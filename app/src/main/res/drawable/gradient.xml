@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- gradient为渐变  angle为方向角度-->
+    <gradient
+        android:startColor="#330FFFFF"
+        android:endColor="#FF00FFFF"
+        android:angle="0"/>
+</shape>

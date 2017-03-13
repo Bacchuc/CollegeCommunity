@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_login">
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="461357831@163.com"
+        android:theme="@style/MyEditText"
+        android:gravity="top|center"
+        android:layout_centerHorizontal="true"
+        android:maxLines="1"
+        android:background="@null"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/colorGray"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="105dp"
+        />
+
+    <View
+        android:id="@+id/v_username"
+        android:layout_width="250dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorDarkGray"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/et_username">
+    </View>
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="......"
+        android:layout_marginTop="30dp"
+        android:theme="@style/MyEditText"
+        android:gravity="top|center"
+        android:maxLines="1"
+        android:background="@null"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/colorGray"
+        android:paddingBottom="5dp"
+        android:inputType="textPassword"
+        android:layout_below="@+id/et_username"
+        android:layout_centerHorizontal="true"
+        />
+
+    <View
+        android:layout_width="150dp"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorDarkGray"
+        android:layout_below="@+id/et_password"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/view">
+    </View>
+
+    <!--<TextView-->
+        <!--android:id="@+id/tv_third"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/view"-->
+        <!--android:text="Third-party login"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:textColor="@color/colorLightOrange"/>-->
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="SIGN IN"
+        android:textSize="18dp"
+        android:textColor="#FFF"
+        android:background="@drawable/semi_round_backgroud"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        />
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_forget"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="forget password"-->
+    <!--android:textColor="@color/colorOrange"-->
+    <!--android:textSize="12dp"-->
+    <!--android:layout_marginBottom="24dp"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true" />-->
+
+</RelativeLayout>

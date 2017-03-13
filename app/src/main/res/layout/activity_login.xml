@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_up"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:background="@drawable/login"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="sign in"
+            android:textColor="@color/colorDarkGray"
+            android:layout_marginTop="140dp"
+            android:background="@android:color/transparent"
+            android:paddingTop="8dp"
+            />
+
+        <Button
+            android:id="@+id/bt_register"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="sign up"
+            android:textColor="@color/colorDarkGray"
+            android:layout_marginTop="140dp"
+            android:background="@android:color/transparent"
+            />
+
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_up"
+        >
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

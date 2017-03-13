@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/ib_qq"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/qq"
+        android:background="@android:color/transparent"
+        android:layout_alignBottom="@+id/ib_weixin"
+        android:layout_alignLeft="@+id/ib_weixin"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_weixin"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/weixin"
+        android:background="@android:color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        />
+
+    <ImageButton
+        android:id="@+id/ib_xinlang"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/xinlang"
+        android:background="@android:color/transparent"
+        android:layout_alignBottom="@+id/ib_weixin"
+        android:layout_alignLeft="@+id/ib_weixin"
+        />
+</RelativeLayout>

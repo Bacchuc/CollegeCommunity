@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <com.mursaat.extendedtextview.AnimatedGradientTextView
+            android:id="@+id/tv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="me"
+            android:textSize="@dimen/activity_title_text_size"
+            android:layout_alignBaseline="@+id/tv_center"
+            android:textColor="@color/colorDarkGray"
+            android:layout_marginLeft="10dp"
+            app:colors="@array/left_title_colors"
+            app:simultaneousColors="2"
+            app:angle="45"
+            app:speed="1000"
+            />
+
+        <com.mursaat.extendedtextview.AnimatedGradientTextView
+            android:id="@+id/tv_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="News"
+            app:colors="@array/center_title_colors"
+            app:simultaneousColors="2"
+            app:angle="45"
+            app:speed="1000"
+            android:textSize="@dimen/activity_title_center_size"/>
+
+
+        <!--app:font="BebasNeue.otf"-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_right"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="right"-->
+            <!--android:textSize="@dimen/activity_title_text_size"-->
+            <!--android:textColor="@color/colorDarkGray"-->
+            <!--android:layout_alignBaseline="@+id/tv_center"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--/>-->
+    </RelativeLayout>
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:background="@color/colorDarkGray"-->
+        <!--android:layout_below="@+id/rl_title"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/view">-->
+    <!--</View>-->
+
+    <RelativeLayout
+        android:id="@+id/rl_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_title">
+
+        <LinearLayout
+            android:id="@+id/ll_up"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/bt_task"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="task"
+                android:textColor="@color/colorBrack"
+                android:background="@android:color/transparent"
+                android:paddingTop="2dp"
+                />
+
+            <Button
+                android:id="@+id/bt_goods"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="goods"
+                android:textColor="@color/colorBrack"
+                android:background="@android:color/transparent"
+                />
+
+            <Button
+                android:id="@+id/bt_ranking_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ranking"
+                android:textColor="@color/colorBrack"
+                android:background="@android:color/transparent"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorDarkGray"
+            android:layout_below="@+id/ll_up"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/view_up">
+        </View>
+
+        <ImageView
+            android:id="@+id/iv_tab"
+            android:layout_width="90dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/ll_up"
+            android:src="@drawable/tab"
+            android:layout_marginLeft="180dp"
+            />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_up">
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="35dp"
+        android:src="@drawable/pencel"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        fab:fab_colorNormal="@color/colorOrange"
+        fab:fab_colorPressed="@color/colorLightOrange"
+        fab:fab_colorRipple="@color/colorLightOrange" />
+</RelativeLayout>

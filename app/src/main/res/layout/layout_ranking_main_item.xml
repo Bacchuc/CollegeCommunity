@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/ib_head_picture"
+        android:layout_width="40dip"
+        android:layout_height="40dip"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/head1"
+        >
+    </at.markushi.ui.CircleButton>
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bacchus"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_toRightOf="@+id/ib_head_picture"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+    />
+
+    <TextView
+        android:id="@+id/tv_school"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harvard University "
+        android:textSize="15dp"
+        android:textColor="@color/colorGray"
+        android:layout_toRightOf="@+id/ib_head_picture"
+        android:layout_marginLeft="10dp"
+        android:layout_alignBottom="@+id/ib_head_picture"
+        android:layout_below="@+id/tv_username"
+        />
+
+    <Button
+        android:id="@+id/bt_contact"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:text="contact"
+        android:textSize="15dp"
+        android:textColor="#FFF"
+        android:background="@drawable/semi_round_hollow_background"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentRight="true"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_image"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/ib_head_picture"
+        android:layout_margin="10dp"
+        android:layout_centerVertical="true"
+        android:scrollbars="none">
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
