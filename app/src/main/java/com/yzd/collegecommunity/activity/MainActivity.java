@@ -1,5 +1,6 @@
 package com.yzd.collegecommunity.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,23 +9,20 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
-
-import com.melnykov.fab.FloatingActionButton;
-import com.yzd.collegecommunity.R;
-import com.yzd.collegecommunity.adapter.MyFragmentPagerAdapter;
-import com.yzd.collegecommunity.fragment.GoodsMainFragment;
-import com.yzd.collegecommunity.fragment.RankingMainFragment;
-import com.yzd.collegecommunity.fragment.TaskMainFragment;
-import com.yzd.collegecommunity.util.BlurBehind;
-import com.yzd.collegecommunity.util.OnBlurCompleteListener;
-
-import android.content.Intent;
-
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.melnykov.fab.FloatingActionButton;
+import com.yzd.collegecommunity.R;
+import com.yzd.collegecommunity.adapter.MyFragmentPagerAdapter;
+import com.yzd.collegecommunity.fragment.Main_GoodsFragment;
+import com.yzd.collegecommunity.fragment.Main_RankingFragment;
+import com.yzd.collegecommunity.fragment.Main_TaskFragment;
+import com.yzd.collegecommunity.util.BlurBehind;
+import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 
 import java.util.ArrayList;
 
@@ -60,7 +58,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
 
         initView();
 
@@ -82,9 +80,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         vp_main=(ViewPager)findViewById(R.id.vp_main);
 
         fragments=new ArrayList<Fragment>();
-        fragments.add(new TaskMainFragment());
-        fragments.add(new GoodsMainFragment());
-        fragments.add(new RankingMainFragment());
+        fragments.add(new Main_TaskFragment());
+        fragments.add(new Main_GoodsFragment());
+        fragments.add(new Main_RankingFragment());
 
         btArgs = new Button[]{bt_task,bt_goods,bt_ranking_list};     //将滑动的buttonTab放进一个集合
 

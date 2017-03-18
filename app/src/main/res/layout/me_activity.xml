@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/setting_background">
+
+        <com.mursaat.extendedtextview.AnimatedGradientTextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bacchus"
+            android:textSize="50dp"
+            android:textColor="@color/colorLightOrange"
+            android:layout_below="@+id/ib_head_picture"
+            android:layout_marginTop="10dp"
+            android:layout_centerInParent="true"
+            app:colors="@array/center_title_colors"
+            app:simultaneousColors="2"
+            app:angle="45"
+            app:speed="1000"
+            />
+
+        <com.mursaat.extendedtextview.AnimatedGradientTextView
+            android:id="@+id/tv_school"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="university"
+            android:textSize="25dp"
+            android:textColor="@color/colorGray"
+            android:layout_below="@+id/tv_username"
+            android:layout_marginTop="2dp"
+            android:layout_centerHorizontal="true"
+            app:colors="@array/left_title_colors"
+            app:simultaneousColors="2"
+            app:angle="45"
+            app:speed="1000"
+            />
+
+    </RelativeLayout>
+`
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Info"
+        android:textColor="@color/colorLightOrange"
+        android:textSize="16dp"
+        android:layout_below="@+id/rl_top"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorDarkGray"
+        android:layout_below="@+id/tv_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/view_up">
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/ll_task"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/view_up">
+
+        <ImageView
+            android:id="@+id/iv_task_picture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/main_fab_task"/>
+
+        <TextView
+            android:id="@+id/tv_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task"
+            android:textSize="18dp"
+            android:textColor="@color/colorGray"
+            android:layout_toRightOf="@+id/iv_task_picture"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_go"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/more"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_goods"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/ll_task">
+
+        <ImageView
+            android:id="@+id/iv_goods_picture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/main_fab_goods"/>
+
+        <TextView
+            android:id="@+id/tv_goods"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Goods"
+            android:textSize="18dp"
+            android:textColor="@color/colorGray"
+            android:layout_toRightOf="@+id/iv_goods_picture"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_go2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/more"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_collect"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/ll_goods">
+
+        <ImageView
+            android:id="@+id/iv_collect_picture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/collect"/>
+
+        <TextView
+            android:id="@+id/tv_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Collect"
+            android:textSize="18dp"
+            android:textColor="@color/colorGray"
+            android:layout_toRightOf="@+id/iv_collect_picture"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_go3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/more"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_contact"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/ll_collect">
+
+        <ImageView
+            android:id="@+id/iv_contact_picture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/contact"/>
+
+        <TextView
+            android:id="@+id/tv_contact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contact"
+            android:textSize="18dp"
+            android:textColor="@color/colorGray"
+            android:layout_toRightOf="@+id/iv_contact_picture"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_go4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/more"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/colorDarkGray"
+        android:layout_below="@+id/ll_contact"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:id="@+id/view_up2">
+    </View>
+
+    <RelativeLayout
+        android:id="@+id/ll_setting"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/view_up2">
+
+        <ImageView
+            android:id="@+id/iv_setting_picture"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/setting"/>
+
+        <TextView
+            android:id="@+id/tv_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setting"
+            android:textSize="18dp"
+            android:textColor="@color/colorGray"
+            android:layout_toRightOf="@+id/iv_setting_picture"
+            android:layout_marginLeft="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/iv_go5"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/more"
+            android:layout_marginRight="10dp"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+

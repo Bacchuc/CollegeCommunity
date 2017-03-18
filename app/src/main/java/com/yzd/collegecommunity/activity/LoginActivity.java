@@ -1,6 +1,5 @@
 package com.yzd.collegecommunity.activity;
 
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,11 +10,8 @@ import android.widget.Button;
 
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.adapter.MyFragmentPagerAdapter;
-import com.yzd.collegecommunity.constants.Constants;
-import com.yzd.collegecommunity.fragment.LoginFragment;
-import com.yzd.collegecommunity.fragment.RegisterFragment;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.BitmapCallback;
+import com.yzd.collegecommunity.fragment.Login_LoginFragment;
+import com.yzd.collegecommunity.fragment.Login_RegisterFragment;
 
 import java.util.ArrayList;
 
@@ -44,7 +40,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_activity);
 
         initView();
         initListener();
@@ -58,8 +54,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         vp_login=(ViewPager)findViewById(R.id.vp_login);
 
         fragments=new ArrayList<Fragment>();
-        fragments.add(new LoginFragment());
-        fragments.add(new RegisterFragment());
+        fragments.add(new Login_LoginFragment());
+        fragments.add(new Login_RegisterFragment());
 
         btArgs = new Button[]{bt_login,bt_register};
 
@@ -196,7 +192,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 //                BlurBehind.getInstance().execute(LoginActivity.this, new OnBlurCompleteListener() {
 //                    @Override
 //                    public void onBlurComplete() {
-//                        Intent intent1 = new Intent(LoginActivity.this, ThirdPartLoginActivity.class);
+//                        Intent intent1 = new Intent(LoginActivity.this, ThirdActivity.class);
 //                        intent1.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 //                        startActivity(intent1);
 //                    }

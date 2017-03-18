@@ -1,7 +1,6 @@
 package com.yzd.collegecommunity.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import com.yzd.collegecommunity.R;
 import java.util.List;
 import java.util.Map;
 
-import at.markushi.ui.CircleButton;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Laiyin on 2017/3/6.
@@ -26,7 +25,7 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
     private Activity mContext;
     private List<Map<String, Object>> dates;
 
-    private CircleButton ib_head_picture;
+    private CircleImageView ib_head_picture;
     private ImageButton bt_like;
     private ImageButton ib_contact;
     private ImageView iv_task_picture;
@@ -57,7 +56,7 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        final View view1 = LayoutInflater.from(mContext).inflate(R.layout.layout_task_main_item,null,false);
+        final View view1 = LayoutInflater.from(mContext).inflate(R.layout.main_fragment_task_item,null,false);
 
         view1.setTag(false);        //默认取消true，收藏为true
 
@@ -71,7 +70,7 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
 
     private void initView(View view) {
 
-        ib_head_picture= (CircleButton) view.findViewById(R.id.ib_head_picture);
+        ib_head_picture= (CircleImageView) view.findViewById(R.id.ib_head_picture);
         bt_like= (ImageButton) view.findViewById(R.id.bt_like);
         ib_contact= (ImageButton) view.findViewById(R.id.ib_contact);
         iv_task_picture= (ImageView) view.findViewById(R.id.iv_task_picture);

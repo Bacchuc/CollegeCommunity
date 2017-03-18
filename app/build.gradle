@@ -32,11 +32,16 @@ dependencies {
     //悬浮球
     compile 'com.github.mursaat:animatedgradienttextview:v0.0.3'
     //TextView渐变颜色
-    compile 'com.github.markushi:circlebutton:1.1'
+    compile 'de.hdodenhof:circleimageview:2.1.0'
     //圆形的ImageButton
     compile 'com.google.code.gson:gson-parent:2.8.0'
     compile 'com.google.code.gson:gson:2.8.0'
     //Gson
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //图片下载
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+    //butterknife  一个是编译器一个是代码库
 //    compile 'io.reactivex:rxjava:1.0.14'
 //    compile 'io.reactivex:rxandroid:1.0.1'
 //    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'

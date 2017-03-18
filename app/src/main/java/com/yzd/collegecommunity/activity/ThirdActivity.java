@@ -11,7 +11,7 @@ import com.yzd.collegecommunity.util.BlurBehind;
  * Created by Laiyin on 2017/2/28.
  */
 
-public class ThirdPartLoginActivity extends BaseActivity {
+public class ThirdActivity extends BaseActivity {
 
     private ImageButton ib_qq;
     private ImageButton ib_weixin;

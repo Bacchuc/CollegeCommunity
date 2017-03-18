@@ -1,8 +1,7 @@
 package com.yzd.collegecommunity.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.RemoteException;
-import android.service.carrier.CarrierMessagingService;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
 import com.google.gson.Gson;
 import com.yzd.collegecommunity.R;
-import com.yzd.collegecommunity.activity.MainActivity;
-import com.yzd.collegecommunity.activity.ThirdPartLoginActivity;
+import com.yzd.collegecommunity.activity.ThirdActivity;
 import com.yzd.collegecommunity.callback.OkHttpCallback;
 import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
@@ -21,27 +20,20 @@ import com.yzd.collegecommunity.modeal.Test;
 import com.yzd.collegecommunity.util.BlurBehind;
 import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-import android.content.Intent;
-import android.widget.Toast;
-
-import org.json.JSONObject;
-
-import okhttp3.Call;
 
 
 /**
  * Created by Laiyin on 2017/3/4.
  */
 
-public class LoginFragment extends Fragment implements View.OnClickListener{
+public class Login_LoginFragment extends Fragment implements View.OnClickListener{
 
     private Button bt_login;
     private EditText et_username;
     private EditText et_password;
 //    private TextView tv_third;
 
-    private String TAG="LoginFragment";
+    private String TAG="Login_LoginFragment";
 
     private String res;
 
@@ -52,7 +44,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_layout_login,container,false);
+        View view=inflater.inflate(R.layout.login_fragment_login,container,false);
 
         initView(view);
 
@@ -88,7 +80,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 //                        .execute(new StringCallback() {
 //                            @Override
 //                            public void onError(Call call, Exception e, int id) {
-//                                Log.e("LoginFragment","onError:"+e.getMessage());
+//                                Log.e("Login_LoginFragment","onError:"+e.getMessage());
 //                            }
 //
 //                            @Override
@@ -199,7 +191,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 //                            @Override
 //                            public void onError(Call call, Exception e, int id) {
 //
-//                                Log.e("LoginFragment","onError:"+e.getMessage());
+//                                Log.e("Login_LoginFragment","onError:"+e.getMessage());
 //                            }
 //
 //                            @Override
@@ -230,7 +222,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
         BlurBehind.getInstance().execute(getActivity(), new OnBlurCompleteListener() {
             @Override
             public void onBlurComplete() {
-                Intent intent1 = new Intent(getActivity(), ThirdPartLoginActivity.class);
+                Intent intent1 = new Intent(getActivity(), ThirdActivity.class);
                 intent1.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(intent1);
             }

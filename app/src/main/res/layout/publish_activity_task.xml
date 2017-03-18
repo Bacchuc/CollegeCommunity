@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <com.mursaat.extendedtextview.AnimatedGradientTextView
+            android:id="@+id/tv_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Publish"
+            app:colors="@array/center_title_colors"
+            app:simultaneousColors="2"
+            app:angle="45"
+            app:speed="1000"
+            android:textSize="@dimen/activity_title_center_size"/>
+
+
+        <ImageButton
+            android:id="@+id/ib_commit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/commit"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorDarkGray"
+        android:layout_below="@+id/rl_title"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/view_up">
+    </View>
+
+    <EditText
+        android:id="@+id/et_task_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_up"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textCursorDrawable="@null"
+        android:background="@null"
+        android:theme="@style/MyEditText"
+        android:maxLines="1"
+        android:hint="REVIEW TOGETHER"
+        android:textSize="30dp"
+        android:textColor="@color/colorGray"/>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_task_title"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="10dp"
+        android:text="$"
+        android:textSize="18dp"
+        android:textColor="@color/colorGray"/>
+
+    <EditText
+        android:id="@+id/et_task_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_task_title"
+        android:layout_marginTop="2dp"
+        android:textCursorDrawable="@null"
+        android:layout_toRightOf="@+id/tv_price"
+        android:layout_alignBaseline="@+id/tv_price"
+        android:background="@null"
+        android:maxLines="1"
+        android:theme="@style/MyEditText"
+        android:hint="59.00"
+        android:textSize="18dp"
+        android:textColor="@color/colorGray"/>
+
+    <FrameLayout
+        android:id="@+id/fl_describe"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/tv_price"
+        android:layout_margin="10dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_describe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ScrollView
+                android:id="@+id/sv_describe"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:drawable/editbox_background"
+                >
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_describe"
+                    android:hint="Please enter a detailed description of the task here..."
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="18dp"
+                    android:textCursorDrawable="@null"
+                    android:textColor="@color/colorGray"
+                    android:theme="@style/MyEditText"
+                    android:background="@null"/>
+
+            </ScrollView>
+
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/camera"
+                android:id="@+id/ib_task_photo"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="20dp"
+                android:background="@color/colorLightOrange"
+                />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_begin_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_describe"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="10dp"
+        android:text="Begin Time:"
+        android:textSize="18dp"
+        android:textColor="@color/colorGray"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_begin_time"
+        android:hint="2017.3.15 4:00 pm"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@+id/tv_begin_time"
+        android:layout_toRightOf="@+id/tv_begin_time"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/colorGray"
+        android:layout_marginLeft="10dp"
+        android:theme="@style/MyEditText"
+        android:background="@null"/>
+
+    <TextView
+        android:id="@+id/tv_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_begin_time"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="End Time:"
+        android:textSize="18dp"
+        android:textColor="@color/colorGray"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_end_time"
+        android:hint="2017.3.16 5:00 pm "
+        android:textSize="18dp"
+        android:layout_toRightOf="@+id/tv_end_time"
+        android:textCursorDrawable="@null"
+        android:layout_alignBaseline="@+id/tv_end_time"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorGray"
+        android:layout_below="@+id/et_begin_time"
+        android:theme="@style/MyEditText"
+        android:background="@null"/>
+
+</RelativeLayout>

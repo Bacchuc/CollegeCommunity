@@ -25,7 +25,7 @@ import okhttp3.Call;
  * Created by Laiyin on 2017/3/4.
  */
 
-public class RegisterFragment extends Fragment implements View.OnClickListener{
+public class Login_RegisterFragment extends Fragment implements View.OnClickListener{
 
     private EditText et_username;
     private EditText et_email;
@@ -44,7 +44,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_layout_register,container,false);
+        View view=inflater.inflate(R.layout.login_fragment_register,container,false);
 
         initView(view);
 
@@ -83,7 +83,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("LoginFragment","onError:"+e.getMessage());
+                                Log.e("Login_LoginFragment","onError:"+e.getMessage());
                             }
 
                             @Override
@@ -120,7 +120,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("RegisterFragment","onError:"+e.getMessage());
+                                Log.e("Login_RegisterFragment","onError:"+e.getMessage());
                             }
 
                             @Override

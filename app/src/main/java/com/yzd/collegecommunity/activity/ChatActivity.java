@@ -24,7 +24,7 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
 
 
-        setContentView(R.layout.activity_chat);
+        setContentView(R.layout.chat_activity);
 
         initView();
 

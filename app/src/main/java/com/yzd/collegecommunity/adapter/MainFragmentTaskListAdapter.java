@@ -1,7 +1,6 @@
 package com.yzd.collegecommunity.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +9,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yzd.collegecommunity.R;
-import com.yzd.collegecommunity.fragment.TaskMainFragment;
 import com.yzd.collegecommunity.modeal.MainTaskListInfo;
 
 import java.util.List;
 
-import at.markushi.ui.CircleButton;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Laiyin on 2017/3/6.
@@ -57,7 +55,7 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
         if (view == null) {
             viewHolder = new ViewHolder();
             view = inflater.inflate(layoutId, null);
-            viewHolder.ib_head_picture = (CircleButton) view.findViewById(R.id.ib_head_picture);
+            viewHolder.ib_head_picture = (CircleImageView) view.findViewById(R.id.ib_head_picture);
             viewHolder.iv_task_picture = (ImageView) view.findViewById(R.id.iv_task_picture);
             viewHolder.tv_username = (TextView) view.findViewById(R.id.tv_username);
             viewHolder.tv_describe = (TextView) view.findViewById(R.id.tv_describe);
@@ -77,8 +75,7 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-
-        CircleButton ib_head_picture;  //头像
+        CircleImageView ib_head_picture;
         ImageView iv_task_picture;     //任务列表头像
         TextView tv_describe;          //任务描述
         TextView tv_username;          //用户名

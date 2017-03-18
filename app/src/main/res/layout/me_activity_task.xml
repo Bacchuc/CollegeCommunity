@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <com.mursaat.extendedtextview.AnimatedGradientTextView
+            android:id="@+id/tv_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Task"
+            app:colors="@array/center_title_colors"
+            app:simultaneousColors="2"
+            app:angle="45"
+            app:speed="1000"
+            android:textSize="@dimen/activity_title_center_size"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorDarkGray"
+        android:layout_below="@+id/rl_title"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/view_up">
+    </View>
+
+    <FrameLayout
+        android:id="@+id/fl_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_up"
+        android:layout_above="@+id/view_up2">
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorDarkGray"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/view_up2">
+    </View>
+
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/bt_my_publish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/my_publish"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:id="@+id/bt_publish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/pencel"
+            android:background="@color/colorOrange"/>
+
+        <ImageButton
+            android:id="@+id/bt_others_publish"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/others_publish"
+            android:background="@android:color/transparent"/>
+    </LinearLayout>
+
+</RelativeLayout>

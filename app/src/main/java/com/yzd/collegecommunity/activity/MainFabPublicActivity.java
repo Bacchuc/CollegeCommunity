@@ -22,7 +22,7 @@ public class MainFabPublicActivity extends BaseActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_fab);
+        setContentView(R.layout.main_activity_fab_publish);
         initView();
         BlurBehind();
     }

@@ -1,40 +1,28 @@
 package com.yzd.collegecommunity.fragment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.adapter.MainFragmentTaskListAdapter;
-import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.MainTaskListInfo;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.BitmapCallback;
-import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.https.HttpsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Call;
 
 /**
  * Created by Laiyin on 2017/3/5.
  */
 
 
-public class TaskMainFragment extends Fragment {
+public class Main_TaskFragment extends Fragment {
 
     private MainFragmentTaskListAdapter mainFragmentTaskListAdapter;
     private ListView lv_task;
@@ -56,7 +44,7 @@ public class TaskMainFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.layout_task_main,container,false);
+        View view=inflater.inflate(R.layout.main_fragment_task,container,false);
 
         initView(view);
 
@@ -69,7 +57,7 @@ public class TaskMainFragment extends Fragment {
 
     private void initView(View view) {
         lv_task= (ListView) view.findViewById(R.id.lv_task);
-        mainFragmentTaskListAdapter=new MainFragmentTaskListAdapter(this.getActivity(),R.layout.layout_task_main_item,mainTaskListInfoList);
+        mainFragmentTaskListAdapter=new MainFragmentTaskListAdapter(this.getActivity(),R.layout.main_fragment_task_item,mainTaskListInfoList);
         lv_task.setAdapter(mainFragmentTaskListAdapter);
     }
 
