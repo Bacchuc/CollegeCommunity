@@ -1,91 +1,66 @@
 package com.yzd.collegecommunity.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import android.content.Intent;
-
 import com.mursaat.extendedtextview.AnimatedGradientTextView;
 import com.yzd.collegecommunity.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Laiyin on 2017/3/14.
  */
 
-public class MeActivity extends BaseActivity implements View.OnClickListener{
-
-    private AnimatedGradientTextView tv_username;
-    private AnimatedGradientTextView tv_school;
-    private RelativeLayout ll_task;
-    private RelativeLayout ll_goods;
-    private RelativeLayout ll_collect;
-    private RelativeLayout ll_contact;
-    private RelativeLayout ll_setting;
+public class MeActivity extends BaseActivity implements View.OnClickListener {
+    @BindView(R.id.tv_username)
+    AnimatedGradientTextView tvUsername;
+    @BindView(R.id.tv_school)
+    AnimatedGradientTextView tvSchool;
+    @BindView(R.id.rl_task)
+    RelativeLayout rlTask;
+    @BindView(R.id.rl_goods)
+    RelativeLayout rlGoods;
+    @BindView(R.id.rl_collect)
+    RelativeLayout rlCollect;
+    @BindView(R.id.rl_contact)
+    RelativeLayout rlContact;
+    @BindView(R.id.rl_setting)
+    RelativeLayout rlSetting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.me_activity);
-
-        initListener();
-
-        initView();
-
+        ButterKnife.bind(this);
     }
 
-    private void initView() {
-        tv_username= (AnimatedGradientTextView) findViewById(R.id.tv_username);
-        tv_school= (AnimatedGradientTextView) findViewById(R.id.tv_school);
-        ll_task= (RelativeLayout) findViewById(R.id.ll_task);
-        ll_goods= (RelativeLayout) findViewById(R.id.ll_goods);
-        ll_collect= (RelativeLayout) findViewById(R.id.ll_collect);
-        ll_contact= (RelativeLayout) findViewById(R.id.ll_contact);
-        ll_setting= (RelativeLayout) findViewById(R.id.ll_setting);
-    }
-
-    private void initListener() {
-        tv_username.setOnClickListener(this);
-        tv_school.setOnClickListener(this);
-        ll_task.setOnClickListener(this);
-        ll_goods.setOnClickListener(this);
-        ll_collect.setOnClickListener(this);
-        ll_contact.setOnClickListener(this);
-        ll_setting.setOnClickListener(this);
-    }
-
-    @Override
+    @OnClick({R.id.rl_task, R.id.rl_goods, R.id.rl_collect, R.id.rl_contact, R.id.rl_setting})
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tv_username:
-                Intent intent=new Intent(MeActivity.this,MeActivity.class);
+        switch (view.getId()) {
+            case R.id.rl_task:
+                Intent intent = new Intent(MeActivity.this, MeTaskActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_school:
-                Intent intent2=new Intent(MeActivity.this,MeActivity.class);
+            case R.id.rl_goods:
+                Intent intent1 = new Intent(MeActivity.this, MeGoodsActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.rl_collect:
+                Intent intent2 = new Intent(MeActivity.this, MeCollectActivity.class);
                 startActivity(intent2);
                 break;
-            case R.id.ll_task:
-                Intent intent3=new Intent(MeActivity.this,MeActivity.class);
+            case R.id.rl_contact:
+                Intent intent3 = new Intent(MeActivity.this, MeContactActivity.class);
                 startActivity(intent3);
                 break;
-            case R.id.ll_goods:
-                Intent intent4=new Intent(MeActivity.this,MeActivity.class);
+            case R.id.rl_setting:
+                Intent intent4 = new Intent(MeActivity.this, MeSettingActivity.class);
                 startActivity(intent4);
-                break;
-            case R.id.ll_collect:
-                Intent intent5=new Intent(MeActivity.this,MeActivity.class);
-                startActivity(intent5);
-                break;
-            case R.id.ll_contact:
-                Intent intent6=new Intent(MeActivity.this,MeActivity.class);
-                startActivity(intent6);
-                break;
-            case R.id.ll_setting:
-                Intent intent7=new Intent(MeActivity.this,MeActivity.class);
-                startActivity(intent7);
-                break;
-            default:
                 break;
         }
     }

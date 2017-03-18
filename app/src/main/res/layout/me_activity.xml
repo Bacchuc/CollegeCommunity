@@ -67,7 +67,7 @@
     </View>
 
     <RelativeLayout
-        android:id="@+id/ll_task"
+        android:id="@+id/rl_task"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
@@ -102,11 +102,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/ll_goods"
+        android:id="@+id/rl_goods"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/ll_task">
+        android:layout_below="@+id/rl_task">
 
         <ImageView
             android:id="@+id/iv_goods_picture"
@@ -137,11 +137,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/ll_collect"
+        android:id="@+id/rl_collect"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/ll_goods">
+        android:layout_below="@+id/rl_goods">
 
         <ImageView
             android:id="@+id/iv_collect_picture"
@@ -172,11 +172,11 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/ll_contact"
+        android:id="@+id/rl_contact"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/ll_collect">
+        android:layout_below="@+id/rl_collect">
 
         <ImageView
             android:id="@+id/iv_contact_picture"
@@ -210,14 +210,14 @@
         android:layout_width="match_parent"
         android:layout_height="15dp"
         android:background="@color/colorDarkGray"
-        android:layout_below="@+id/ll_contact"
+        android:layout_below="@+id/rl_contact"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:id="@+id/view_up2">
     </View>
 
     <RelativeLayout
-        android:id="@+id/ll_setting"
+        android:id="@+id/rl_setting"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"

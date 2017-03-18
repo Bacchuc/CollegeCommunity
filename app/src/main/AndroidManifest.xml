@@ -21,10 +21,19 @@
         <activity android:name=".activity.ChatActivity"></activity>
         <activity android:name=".activity.ThirdActivity"></activity>
         <activity android:name=".activity.MainFabPublicActivity"></activity>
-        <activity android:name=".activity.MeActivity"></activity>
         <activity android:name=".activity.WelcomeActivity"></activity>
+
         <activity android:name=".activity.PublishTaskActivity"></activity>
+        <activity android:name=".activity.PublishGoodsActivity"></activity>
+
+        <activity android:name=".activity.MeActivity"></activity>
         <activity android:name=".activity.MeSettingActivity"></activity>
+        <activity android:name=".activity.MeTaskActivity"></activity>
+        <activity android:name=".activity.MeCollectActivity"></activity>
+        <activity android:name=".activity.MeContactActivity"></activity>
+        <activity android:name=".activity.MeGoodsActivity"></activity>
+
+
     </application>
 
 </manifest>

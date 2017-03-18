@@ -14,15 +14,13 @@ import com.yzd.collegecommunity.adapter.MainFragmentRankingListAdapter;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by Laiyin on 2017/3/5.
  */
 
 public class Main_RankingFragment extends Fragment {
 
-//    @BindView(R.id.lv_ranking)
+//    @BindView(lv_ranking)
 //    RecyclerView lvRanking;
     private RecyclerView lv_ranking;
     private ArrayList list;
@@ -43,7 +41,7 @@ public class Main_RankingFragment extends Fragment {
 
         initView(view);
 
-        ButterKnife.bind(this, view);
+//        ButterKnife.bind(this, view);
         return view;
     }
 

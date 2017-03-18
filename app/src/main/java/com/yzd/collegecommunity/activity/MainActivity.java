@@ -154,6 +154,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_left:
+                Intent intent = new Intent(MainActivity.this, MeActivity.class);
+                startActivity(intent);
                 break;
             case R.id.fab:
                 BlurBehind.getInstance().execute(MainActivity.this, new OnBlurCompleteListener() {
