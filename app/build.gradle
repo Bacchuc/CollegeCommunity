@@ -42,6 +42,11 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     //butterknife  一个是编译器一个是代码库
+    compile 'com.github.bluzwong:swipeback:0.2.0@aar'
+    //activity侧滑退出
+
+
+
 //    compile 'io.reactivex:rxjava:1.0.14'
 //    compile 'io.reactivex:rxandroid:1.0.1'
 //    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'

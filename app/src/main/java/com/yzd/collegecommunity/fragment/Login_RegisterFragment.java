@@ -19,20 +19,36 @@ import com.yzd.collegecommunity.constants.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.Call;
+
+import static com.yzd.collegecommunity.R.id.bt_register;
+import static com.yzd.collegecommunity.R.id.et_code;
+import static com.yzd.collegecommunity.R.id.et_email;
+import static com.yzd.collegecommunity.R.id.et_password;
+import static com.yzd.collegecommunity.R.id.et_username;
+import static com.yzd.collegecommunity.R.id.tv_sendCode;
 
 /**
  * Created by Laiyin on 2017/3/4.
  */
 
-public class Login_RegisterFragment extends Fragment implements View.OnClickListener{
+public class Login_RegisterFragment extends Fragment implements View.OnClickListener {
 
-    private EditText et_username;
-    private EditText et_email;
-    private EditText et_password;
-    private EditText et_code;
-    private TextView tv_sendCode;
-    private Button bt_register;
+    @BindView(et_username)
+    EditText etUsername;
+    @BindView(et_email)
+    EditText etEmail;
+    @BindView(et_password)
+    EditText etPassword;
+    @BindView(tv_sendCode)
+    TextView tvSendCode;
+    @BindView(et_code)
+    EditText etCode;
+    @BindView(bt_register)
+    Button btRegister;
 
     private String resCode;
 
@@ -44,91 +60,69 @@ public class Login_RegisterFragment extends Fragment implements View.OnClickList
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.login_fragment_register,container,false);
-
-        initView(view);
-
-        initListener();
-
+        View view = inflater.inflate(R.layout.login_fragment_register, container, false);
+        ButterKnife.bind(this, view);
         return view;
     }
 
-    private void initView(View view){
-        bt_register=(Button)view.findViewById(R.id.bt_register);
-        et_username=(EditText)view.findViewById(R.id.et_username);
-        et_password=(EditText)view.findViewById(R.id.et_password);
-        et_email=(EditText)view.findViewById(R.id.et_email);
-        et_code=(EditText)view.findViewById(R.id.et_code);
-        tv_sendCode=(TextView)view.findViewById(R.id.tv_sendCode);
-
-    }
-
-    private void initListener(){
-        bt_register.setOnClickListener(this);
-        tv_sendCode.setOnClickListener(this);
-    }
-
-    @Override
+    @OnClick({R.id.tv_sendCode, R.id.bt_register})
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bt_login:
                 OkHttpUtils
                         .post()
-                        .url(Constants.BASEURL+"textPost.action")
-                        .addParams("et_email", et_email.getText().toString())
-                        .addParams("et_code", et_code.getText().toString())
-                        .addParams("username", et_username.getText().toString())
-                        .addParams("password",et_password.getText().toString())
+                        .url(Constants.BASEURL + "textPost.action")
+                        .addParams("et_email", etEmail.getText().toString())
+                        .addParams("et_code", etCode.getText().toString())
+                        .addParams("username", etUsername.getText().toString())
+                        .addParams("password", etPassword.getText().toString())
                         .build()
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("Login_LoginFragment","onError:"+e.getMessage());
+                                Log.e("Login_LoginFragment", "onError:" + e.getMessage());
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
 
-                                final String res=response;
+                                final String res = response;
 
-                                if(res=="OK"){
+                                if (res == "OK") {
                                     Intent intent = new Intent(getActivity(), MainActivity.class);
                                     getActivity().startActivity(intent);
-                                }
-                                else if(res=="et_username"){
-                                    Toast.makeText(getActivity(),"用户名已注册",Toast.LENGTH_LONG).show();
-                                    et_username.setText("");
-                                }
-                                else if(res=="et_email"){
-                                    Toast.makeText(getActivity(),"邮箱已注册",Toast.LENGTH_LONG).show();
-                                    et_email.setText("");
-                                }
-                                else if(res=="et_code"){
-                                    Toast.makeText(getActivity(),"验证码错误",Toast.LENGTH_LONG).show();
-                                    et_code.setText("");
+                                } else if (res == "et_username") {
+                                    Toast.makeText(getActivity(), "用户名已注册", Toast.LENGTH_LONG).show();
+                                    etUsername.setText("");
+                                } else if (res == "et_email") {
+                                    Toast.makeText(getActivity(), "邮箱已注册", Toast.LENGTH_LONG).show();
+                                    etEmail.setText("");
+                                } else if (res == "et_code") {
+                                    Toast.makeText(getActivity(), "验证码错误", Toast.LENGTH_LONG).show();
+                                    etCode.setText("");
                                 }
                             }
                         });
                 break;
-            case R.id.tv_sendCode:
+            case tv_sendCode:
 
                 OkHttpUtils
                         .post()
-                        .url(Constants.BASEURL+"textPost.action")
-                        .addParams("et_email", et_email.getText().toString())
+                        .url(Constants.BASEURL + "textPost.action")
+                        .addParams("et_email", etEmail.getText().toString())
                         .build()
                         .execute(new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
-                                Log.e("Login_RegisterFragment","onError:"+e.getMessage());
+                                Log.e("Login_RegisterFragment", "onError:" + e.getMessage());
                             }
 
                             @Override
                             public void onResponse(String response, int id) {
 
-                                resCode=response;
-                                if (resCode=="OK"){
-                                    Toast.makeText(getActivity(),"已将验证码发送至您的邮箱，请验证！",Toast.LENGTH_LONG).show();
+                                resCode = response;
+                                if (resCode == "OK") {
+                                    Toast.makeText(getActivity(), "已将验证码发送至您的邮箱，请验证！", Toast.LENGTH_LONG).show();
                                 }
 
                             }

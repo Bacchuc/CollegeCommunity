@@ -15,20 +15,29 @@ import com.yzd.collegecommunity.fragment.Login_RegisterFragment;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.yzd.collegecommunity.R.id.bt_login;
+import static com.yzd.collegecommunity.R.id.bt_register;
+
 /**
  * Created by Laiyin on 2017/2/25.
- *
+ * <p>
  * 登录页面
  */
 
-public class LoginActivity extends FragmentActivity implements View.OnClickListener,ViewPager.OnPageChangeListener{
+public class LoginActivity extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
-    private Button bt_login;
-    private Button bt_register;
+    @BindView(R.id.bt_login)
+    Button btLogin;
+    @BindView(R.id.bt_register)
+    Button btRegister;
+    @BindView(R.id.vp_login)
+    ViewPager vpLogin;
 
-    public String TAG="LoginActivity";
-
-    private ViewPager vp_login;
+    public String TAG = "LoginActivity";
 
     //fragment的集合，对应每个子页面
     private ArrayList<Fragment> fragments;
@@ -41,6 +50,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+        ButterKnife.bind(this);
 
         initView();
         initListener();
@@ -48,42 +58,36 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         onPageSelected(0);
     }
 
-    private void initView(){
-        bt_login= (Button) findViewById(R.id.bt_login);
-        bt_register= (Button) findViewById(R.id.bt_register);
-        vp_login=(ViewPager)findViewById(R.id.vp_login);
+    private void initView() {
 
-        fragments=new ArrayList<Fragment>();
+        fragments = new ArrayList<Fragment>();
         fragments.add(new Login_LoginFragment());
         fragments.add(new Login_RegisterFragment());
 
-        btArgs = new Button[]{bt_login,bt_register};
+        btArgs = new Button[]{btLogin, btRegister};
 
-        MyFragmentPagerAdapter adapter=new MyFragmentPagerAdapter(getSupportFragmentManager(),fragments);
-        vp_login.setAdapter(adapter);
+        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments);
+        vpLogin.setAdapter(adapter);
     }
 
     private void initListener() {
-        bt_login.setOnClickListener(this);
-        bt_register.setOnClickListener(this);
-
-        vp_login.addOnPageChangeListener(this);
+        vpLogin.addOnPageChangeListener(this);
     }
 
     //重置按钮颜色 浅黑色
-    public void resetButtonTextColor(){
-        bt_login.setTextColor(Color.parseColor("#D0D0D0"));
-        bt_register.setTextColor(Color.parseColor("#D0D0D0"));
+    public void resetButtonTextColor() {
+        btLogin.setTextColor(Color.parseColor("#D0D0D0"));
+        btRegister.setTextColor(Color.parseColor("#D0D0D0"));
     }
 
-    @Override
+    @OnClick({R.id.bt_login, R.id.bt_register})
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.bt_login:
-                vp_login.setCurrentItem(0);
+        switch (v.getId()) {
+            case bt_login:
+                vpLogin.setCurrentItem(0);
                 break;
-            case R.id.bt_register:
-                vp_login.setCurrentItem(1);
+            case bt_register:
+                vpLogin.setCurrentItem(1);
                 break;
             default:
                 break;

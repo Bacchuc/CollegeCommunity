@@ -13,9 +13,10 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.github.bluzwong.swipeback.SwipeBackActivityHelper;
 import com.melnykov.fab.FloatingActionButton;
+import com.mursaat.extendedtextview.AnimatedGradientTextView;
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.adapter.MyFragmentPagerAdapter;
 import com.yzd.collegecommunity.fragment.Main_GoodsFragment;
@@ -26,23 +27,37 @@ import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.yzd.collegecommunity.R.id.bt_goods;
+import static com.yzd.collegecommunity.R.id.bt_ranking_list;
+import static com.yzd.collegecommunity.R.id.bt_task;
+import static com.yzd.collegecommunity.R.id.tv_left;
+
 /**
  * Created by Laiyin on 2017/3/5.
  */
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener,ViewPager.OnPageChangeListener{
+public class MainActivity extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
-    private TextView tv_left;
-    private Button bt_task;
-    private Button bt_goods;
-    private Button bt_ranking_list;
-    private ImageView iv_tab;
+    @BindView(R.id.tv_left)
+    AnimatedGradientTextView tvLeft;
+    @BindView(R.id.bt_task)
+    Button btTask;
+    @BindView(R.id.bt_goods)
+    Button btGoods;
+    @BindView(R.id.bt_ranking_list)
+    Button btRankingList;
+    @BindView(R.id.iv_tab)
+    ImageView ivTab;
+    @BindView(R.id.vp_main)
+    ViewPager vpMain;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
-    private FloatingActionButton fab;
-
-    public String TAG="MainActivity";
-
-    private ViewPager vp_main;
+    public String TAG = "MainActivity";
 
     //fragment的集合，对应每个子页面
     private ArrayList<Fragment> fragments;
@@ -59,70 +74,51 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        ButterKnife.bind(this);
 
         initView();
-
-        initListener();
 
         onPageSelected(0);
     }
 
-
     private void initView() {
-        tv_left= (TextView) findViewById(R.id.tv_left);
-        bt_task= (Button) findViewById(R.id.bt_task);
-        bt_goods= (Button) findViewById(R.id.bt_goods);
-        bt_ranking_list= (Button) findViewById(R.id.bt_ranking_list);
-        iv_tab= (ImageView) findViewById(R.id.iv_tab);
 
-        fab= (FloatingActionButton) findViewById(R.id.fab);
-
-        vp_main=(ViewPager)findViewById(R.id.vp_main);
-
-        fragments=new ArrayList<Fragment>();
+        fragments = new ArrayList<Fragment>();
         fragments.add(new Main_TaskFragment());
         fragments.add(new Main_GoodsFragment());
         fragments.add(new Main_RankingFragment());
 
-        btArgs = new Button[]{bt_task,bt_goods,bt_ranking_list};     //将滑动的buttonTab放进一个集合
+        btArgs = new Button[]{btTask, btGoods, btRankingList};     //将滑动的buttonTab放进一个集合
 
-        MyFragmentPagerAdapter adapter=new MyFragmentPagerAdapter(getSupportFragmentManager(),fragments);
-        vp_main.setAdapter(adapter);
+        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments);
+        vpMain.setAdapter(adapter);
 
         //获取图片宽度
-        imgleth= BitmapFactory.decodeResource(getResources(), R.drawable.tab).getWidth();
+        imgleth = BitmapFactory.decodeResource(getResources(), R.drawable.tab).getWidth();
         //获取屏幕宽度
-        DisplayMetrics dm=new DisplayMetrics();
+        DisplayMetrics dm = new DisplayMetrics();
         // 把屏幕尺寸信息赋值给DisplayMetrics dm，注意不是set
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         // 屏幕宽度
-        int count=dm.widthPixels;
+        int count = dm.widthPixels;
         //计算偏移量
-        offset=(count/3-imgleth)/2;
+        offset = (count / 3 - imgleth) / 2;
 
         //平移动画(第一页的)
-        Animation an=new TranslateAnimation(0, offset, 0, 0);
+        Animation an = new TranslateAnimation(0, offset, 0, 0);
         an.setFillAfter(true);
         an.setDuration(200);
-        iv_tab.setAnimation(an);
+        ivTab.setAnimation(an);
 
-    }
+        vpMain.addOnPageChangeListener(this);
 
-    private void initListener() {
-        tv_left.setOnClickListener(this);
-        bt_task.setOnClickListener(this);
-        bt_goods.setOnClickListener(this);
-        bt_ranking_list.setOnClickListener(this);
-        fab.setOnClickListener(this);
-
-        vp_main.addOnPageChangeListener(this);
     }
 
     //重置按钮颜色 为浅黑色
-    public void resetButtonTextColor(){
-        bt_task.setTextColor(Color.parseColor("#D0D0D0"));
-        bt_goods.setTextColor(Color.parseColor("#D0D0D0"));
-        bt_ranking_list.setTextColor(Color.parseColor("#D0D0D0"));
+    public void resetButtonTextColor() {
+        btTask.setTextColor(Color.parseColor("#D0D0D0"));
+        btGoods.setTextColor(Color.parseColor("#D0D0D0"));
+        btRankingList.setTextColor(Color.parseColor("#D0D0D0"));
     }
 
     @Override
@@ -132,17 +128,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     public void onPageSelected(int i) {
 
-        int one=offset*2+imgleth;//相邻页面的偏移量
+        int one = offset * 2 + imgleth;//相邻页面的偏移量
 
         resetButtonTextColor();
         btArgs[i].setTextColor(Color.parseColor("#272727"));
 
         //评议动画
-        Animation anima=new TranslateAnimation(index*one+offset,i*one+offset,0,0);
-        index=i; //当前页跟着变
+        Animation anima = new TranslateAnimation(index * one + offset, i * one + offset, 0, 0);
+        index = i; //当前页跟着变
         anima.setFillAfter(true); // 动画终止时停留在最后一帧，不然会回到没有执行前的状态
         anima.setDuration(200);// 动画持续时间0.2秒
-        iv_tab.startAnimation(anima);// 是用ImageView来显示动画的
+        ivTab.startAnimation(anima);// 是用ImageView来显示动画的
     }
 
     @Override
@@ -150,12 +146,22 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
-    @Override
+    @OnClick({R.id.tv_left, R.id.bt_task, R.id.bt_goods, R.id.bt_ranking_list, R.id.fab})
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.tv_left:
+        switch (view.getId()) {
+            case tv_left:
                 Intent intent = new Intent(MainActivity.this, MeActivity.class);
-                startActivity(intent);
+                SwipeBackActivityHelper.startSwipeActivity(this, intent, com.github.bluzwong.swipeback.R.anim.slide_out_right, true);
+                // 或者使用builder方法
+                SwipeBackActivityHelper.activityBuilder(MainActivity.this)
+                        .intent(intent)
+                        .needParallax(true)
+                        .needBackgroundShadow(true)
+                        // .fitSystemWindow(true) // status bar height
+                        // .prepareView(swipeRefreshLayout)
+                        // see http://stackoverflow.com/questions/29356607/android-swiperefreshlayout-cause-recyclerview-not-update-when-take-screenshot
+                        .startActivity();
+
                 break;
             case R.id.fab:
                 BlurBehind.getInstance().execute(MainActivity.this, new OnBlurCompleteListener() {
@@ -167,14 +173,14 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                     }
                 });
                 break;
-            case R.id.bt_task:
-                vp_main.setCurrentItem(0);
+            case bt_task:
+                vpMain.setCurrentItem(0);
                 break;
-            case R.id.bt_goods:
-                vp_main.setCurrentItem(1);
+            case bt_goods:
+                vpMain.setCurrentItem(1);
                 break;
-            case R.id.bt_ranking_list:
-                vp_main.setCurrentItem(2);
+            case bt_ranking_list:
+                vpMain.setCurrentItem(2);
                 break;
             default:
                 break;

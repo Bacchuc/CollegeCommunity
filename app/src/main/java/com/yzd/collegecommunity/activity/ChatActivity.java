@@ -9,53 +9,49 @@ import android.widget.EditText;
 
 import com.yzd.collegecommunity.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.yzd.collegecommunity.R.id.bt_send;
+import static com.yzd.collegecommunity.R.id.et_chat;
+import static com.yzd.collegecommunity.R.id.rv_chat;
+
 /**
  * Created by Laiyin on 2017/3/11.
  */
 
-public class ChatActivity extends BaseActivity implements View.OnClickListener{
+public class ChatActivity extends BaseActivity implements View.OnClickListener {
 
-    private Button bt_send;
-    private EditText et_chat;
-    private RecyclerView rv_chat;
+    @BindView(R.id.rv_chat)
+    RecyclerView rvChat;
+    @BindView(R.id.et_chat)
+    EditText etChat;
+    @BindView(R.id.bt_send)
+    Button btSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.chat_activity);
-
+        ButterKnife.bind(this);
         initView();
-
-        initListener();
     }
 
     private void initView() {
-        bt_send= (Button) findViewById(R.id.bt_send);
-        et_chat= (EditText) findViewById(R.id.et_chat);
-        rv_chat= (RecyclerView) findViewById(R.id.rv_chat);
-
-        rv_chat.setLayoutManager(new LinearLayoutManager(this));
+        rvChat.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void initListener() {
-        bt_send.setOnClickListener(this);
-        et_chat.setOnClickListener(this);
-        rv_chat.setOnClickListener(this);
-    }
-
-
-    @Override
+    @OnClick({R.id.rv_chat, R.id.et_chat, R.id.bt_send})
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.bt_send:
+        switch (view.getId()) {
+            case bt_send:
 
                 break;
-            case R.id.et_chat:
+            case et_chat:
 
                 break;
-            case R.id.rv_chat:
+            case rv_chat:
 
                 break;
             default:

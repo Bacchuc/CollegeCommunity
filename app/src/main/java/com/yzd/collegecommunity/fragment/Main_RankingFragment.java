@@ -14,15 +14,19 @@ import com.yzd.collegecommunity.adapter.MainFragmentRankingListAdapter;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.yzd.collegecommunity.R.id.lv_ranking;
+
 /**
  * Created by Laiyin on 2017/3/5.
  */
 
 public class Main_RankingFragment extends Fragment {
 
-//    @BindView(lv_ranking)
-//    RecyclerView lvRanking;
-    private RecyclerView lv_ranking;
+    @BindView(R.id.lv_ranking)
+    RecyclerView lvRanking;
     private ArrayList list;
     private MainFragmentRankingListAdapter listAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -41,12 +45,12 @@ public class Main_RankingFragment extends Fragment {
 
         initView(view);
 
-//        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
     private void initView(View view) {
-        lv_ranking= (RecyclerView) view.findViewById(R.id.lv_ranking);
+        lvRanking= (RecyclerView) view.findViewById(lv_ranking);
 
         //new布局管理器
         linearLayoutManager = new LinearLayoutManager(mContext);
@@ -55,7 +59,7 @@ public class Main_RankingFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         //设置布局管理器
-        lv_ranking.setLayoutManager(linearLayoutManager);
+        lvRanking.setLayoutManager(linearLayoutManager);
 
         initDate();
 
@@ -63,7 +67,7 @@ public class Main_RankingFragment extends Fragment {
         listAdapter = new MainFragmentRankingListAdapter(getActivity(),list);
 
         //设置适配器
-        lv_ranking.setAdapter(listAdapter);
+        lvRanking.setAdapter(listAdapter);
 
         //设置增加或删除条目的动画  
 //        recyclerview.setItemAnimator(new DefaultItemAnimator());

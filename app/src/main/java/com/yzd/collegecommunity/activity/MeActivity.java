@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.github.bluzwong.swipeback.SwipeBackActivityHelper;
 import com.mursaat.extendedtextview.AnimatedGradientTextView;
 import com.yzd.collegecommunity.R;
 
@@ -22,6 +23,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.tv_school)
     AnimatedGradientTextView tvSchool;
     @BindView(R.id.rl_task)
+
     RelativeLayout rlTask;
     @BindView(R.id.rl_goods)
     RelativeLayout rlGoods;
@@ -32,11 +34,21 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.rl_setting)
     RelativeLayout rlSetting;
 
+    SwipeBackActivityHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.me_activity);
         ButterKnife.bind(this);
+
+        helper = new SwipeBackActivityHelper();
+
+        helper.setEdgeMode(true)
+                .setParallaxMode(true)
+                .setParallaxRatio(3)
+                .setNeedBackgroundShadow(true)
+                .init(this);
     }
 
     @OnClick({R.id.rl_task, R.id.rl_goods, R.id.rl_collect, R.id.rl_contact, R.id.rl_setting})
@@ -63,5 +75,10 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
                 startActivity(intent4);
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        helper.finish();
     }
 }

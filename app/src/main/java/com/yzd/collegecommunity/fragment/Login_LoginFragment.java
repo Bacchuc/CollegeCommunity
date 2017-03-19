@@ -21,19 +21,27 @@ import com.yzd.collegecommunity.util.BlurBehind;
 import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.yzd.collegecommunity.R.id.bt_login;
+
 
 /**
  * Created by Laiyin on 2017/3/4.
  */
 
-public class Login_LoginFragment extends Fragment implements View.OnClickListener{
+public class Login_LoginFragment extends Fragment implements View.OnClickListener {
 
-    private Button bt_login;
-    private EditText et_username;
-    private EditText et_password;
-//    private TextView tv_third;
+    @BindView(R.id.et_username)
+    EditText etUsername;
+    @BindView(R.id.et_password)
+    EditText etPassword;
+    @BindView(R.id.bt_login)
+    Button btLogin;
 
-    private String TAG="Login_LoginFragment";
+    private String TAG = "Login_LoginFragment";
 
     private String res;
 
@@ -44,33 +52,16 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.login_fragment_login,container,false);
+        View view = inflater.inflate(R.layout.login_fragment_login, container, false);
 
-        initView(view);
-
-        initListener();
-
+        ButterKnife.bind(this, view);
         return view;
     }
 
-
-    private void initView(View view){
-        bt_login=(Button)view.findViewById(R.id.bt_login);
-        et_username=(EditText)view.findViewById(R.id.et_username);
-        et_password=(EditText)view.findViewById(R.id.et_password);
-//        tv_third=(TextView)view.findViewById(R.id.tv_third);
-
-    }
-
-    private void initListener(){
-        bt_login.setOnClickListener(this);
-//        tv_third.setOnClickListener(this);
-    }
-
-    @Override
+    @OnClick({R.id.bt_login})
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.bt_login:
+        switch (view.getId()) {
+            case bt_login:
 //                OkHttpUtils
 //                        .post()
 //                        .url(Constants.BASEURL+"test.action")
@@ -153,9 +144,9 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
 
                 OkHttpUtils
                         .post()
-                        .url(Constants.BASEURL+"textPost")
-                        .addParams("username",et_username.getText().toString())
-                        .addParams("password",et_password.getText().toString())
+                        .url(Constants.BASEURL + "textPost")
+                        .addParams("username", etUsername.getText().toString())
+                        .addParams("password", etPassword.getText().toString())
                         .build()
                         .execute(new OkHttpCallback<Test>() {
                             @Override
@@ -170,10 +161,10 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
                             @Override
                             protected void onSuccess(HttpWrapper<Test> response, int id) {
 
-                                et_username.setText(new Gson().toJson(response));
-                                System.out.println("onSuccess:"+new Gson().toJson(response)+"------------------------------------");
+                                etUsername.setText(new Gson().toJson(response));
+                                System.out.println("onSuccess:" + new Gson().toJson(response) + "------------------------------------");
 
-                                Log.e(TAG,"onSuccess:"+new Gson().toJson(response)+"------------------------------------");
+                                Log.e(TAG, "onSuccess:" + new Gson().toJson(response) + "------------------------------------");
 
                             }
 
@@ -218,7 +209,7 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    public void startThirdActivity(){
+    public void startThirdActivity() {
         BlurBehind.getInstance().execute(getActivity(), new OnBlurCompleteListener() {
             @Override
             public void onBlurComplete() {
