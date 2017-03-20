@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_title">
+
+        <LinearLayout
+            android:id="@+id/ll_up"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            >
+
+            <Button
+                android:id="@+id/bt_released"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="RELEASED"
+                android:textColor="@color/colorBrack"
+                android:background="@android:color/transparent"
+                android:paddingTop="2dp"
+                />
+
+            <Button
+                android:id="@+id/bt_under_way"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Under way"
+                android:textColor="@color/colorBrack"
+                android:background="@android:color/transparent"
+                />
+
+            <Button
+                android:id="@+id/bt_finished"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="finished"
+                android:textColor="@color/colorBrack"
+                android:background="@android:color/transparent"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorDarkGray"
+            android:layout_below="@+id/ll_up"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/view_up">
+        </View>
+
+        <ImageView
+            android:id="@+id/iv_tab"
+            android:layout_width="90dp"
+            android:layout_height="1dp"
+            android:layout_below="@+id/ll_up"
+            android:src="@drawable/tab"
+            android:layout_marginLeft="180dp"
+            />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_up">
+        </android.support.v4.view.ViewPager>
+    </RelativeLayout>
+
+</RelativeLayout>

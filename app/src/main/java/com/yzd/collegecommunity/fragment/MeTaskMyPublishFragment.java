@@ -1,28 +1,21 @@
-package com.yzd.collegecommunity.activity;
+package com.yzd.collegecommunity.fragment;
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import com.melnykov.fab.FloatingActionButton;
-import com.mursaat.extendedtextview.AnimatedGradientTextView;
+//import android.app.Fragment;
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.adapter.MyFragmentPagerAdapter;
-import com.yzd.collegecommunity.fragment.Main_GoodsFragment;
-import com.yzd.collegecommunity.fragment.Main_RankingFragment;
-import com.yzd.collegecommunity.fragment.Main_TaskFragment;
-import com.yzd.collegecommunity.util.BlurBehind;
-import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 
 import java.util.ArrayList;
 
@@ -30,33 +23,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.yzd.collegecommunity.R.id.bt_goods;
-import static com.yzd.collegecommunity.R.id.bt_ranking_list;
-import static com.yzd.collegecommunity.R.id.bt_task;
-import static com.yzd.collegecommunity.R.id.tv_left;
-
 /**
- * Created by Laiyin on 2017/3/5.
+ * Created by Laiyin on 2017/3/19.
  */
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class MeTaskMyPublishFragment extends Fragment implements ViewPager.OnPageChangeListener {
 
-    @BindView(R.id.tv_left)
-    AnimatedGradientTextView tvLeft;
-    @BindView(R.id.bt_task)
-    Button btTask;
-    @BindView(R.id.bt_goods)
-    Button btGoods;
-    @BindView(R.id.bt_ranking_list)
-    Button btRankingList;
+    @BindView(R.id.bt_released)
+    Button btReleased;
+    @BindView(R.id.bt_under_way)
+    Button btUnderWay;
+    @BindView(R.id.bt_finished)
+    Button btFinished;
     @BindView(R.id.iv_tab)
     ImageView ivTab;
     @BindView(R.id.vp_main)
     ViewPager vpMain;
-    @BindView(R.id.fab)
-    FloatingActionButton fab;
-
-    public String TAG = "MainActivity";
 
     //fragment的集合，对应每个子页面
     private ArrayList<Fragment> fragments;
@@ -70,12 +52,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private int offset; //偏移量
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
-        ButterKnife.bind(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.me_fragment_task_mypublish, container, false);
+
+        ButterKnife.bind(this, view);
         initView();
         onPageSelected(0);
+        return view;
     }
 
     private void initView() {
@@ -85,9 +73,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         fragments.add(new Main_GoodsFragment());
         fragments.add(new Main_RankingFragment());
 
-        btArgs = new Button[]{btTask, btGoods, btRankingList};     //将滑动的buttonTab放进一个集合
+        btArgs = new Button[]{btReleased, btUnderWay, btFinished};     //将滑动的buttonTab放进一个集合
 
-        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments);
+        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(), fragments);
         vpMain.setAdapter(adapter);
 
         //获取图片宽度
@@ -95,7 +83,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         //获取屏幕宽度
         DisplayMetrics dm = new DisplayMetrics();
         // 把屏幕尺寸信息赋值给DisplayMetrics dm，注意不是set
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         // 屏幕宽度
         int count = dm.widthPixels;
         //计算偏移量
@@ -113,9 +101,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     //重置按钮颜色 为浅黑色
     public void resetButtonTextColor() {
-        btTask.setTextColor(Color.parseColor("#D0D0D0"));
-        btGoods.setTextColor(Color.parseColor("#D0D0D0"));
-        btRankingList.setTextColor(Color.parseColor("#D0D0D0"));
+        btReleased.setTextColor(Color.parseColor("#D0D0D0"));
+        btUnderWay.setTextColor(Color.parseColor("#D0D0D0"));
+        btFinished.setTextColor(Color.parseColor("#D0D0D0"));
     }
 
     @Override
@@ -143,34 +131,17 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     }
 
-    @OnClick({R.id.tv_left, R.id.bt_task, R.id.bt_goods, R.id.bt_ranking_list, R.id.fab})
+    @OnClick({R.id.bt_released, R.id.bt_under_way, R.id.bt_finished})
     public void onClick(View view) {
         switch (view.getId()) {
-            case tv_left:
-                Intent intent = new Intent(MainActivity.this, MeActivity.class);
-                startActivity(intent);
-
-                break;
-            case R.id.fab:
-                BlurBehind.getInstance().execute(MainActivity.this, new OnBlurCompleteListener() {
-                    @Override
-                    public void onBlurComplete() {
-                        Intent intent1 = new Intent(MainActivity.this, MainFabPublicActivity.class);
-                        intent1.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent1);
-                    }
-                });
-                break;
-            case bt_task:
+            case R.id.bt_released:
                 vpMain.setCurrentItem(0);
                 break;
-            case bt_goods:
+            case R.id.bt_under_way:
                 vpMain.setCurrentItem(1);
                 break;
-            case bt_ranking_list:
+            case R.id.bt_finished:
                 vpMain.setCurrentItem(2);
-                break;
-            default:
                 break;
         }
     }

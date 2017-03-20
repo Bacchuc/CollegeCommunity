@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.github.bluzwong.swipeback.SwipeBackActivityHelper;
+import com.jude.swipbackhelper.SwipeBackHelper;
 import com.yzd.collegecommunity.R;
 
 import butterknife.BindView;
@@ -30,11 +32,15 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.bt_send)
     Button btSend;
 
+    SwipeBackActivityHelper helper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_activity);
         ButterKnife.bind(this);
+        //侧滑效果
+        SwipeBackHelper.onCreate(this);
         initView();
     }
 
@@ -57,5 +63,18 @@ public class ChatActivity extends BaseActivity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+    //侧滑效果
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        SwipeBackHelper.onPostCreate(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SwipeBackHelper.onDestroy(this);
     }
 }

@@ -45,6 +45,8 @@ dependencies {
     compile 'com.github.bluzwong:swipeback:0.2.0@aar'
     //activity侧滑退出
 
+    compile 'com.jude:swipebackhelper:3.1.2'
+
 
 
 //    compile 'io.reactivex:rxjava:1.0.14'

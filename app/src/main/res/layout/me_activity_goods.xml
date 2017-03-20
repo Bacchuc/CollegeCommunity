@@ -23,20 +23,11 @@
 
     </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="@color/colorDarkGray"
-        android:layout_below="@+id/rl_title"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/view_up">
-    </View>
-
     <FrameLayout
         android:id="@+id/fl_goods"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/view_up"
+        android:layout_below="@+id/rl_title"
         android:layout_above="@+id/view_up2">
 
     </FrameLayout>
@@ -45,24 +36,29 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:background="@color/colorDarkGray"
-        android:layout_above="@+id/ll_bottom"
+        android:layout_above="@+id/rg_bottom"
         android:layout_centerHorizontal="true"
         android:id="@+id/view_up2">
     </View>
 
-    <LinearLayout
-        android:id="@+id/ll_bottom"
+    <RadioGroup
+        android:id="@+id/rg_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true">
 
-        <ImageButton
-            android:id="@+id/bt_my_publish"
+        <RadioButton
+            android:id="@+id/rb_my_publish"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/my_publish"
+            android:text="mine"
+            android:textSize="20dp"
+            android:textColor="@color/colorGray"
+            android:gravity="center"
+            android:button="@null"
+            android:checked="true"
             android:background="@android:color/transparent"/>
 
         <ImageButton
@@ -73,13 +69,18 @@
             android:src="@drawable/pencel"
             android:background="@color/colorOrange"/>
 
-        <ImageButton
-            android:id="@+id/bt_others_publish"
+        <RadioButton
+            android:id="@+id/rb_others_publish"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/others_publish"
+            android:text="other"
+            android:textSize="20dp"
+            android:textColor="@color/colorGray"
+            android:gravity="center"
+            android:button="@null"
+            android:checked="true"
             android:background="@android:color/transparent"/>
-    </LinearLayout>
+    </RadioGroup>
 
 </RelativeLayout>

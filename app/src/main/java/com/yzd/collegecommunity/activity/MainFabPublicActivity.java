@@ -16,6 +16,9 @@ import butterknife.OnClick;
 
 /**
  * Created by Laiyin on 2017/3/6.
+ *
+ * 悬浮窗页面 背景透明
+ *
  */
 
 public class MainFabPublicActivity extends BaseActivity implements View.OnClickListener {

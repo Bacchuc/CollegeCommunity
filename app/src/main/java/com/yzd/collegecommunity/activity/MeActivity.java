@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.github.bluzwong.swipeback.SwipeBackActivityHelper;
+import com.jude.swipbackhelper.SwipeBackHelper;
 import com.mursaat.extendedtextview.AnimatedGradientTextView;
 import com.yzd.collegecommunity.R;
 
@@ -34,7 +34,7 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     @BindView(R.id.rl_setting)
     RelativeLayout rlSetting;
 
-    SwipeBackActivityHelper helper;
+    private String TAG="MeActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +42,10 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.me_activity);
         ButterKnife.bind(this);
 
-        helper = new SwipeBackActivityHelper();
-
-        helper.setEdgeMode(true)
-                .setParallaxMode(true)
-                .setParallaxRatio(3)
-                .setNeedBackgroundShadow(true)
-                .init(this);
+        //侧滑效果
+        SwipeBackHelper.onCreate(this);
     }
+
 
     @OnClick({R.id.rl_task, R.id.rl_goods, R.id.rl_collect, R.id.rl_contact, R.id.rl_setting})
     public void onClick(View view) {
@@ -77,8 +73,16 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    //侧滑效果
     @Override
-    public void onBackPressed() {
-        helper.finish();
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        SwipeBackHelper.onPostCreate(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SwipeBackHelper.onDestroy(this);
     }
 }
