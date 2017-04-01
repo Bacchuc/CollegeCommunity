@@ -59,6 +59,7 @@ public class MeTaskActivity extends BaseActivity implements View.OnClickListener
         transaction = fragmentManager.beginTransaction();
         Fragment fragment = null;
         try {
+			//实例化默认构造方法
             fragment = (Fragment) myFragment.newInstance();
         } catch (InstantiationException e1) {
             // TODO Auto-generated catch block
@@ -82,59 +83,6 @@ public class MeTaskActivity extends BaseActivity implements View.OnClickListener
                 break;
         }
     }
-
-//    //设置内容区域
-//    private void setSelect(int i){
-//
-//        FragmentManager fm=getFragmentManager();
-//        FragmentTransaction transaction=fm.beginTransaction();
-//        hideFragment(transaction);
-//
-//        switch (i){
-//            case 0:
-//                if (fragmentMyPublish==null){
-//                    fragmentMyPublish=new MeTaskMyPublishFragment();
-//                    transaction.add(R.id.fl_task,fragmentMyPublish);
-//                }else {
-//                    transaction.show(fragmentMyPublish);
-//                }
-//                break;
-//            case 1:
-//                if (fragmentOthersPublish==null){
-//                    fragmentOthersPublish=new MeTaskOtherPublishFragment();
-//                    transaction.add(R.id.fl_task,fragmentOthersPublish);
-//                }else {
-//                    transaction.show(fragmentOthersPublish);
-//                }
-//                break;
-//        }
-//        transaction.commit();
-//    }
-//
-//    private void hideFragment(FragmentTransaction transaction) {
-//        if (fragmentMyPublish!=null){
-//            transaction.hide(fragmentMyPublish);
-//        }
-//        if (fragmentOthersPublish!=null){
-//            transaction.hide(fragmentOthersPublish);
-//        }
-//    }
-
-//    @OnClick({R.id.bt_my_publish, R.id.bt_publish, R.id.bt_others_publish})
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.bt_my_publish:
-//                setSelect(0);
-//                break;
-//            case R.id.bt_publish:
-//                Intent intent = new Intent(MeTaskActivity.this, PublishTaskActivity.class);
-//                startActivity(intent);
-//                break;
-//            case R.id.bt_others_publish:
-//                setSelect(1);
-//                break;
-//        }
-//    }
 
     //侧滑效果
     @Override

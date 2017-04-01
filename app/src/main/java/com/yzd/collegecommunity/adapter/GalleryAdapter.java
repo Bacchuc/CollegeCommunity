@@ -1,20 +1,20 @@
 package com.yzd.collegecommunity.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.yzd.collegecommunity.R;
-import android.content.Context;
-import android.widget.ImageView;
 
 import java.util.List;
 
-import static com.yzd.collegecommunity.R.id.view;
-
 /**
  * Created by Laiyin on 2017/3/11.
+ *
+ * RecyclerView适配器
  */
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder>{

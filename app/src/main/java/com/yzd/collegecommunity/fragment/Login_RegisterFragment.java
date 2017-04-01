@@ -13,16 +13,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.activity.MainActivity;
 import com.yzd.collegecommunity.constants.Constants;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.yzd.collegecommunity.modeal.HttpWrapper;
+import com.yzd.collegecommunity.retrofit.Registerlmpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Call;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.yzd.collegecommunity.R.id.bt_register;
 import static com.yzd.collegecommunity.R.id.et_code;
@@ -52,6 +58,8 @@ public class Login_RegisterFragment extends Fragment implements View.OnClickList
 
     private String resCode;
 
+    private String TAG = "Login_RegisterFragment";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,62 +77,96 @@ public class Login_RegisterFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_login:
-                OkHttpUtils
-                        .post()
-                        .url(Constants.BASEURL + "textPost.action")
-                        .addParams("et_email", etEmail.getText().toString())
-                        .addParams("et_code", etCode.getText().toString())
-                        .addParams("username", etUsername.getText().toString())
-                        .addParams("password", etPassword.getText().toString())
-                        .build()
-                        .execute(new StringCallback() {
+
+                Retrofit registerRetrofit = new Retrofit.Builder()
+                        .baseUrl(Constants.BASEURL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                        .build();
+
+                Registerlmpl registerService = registerRetrofit.create(Registerlmpl.class);
+
+                registerService.register(etUsername.getText().toString(),etEmail.getText().toString(),etPassword.getText().toString(),etCode.getText().toString())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<HttpWrapper<String>>() {
                             @Override
-                            public void onError(Call call, Exception e, int id) {
-                                Log.e("Login_LoginFragment", "onError:" + e.getMessage());
+                            public void onCompleted() {
                             }
 
                             @Override
-                            public void onResponse(String response, int id) {
+                            public void onError(Throwable e) {
+                                Log.e(TAG,e.getMessage());
+                                Toast.makeText(getActivity(), "Network error", Toast.LENGTH_SHORT).show();
+                            }
 
-                                final String res = response;
+                            @Override
+                            public void onNext(HttpWrapper<String> loginService) {
 
-                                if (res == "OK") {
-                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    getActivity().startActivity(intent);
-                                } else if (res == "et_username") {
-                                    Toast.makeText(getActivity(), "用户名已注册", Toast.LENGTH_LONG).show();
-                                    etUsername.setText("");
-                                } else if (res == "et_email") {
-                                    Toast.makeText(getActivity(), "邮箱已注册", Toast.LENGTH_LONG).show();
-                                    etEmail.setText("");
-                                } else if (res == "et_code") {
-                                    Toast.makeText(getActivity(), "验证码错误", Toast.LENGTH_LONG).show();
-                                    etCode.setText("");
+                                if (new Gson().toJson(loginService.getCode()).equals("200")){
+
+                                    if(new Gson().toJson(loginService.getInfo()).equals("\"success\"")){
+
+                                        Intent intent=new Intent(getActivity(), MainActivity.class);
+                                        startActivity(intent);
+
+                                    }else if(new Gson().toJson(loginService.getInfo()).equals("\"email\"")){
+
+                                        Toast.makeText(getActivity(), "The mailbox is already registered.", Toast.LENGTH_SHORT).show();
+
+                                    }else if(new Gson().toJson(loginService.getInfo()).equals("\"username\"")){
+
+                                        Toast.makeText(getActivity(), "The username is already registered.", Toast.LENGTH_SHORT).show();
+
+                                    }else if(new Gson().toJson(loginService.getInfo()).equals("\"verCode\"")){
+
+                                        Toast.makeText(getActivity(), "verification code error.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }else {
+                                    Toast.makeText(getActivity(), "Network error", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
+
                 break;
             case tv_sendCode:
+                Retrofit sendCodeRetrofit = new Retrofit.Builder()
+                        .baseUrl(Constants.BASEURL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                        .build();
 
-                OkHttpUtils
-                        .post()
-                        .url(Constants.BASEURL + "textPost.action")
-                        .addParams("et_email", etEmail.getText().toString())
-                        .build()
-                        .execute(new StringCallback() {
+                Registerlmpl sendCodeService = sendCodeRetrofit.create(Registerlmpl.class);
+
+                sendCodeService.sendCode(etEmail.getText().toString())
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<HttpWrapper<String>>() {
                             @Override
-                            public void onError(Call call, Exception e, int id) {
-                                Log.e("Login_RegisterFragment", "onError:" + e.getMessage());
+                            public void onCompleted() {
                             }
 
                             @Override
-                            public void onResponse(String response, int id) {
+                            public void onError(Throwable e) {
+                                Log.e(TAG,e.getMessage());
+                                Toast.makeText(getActivity(), "Network error", Toast.LENGTH_SHORT).show();
+                            }
 
-                                resCode = response;
-                                if (resCode == "OK") {
-                                    Toast.makeText(getActivity(), "已将验证码发送至您的邮箱，请验证！", Toast.LENGTH_LONG).show();
+                            @Override
+                            public void onNext(HttpWrapper<String> loginService) {
+
+                                if (new Gson().toJson(loginService.getCode()).equals("200")){
+
+                                    if(new Gson().toJson(loginService.getInfo()).equals("\"success\"")){
+
+                                        Toast.makeText(getActivity(), "The verification code has been sent to yout mailbox,please verify.", Toast.LENGTH_SHORT).show();
+
+                                    }else{
+                                        Toast.makeText(getActivity(), "verification code failed to send.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }else {
+                                    Toast.makeText(getActivity(), "Network error", Toast.LENGTH_SHORT).show();
                                 }
-
                             }
                         });
 

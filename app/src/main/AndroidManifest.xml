@@ -5,12 +5,13 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application
+        android:name=".util.AppCenterUtil"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +22,7 @@
         <activity android:name=".activity.ChatActivity"></activity>
         <activity android:name=".activity.ThirdActivity"></activity>
         <activity android:name=".activity.MainFabPublicActivity"></activity>
-        <activity android:name=".activity.WelcomeActivity"></activity>
+        <activity android:name=".activity.MainActivity"></activity>
 
         <activity android:name=".activity.PublishTaskActivity"></activity>
         <activity android:name=".activity.PublishGoodsActivity"></activity>

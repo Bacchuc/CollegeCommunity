@@ -80,43 +80,6 @@ public class MeGoodsActivity extends BaseActivity implements View.OnClickListene
         }
     }
 
-    //设置内容区域
-//    private void setSelect(int i) {
-//
-//        FragmentManager fm = getFragmentManager();
-//        FragmentTransaction transaction = fm.beginTransaction();
-//        hideFragment(transaction);
-//
-//        switch (i) {
-//            case 0:
-//                if (fragmentMyPublish == null) {
-//                    fragmentMyPublish = new MeGoodsMyPublishFragment();
-//                    transaction.add(R.id.fl_task, fragmentMyPublish);
-//                } else {
-//                    transaction.show(fragmentMyPublish);
-//                }
-//                break;
-//            case 1:
-//                if (fragmentOthersPublish == null) {
-//                    fragmentOthersPublish = new MeGoodsOtherPublishFragment();
-//                    transaction.add(R.id.fl_task, fragmentOthersPublish);
-//                } else {
-//                    transaction.show(fragmentOthersPublish);
-//                }
-//                break;
-//        }
-//        transaction.commit();
-//    }
-//
-//    private void hideFragment(FragmentTransaction transaction) {
-//        if (fragmentMyPublish != null) {
-//            transaction.hide(fragmentMyPublish);
-//        }
-//        if (fragmentOthersPublish != null) {
-//            transaction.hide(fragmentOthersPublish);
-//        }
-//    }
-
     //侧滑效果
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

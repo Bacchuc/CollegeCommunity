@@ -11,8 +11,9 @@ import java.io.Serializable;
 
 public class HttpWrapper<T> implements Serializable {
 
+
     /**
-     * 响应码  服务器返回200为成功，201为失败
+     * 响应码  服务器返回200为成功，400为失败
      */
     public int code;
 
