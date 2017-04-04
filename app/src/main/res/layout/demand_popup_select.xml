@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/popup_select"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/popup_select_text_title_bg"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="Please Select"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_take"
+                style="@style/popup_select"
+                android:text="take a picture" />
+
+            <TextView
+                android:id="@+id/tv_select"
+                style="@style/popup_select"
+                android:text="select picture from album" />
+
+        </LinearLayout>
+
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_gravity="end"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:background="@mipmap/exit"-->
+            <!--android:onClick="select_cancel" />-->
+
+    </RelativeLayout>
+</RelativeLayout>

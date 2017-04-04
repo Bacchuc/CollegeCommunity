@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
             app:angle="45"
             app:speed="1000"
             android:textSize="@dimen/activity_title_center_size"/>
-
 
         <ImageButton
             android:id="@+id/ib_commit"
@@ -44,7 +42,7 @@
     </View>
 
     <EditText
-        android:id="@+id/et_task_title"
+        android:id="@+id/et_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/view_up"
@@ -62,7 +60,7 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_task_title"
+        android:layout_below="@+id/et_title"
         android:layout_marginTop="2dp"
         android:layout_marginLeft="10dp"
         android:text="$"
@@ -70,10 +68,10 @@
         android:textColor="@color/colorGray"/>
 
     <EditText
-        android:id="@+id/et_task_price"
+        android:id="@+id/et_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/et_task_title"
+        android:layout_below="@+id/et_title"
         android:layout_marginTop="2dp"
         android:textCursorDrawable="@null"
         android:layout_toRightOf="@+id/tv_price"
@@ -85,12 +83,38 @@
         android:textSize="18dp"
         android:textColor="@color/colorGray"/>
 
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fl_describe"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="10dp"
+        android:text="Number:"
+        android:textSize="18dp"
+        android:textColor="@color/colorGray"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_number"
+        android:hint="2"
+        android:textSize="18dp"
+        android:layout_alignBaseline="@+id/tv_number"
+        android:layout_toRightOf="@+id/tv_number"
+        android:textCursorDrawable="@null"
+        android:textColor="@color/colorGray"
+        android:layout_marginLeft="10dp"
+        android:theme="@style/MyEditText"
+        android:background="@null"/>
+
     <FrameLayout
         android:id="@+id/fl_describe"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_below="@+id/tv_price"
-        android:layout_margin="10dp">
+        android:layout_alignLeft="@+id/tv_price"
+        android:layout_alignStart="@+id/tv_price">
 
         <RelativeLayout
             android:id="@+id/rl_describe"
@@ -107,7 +131,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editText_password"
+                    android:id="@+id/et_describe"
                     android:hint="Please enter a detailed description of the task here..."
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
@@ -124,7 +148,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:src="@drawable/camera"
-                android:id="@+id/ib_task_photo"
+                android:id="@+id/ib_photo"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_margin="20dp"
@@ -134,30 +158,5 @@
         </RelativeLayout>
 
     </FrameLayout>
-
-    <TextView
-        android:id="@+id/tv_begin_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fl_describe"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="10dp"
-        android:text="Number:"
-        android:textSize="18dp"
-        android:textColor="@color/colorGray"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/et_begin_time"
-        android:hint="2"
-        android:textSize="18dp"
-        android:layout_alignBaseline="@+id/tv_begin_time"
-        android:layout_toRightOf="@+id/tv_begin_time"
-        android:textCursorDrawable="@null"
-        android:textColor="@color/colorGray"
-        android:layout_marginLeft="10dp"
-        android:theme="@style/MyEditText"
-        android:background="@null"/>
 
 </RelativeLayout>

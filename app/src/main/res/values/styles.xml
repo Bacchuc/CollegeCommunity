@@ -18,4 +18,20 @@
          <item name="colorControlNormal">@color/colorGray</item>
     </style>
 
+    <style name="popup_select">
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#4f4f4f</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">@drawable/popup_select_text_content_bg</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">7dp</item>
+        <item name="android:paddingBottom">8dp</item>
+    </style>
+    <style name="popup_window">
+        <item name="android:windowEnterAnimation">@anim/popup_window_in</item>
+        <item name="android:windowExitAnimation">@anim/popup_window_out</item>
+    </style>
+
 </resources>
