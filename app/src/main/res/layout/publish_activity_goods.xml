@@ -144,16 +144,17 @@
 
             </ScrollView>
 
-            <ImageButton
+            <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/camera"
                 android:id="@+id/ib_photo"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_margin="20dp"
-                android:background="@color/colorLightOrange"
+                android:background="@drawable/bulb_icon"
                 />
+            <!--android:background="@color/colorLightOrange"-->
+            <!--android:src="@drawable/camera"-->
 
         </RelativeLayout>
 

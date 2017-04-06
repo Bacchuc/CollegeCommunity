@@ -59,10 +59,12 @@ public class MainFabPublicActivity extends BaseActivity implements View.OnClickL
             case R.id.ib_task:
                 Intent intent = new Intent(MainFabPublicActivity.this, PublishTaskActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             case R.id.ib_goods:
                 Intent intent1 = new Intent(MainFabPublicActivity.this, PublishGoodsActivity.class);
                 startActivity(intent1);
+                finish();
                 break;
         }
     }
