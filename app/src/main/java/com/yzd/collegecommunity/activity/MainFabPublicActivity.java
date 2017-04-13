@@ -40,6 +40,7 @@ public class MainFabPublicActivity extends BaseActivity implements View.OnClickL
     }
 
     public void initView() {
+
         animatorUtil = new AnimatorUtil();
         animatorUtil.scaleAndTranslationAnimator(ibTask, 0.3f, 1F, 0.3f, 1F, 0, -230F, 0, -180, 400, null);
         animatorUtil.scaleAndTranslationAnimator(ibGoods, 0.3f, 1F, 0.3f, 1F, 0, -230F, 0, 180, 400, null);
