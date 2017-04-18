@@ -10,6 +10,7 @@ import com.yzd.collegecommunity.util.ActivityCollectorUtil;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

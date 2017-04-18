@@ -10,6 +10,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 /**
@@ -26,13 +29,16 @@ public class SelectImageUtil {
     private static final int CROP_SMALL_PICTURE = 2;
     private Activity activity;
 
-    public SelectImageUtil(Activity activity, ImageView mImage){
-        this.activity=activity;
-        this.mImage=mImage;
+    private SubscriberOnNextListener mListener;
+
+    public SelectImageUtil(Activity activity, ImageView mImage) {
+        this.activity = activity;
+        this.mImage = mImage;
     }
 
     /**
      * 重写onActivityResult
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -78,6 +84,7 @@ public class SelectImageUtil {
         activity.startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
 
+
     /**
      * 保存裁剪之后的图片数据
      */
@@ -85,16 +92,54 @@ public class SelectImageUtil {
         Bundle extras = data.getExtras();
         if (extras != null) {
             mBitmap = extras.getParcelable("data");
-            //这里图片是方形的，可以用一个工具类处理成圆形（很多头像都是圆形，这种工具类网上很多不再详述）
-            mImage.setImageBitmap(mBitmap);//显示图片
-            //在这个地方可以写上上传该图片到服务器的代码，后期将单独写一篇这方面的博客，敬请期待...
+            //显示图片,这里图片是方形的，可以用一个工具类处理成圆形
+            mImage.setImageBitmap(mBitmap);
+            //在这个地方可以写上上传该图片到服务器的代码
+            Bitmap2Bytes(mBitmap);
+
+            if(mOnSelectImageOptionListener != null){
+                mOnSelectImageOptionListener.onChoosePhoto();
+            }
+//            Map<String, ResponseBody> bodyMap = new HashMap<>();
+//            bodyMap.put("file"+"\";filename=\""+file.getName(),ResponseBody.create(MediaType.parse("image/png"),file));
+//
+//            mListener = new SubscriberOnNextListener() {
+//                @Override
+//                public void onNext(Object o) {
+//                    ToastUtil.showShort(AppCenterUtil.getContextObject(), "Upload Success");
+//                }
+//            };
+//            RetrofitUtil.getInstance().uploadSingleFile(etUsername.getText().toString(), SPUtil.getToken(),
+//                    new ProgressSubscriber<HttpWrapper<String>>(mListener, AppCenterUtil.getContextObject()));
         }
+    }
+
+    public OnSelectImageOptionListener mOnSelectImageOptionListener;
+
+    public void setOnSelectImageOptionListener(OnSelectImageOptionListener listener){
+        mOnSelectImageOptionListener = listener;
+    }
+
+    public interface OnSelectImageOptionListener{
+        void onTakePhoto();
+        void onChoosePhoto();
+    }
+
+    /**
+     * 把Bitmap转Byte
+     * @param bitmap
+     * @return
+     */
+    public static byte[] Bitmap2Bytes(Bitmap bitmap){
+        ByteArrayOutputStream baos=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        return baos.toByteArray();
     }
 
     /**
      * 选择本地照片
      */
-    public void choosePicture(){
+    public void choosePicture() {
         Intent openAlbumIntent = new Intent(
                 Intent.ACTION_GET_CONTENT);
         openAlbumIntent.setType("image/*");
@@ -105,7 +150,7 @@ public class SelectImageUtil {
     /**
      * 拍照
      */
-    public void takePicture(){
+    public void takePicture() {
         Intent openCameraIntent = new Intent(
                 MediaStore.ACTION_IMAGE_CAPTURE);
         tempUri = Uri.fromFile(new File(Environment

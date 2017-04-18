@@ -19,6 +19,7 @@ import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
 import com.yzd.collegecommunity.util.BlurBehind;
 import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 import com.yzd.collegecommunity.util.RetrofitUtil;
+import com.yzd.collegecommunity.util.SPUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,16 +67,20 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
                 mListener = new SubscriberOnNextListener<HttpWrapper<String>>() {
                     @Override
                     public void onNext(HttpWrapper<String> httpWrapperResponse) {
-                        if(httpWrapperResponse.getCode()==200){
-                            Intent intent=new Intent(getActivity(), MainActivity.class);
+                        if (httpWrapperResponse.getCode() == 200) {
+                            //登陆成功后得到data中的token
+                            SPUtil.refreshToken(httpWrapperResponse.getData());
+
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
                             getActivity().finish();
-                        }else {
+
+                        } else {
                             Toast.makeText(getActivity(), httpWrapperResponse.getInfo(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
-                RetrofitUtil.getInstance().login(etUsername.getText().toString(), etPassword.getText().toString(),new ProgressSubscriber<HttpWrapper<String>>(mListener, getActivity()));
+                RetrofitUtil.getInstance().login(etUsername.getText().toString(), etPassword.getText().toString(), new ProgressSubscriber<HttpWrapper<String>>(mListener, getActivity()));
                 break;
             default:
                 break;

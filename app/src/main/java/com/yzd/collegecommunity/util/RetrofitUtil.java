@@ -34,9 +34,11 @@ public class RetrofitUtil {
     /**
      * 私有构造方法
      */
-    private RetrofitUtil(){
+    private RetrofitUtil() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+
+
         mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl(Constants.BASEURL)
@@ -46,39 +48,35 @@ public class RetrofitUtil {
         mApiService = mRetrofit.create(ApiService.class);
     }
 
-    public static RetrofitUtil getInstance(){
-        if (mInstance == null){
-            synchronized (RetrofitUtil.class){
+    public static RetrofitUtil getInstance() {
+        if (mInstance == null) {
+            synchronized (RetrofitUtil.class) {
                 mInstance = new RetrofitUtil();
             }
         }
         return mInstance;
     }
 
-    private <T> void toSubscribe(Observable<T> observable, Subscriber<T> subscriber){
+    private <T> void toSubscribe(Observable<T> observable, Subscriber<T> subscriber) {
         observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(subscriber);
     }
 
-    public void login(String username,String password,Subscriber<HttpWrapper<String>> subscriber){
-        mApiService.login(username,password)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+    public void login(String username, String password, Subscriber<HttpWrapper<String>> subscriber) {
+        mApiService.login(username, password)
+                .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
 
-    public void sendCode(String email,Subscriber<HttpWrapper<String>> subscriber){
+    public void sendCode(String email, Subscriber<HttpWrapper<String>> subscriber) {
         mApiService.sendCode(email)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
 
-    public void register(String username, String password, String email, String code, Subscriber<HttpWrapper<String>> subscriber){
+    public void register(String username, String password, String email, String code, Subscriber<HttpWrapper<String>> subscriber) {
         mApiService.register(username, email, password, code)
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -86,4 +84,17 @@ public class RetrofitUtil {
                 .subscribe(subscriber);
     }
 
+//    public void uploadSingleFile(File file, String token, Subscriber<HttpWrapper<Test>> subscriber) {
+//
+//        Map<String, ResponseBody> bodyMap = new HashMap<>();
+//        bodyMap.put("file"+"\";filename=\""+file.getName(),ResponseBody.create(MediaType.parse("image/png"),file));
+//
+//        //创建RequwstBody对象
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+//
+//        //使用RxJava方式调度任务并监听
+//        mApiService.uploadSingleFile(requestBody, token)
+//                .compose(RxSchedulers.switchThread())
+//                .subscribe(subscriber);
+//    }
 }

@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.ChatActivity"></activity>
         <activity android:name=".activity.ThirdActivity"></activity>
         <activity android:name=".activity.MainFabPublicActivity"></activity>

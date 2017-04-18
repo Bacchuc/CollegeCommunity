@@ -15,7 +15,6 @@ public class ActivityCollectorUtil {
 
     public static List<Activity> activities=new ArrayList<Activity>();
 
-
     /**
      * 添加继承BaseActivity的活动进栈
      * @param activity
@@ -24,7 +23,6 @@ public class ActivityCollectorUtil {
         activities.add(activity);
     }
 
-
     /**
      * 移除栈中某个继承BaseActivity的活动
      * @param activity
@@ -32,7 +30,6 @@ public class ActivityCollectorUtil {
     public static void removeActivity(Activity activity){
         activities.remove(activity);
     }
-
 
     /**
      * 移除栈中所有继承BaseActivity的活动

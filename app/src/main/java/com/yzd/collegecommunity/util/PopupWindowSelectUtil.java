@@ -35,11 +35,12 @@ public class PopupWindowSelectUtil extends PopupWindow{
     SelectImageUtil selectImageUtil;
     SelectImageUtil selectImageUtilResult;
 
-    public PopupWindowSelectUtil(Context context, Activity activity, int viewLayout, ImageView mImage) {
+    public PopupWindowSelectUtil(Context context, Activity activity, int viewLayout,OnPopWindowOptionListener listener) {
         this.mContext = context;
         this.activity = activity;
         this.viewLayout= viewLayout;
-        this.mImage=mImage;
+        //this.mImage=mImage;
+		mOnPopWindowOptionListener = listener;
         initPopupWindow();
     }
 
@@ -67,7 +68,10 @@ public class PopupWindowSelectUtil extends PopupWindow{
         tvTake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImageUtil.takePicture();
+                //selectImageUtil.takePicture();
+				if(mOnPopWindowOptionListener != null){
+					mOnPopWindowOptionListener.onTakePhoto();
+				}
                 popupWindow.dismiss();
             }
         });
@@ -76,7 +80,10 @@ public class PopupWindowSelectUtil extends PopupWindow{
         tvSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectImageUtil.choosePicture();
+                //selectImageUtil.choosePicture();
+				if(mOnPopWindowOptionListener != null){
+					mOnPopWindowOptionListener.onChoosePhoto();
+				}
                 popupWindow.dismiss();
             }
         });
@@ -99,7 +106,6 @@ public class PopupWindowSelectUtil extends PopupWindow{
                 activity.getWindow().setAttributes(params);
             }
         });
-
     }
 
     /**
@@ -111,4 +117,15 @@ public class PopupWindowSelectUtil extends PopupWindow{
         //设置显示PopupWindow的位置位于View的左下方，x,y表示坐标偏移量
         //popupWindow.showAsDropDown(view,100,100);
     }
+	
+	public OnPopWindowOptionListener mOnPopWindowOptionListener;
+
+	public void setOnPopWindowOptionListener(OnPopWindowOptionListener listener){
+		mOnPopWindowOptionListener = listener;
+	}
+
+	public interface OnPopWindowOptionListener{
+		void onTakePhoto();
+		void onChoosePhoto();
+	}
 }

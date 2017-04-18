@@ -37,6 +37,7 @@ public class PublishGoodsActivity extends BaseActivity {
 
     PopupWindowSelectUtil popupWindowSelect;
     SelectImageUtil selectImageUtilResult;
+    SelectImageUtil selectImageUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +83,18 @@ public class PublishGoodsActivity extends BaseActivity {
             case R.id.ib_commit:
                 break;
             case R.id.ib_photo:
-                popupWindowSelect=new PopupWindowSelectUtil(this, PublishGoodsActivity.this, R.layout.publish_activity_goods,ibPhoto);
+                selectImageUtil=new SelectImageUtil(this, ibPhoto);
+                popupWindowSelect=new PopupWindowSelectUtil(this, PublishGoodsActivity.this, R.layout.publish_activity_goods, new PopupWindowSelectUtil.OnPopWindowOptionListener() {
+                    @Override
+                    public void onTakePhoto() {
+                        selectImageUtil.takePicture();
+                    }
+
+                    @Override
+                    public void onChoosePhoto() {
+                        selectImageUtil.choosePicture();
+                    }
+                });
                 popupWindowSelect.show();
                 break;
         }
