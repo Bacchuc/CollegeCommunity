@@ -65,7 +65,7 @@ public class PublishGoodsActivity extends BaseActivity {
 
     /**
      * 重写上传照片拍照与选取照片功能时需要的onActivityResult，回调PopupWindowSelectUtil中的onActivityResult，
-     * onActivityResult再回调选择照片的工具类SelectImageUtil
+     * onActivityResult再回调选择照片的工具类SelectImageUtil 张琦
      * @param requestCode
      * @param resultCode
      * @param data
