@@ -18,7 +18,7 @@ import com.yzd.collegecommunity.R;
  * Created by Laiyin on 2017/4/4.
  */
 
-public class PopupWindowSelectUtil extends PopupWindow{
+public class PopupWindowSelectUtil extends PopupWindow {
 
     private TextView tvTake;
     private TextView tvSelect;
@@ -35,12 +35,11 @@ public class PopupWindowSelectUtil extends PopupWindow{
     SelectImageUtil selectImageUtil;
     SelectImageUtil selectImageUtilResult;
 
-    public PopupWindowSelectUtil(Context context, Activity activity, int viewLayout,OnPopWindowOptionListener listener) {
+    public PopupWindowSelectUtil(Context context, Activity activity, int viewLayout) {
         this.mContext = context;
         this.activity = activity;
-        this.viewLayout= viewLayout;
+        this.viewLayout = viewLayout;
         //this.mImage=mImage;
-		mOnPopWindowOptionListener = listener;
         initPopupWindow();
     }
 
@@ -58,32 +57,32 @@ public class PopupWindowSelectUtil extends PopupWindow{
         params.alpha = 0.8f;
         activity.getWindow().setAttributes(params);//把该参数对象设置进当前界面中
 
-        selectImageUtil=new SelectImageUtil(activity, mImage);
+        selectImageUtil = new SelectImageUtil(activity, mImage);
 
         show();
 
         myDismiss();
 
-        tvTake= (TextView) view.findViewById(R.id.tv_take);
+        tvTake = (TextView) view.findViewById(R.id.tv_take);
         tvTake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //selectImageUtil.takePicture();
-				if(mOnPopWindowOptionListener != null){
-					mOnPopWindowOptionListener.onTakePhoto();
-				}
+                if (mOnPopWindowOptionListener != null) {
+                    mOnPopWindowOptionListener.onTakePhoto();
+                }
                 popupWindow.dismiss();
             }
         });
 
-        tvSelect= (TextView) view.findViewById(R.id.tv_select);
+        tvSelect = (TextView) view.findViewById(R.id.tv_select);
         tvSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //selectImageUtil.choosePicture();
-				if(mOnPopWindowOptionListener != null){
-					mOnPopWindowOptionListener.onChoosePhoto();
-				}
+                if (mOnPopWindowOptionListener != null) {
+                    mOnPopWindowOptionListener.onChoosePhoto();
+                }
                 popupWindow.dismiss();
             }
         });
@@ -117,15 +116,16 @@ public class PopupWindowSelectUtil extends PopupWindow{
         //设置显示PopupWindow的位置位于View的左下方，x,y表示坐标偏移量
         //popupWindow.showAsDropDown(view,100,100);
     }
-	
-	public OnPopWindowOptionListener mOnPopWindowOptionListener;
 
-	public void setOnPopWindowOptionListener(OnPopWindowOptionListener listener){
-		mOnPopWindowOptionListener = listener;
-	}
+    public OnPopWindowOptionListener mOnPopWindowOptionListener;
 
-	public interface OnPopWindowOptionListener{
-		void onTakePhoto();
-		void onChoosePhoto();
-	}
+    public void setOnPopWindowOptionListener(OnPopWindowOptionListener listener) {
+        mOnPopWindowOptionListener = listener;
+    }
+
+    public interface OnPopWindowOptionListener {
+        void onTakePhoto();
+
+        void onChoosePhoto();
+    }
 }

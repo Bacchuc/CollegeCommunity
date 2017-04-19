@@ -2,15 +2,19 @@ package com.yzd.collegecommunity.util;
 
 import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
+import com.yzd.collegecommunity.modeal.Test;
 import com.yzd.collegecommunity.retrofit.ApiService;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -57,25 +61,47 @@ public class RetrofitUtil {
         return mInstance;
     }
 
-    private <T> void toSubscribe(Observable<T> observable, Subscriber<T> subscriber) {
-        observable.subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber);
-    }
+//    private <T> void toSubscribe(Observable<T> observable, Subscriber<T> subscriber) {
+//        observable.subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(subscriber);
+//    }
 
+    /**
+     * 用户登陆
+     *
+     * @param username   用户名
+     * @param password   密码
+     * @param subscriber
+     */
     public void login(String username, String password, Subscriber<HttpWrapper<String>> subscriber) {
         mApiService.login(username, password)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
 
+    /**
+     * 发送验证码
+     *
+     * @param email      用户邮箱
+     * @param subscriber
+     */
     public void sendCode(String email, Subscriber<HttpWrapper<String>> subscriber) {
         mApiService.sendCode(email)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
 
+    /**
+     * 用户注册
+     *
+     * @param username   用户名
+     * @param password   密码
+     * @param email      邮箱
+     * @param code       验证码
+     * @param subscriber
+     */
     public void register(String username, String password, String email, String code, Subscriber<HttpWrapper<String>> subscriber) {
         mApiService.register(username, email, password, code)
                 .subscribeOn(Schedulers.io())
@@ -84,17 +110,20 @@ public class RetrofitUtil {
                 .subscribe(subscriber);
     }
 
-//    public void uploadSingleFile(File file, String token, Subscriber<HttpWrapper<Test>> subscriber) {
-//
-//        Map<String, ResponseBody> bodyMap = new HashMap<>();
-//        bodyMap.put("file"+"\";filename=\""+file.getName(),ResponseBody.create(MediaType.parse("image/png"),file));
-//
-//        //创建RequwstBody对象
-//        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
-//
-//        //使用RxJava方式调度任务并监听
-//        mApiService.uploadSingleFile(requestBody, token)
-//                .compose(RxSchedulers.switchThread())
-//                .subscribe(subscriber);
-//    }
+    /**
+     * 上传单张图片
+     *
+     * @param bytes      图片byte字节流
+     * @param token
+     * @param subscriber
+     */
+    public void uploadSingleFile(byte[] bytes, String token, Subscriber<HttpWrapper<Test>> subscriber) {
+        Map<String, RequestBody> bodyMap = new HashMap<>();
+
+        bodyMap.put("file" + "\";filename=\"" + Constants.SINGLE_IMAGE,
+                RequestBody.create(MediaType.parse("image/jpg"), bytes));
+        mApiService.uploadSingleFile(bodyMap, token)
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
 }

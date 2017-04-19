@@ -95,22 +95,11 @@ public class SelectImageUtil {
             //显示图片,这里图片是方形的，可以用一个工具类处理成圆形
             mImage.setImageBitmap(mBitmap);
             //在这个地方可以写上上传该图片到服务器的代码
-            Bitmap2Bytes(mBitmap);
+            byte[] bytes = Bitmap2Bytes(mBitmap);
 
             if(mOnSelectImageOptionListener != null){
-                mOnSelectImageOptionListener.onChoosePhoto();
+                mOnSelectImageOptionListener.uploadSingleImage(bytes);
             }
-//            Map<String, ResponseBody> bodyMap = new HashMap<>();
-//            bodyMap.put("file"+"\";filename=\""+file.getName(),ResponseBody.create(MediaType.parse("image/png"),file));
-//
-//            mListener = new SubscriberOnNextListener() {
-//                @Override
-//                public void onNext(Object o) {
-//                    ToastUtil.showShort(AppCenterUtil.getContextObject(), "Upload Success");
-//                }
-//            };
-//            RetrofitUtil.getInstance().uploadSingleFile(etUsername.getText().toString(), SPUtil.getToken(),
-//                    new ProgressSubscriber<HttpWrapper<String>>(mListener, AppCenterUtil.getContextObject()));
         }
     }
 
@@ -121,8 +110,7 @@ public class SelectImageUtil {
     }
 
     public interface OnSelectImageOptionListener{
-        void onTakePhoto();
-        void onChoosePhoto();
+        void uploadSingleImage(byte[] bitmapByte);
     }
 
     /**

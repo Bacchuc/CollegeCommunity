@@ -9,8 +9,16 @@ import android.widget.ImageView;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.yzd.collegecommunity.R;
+import com.yzd.collegecommunity.modeal.HttpWrapper;
+import com.yzd.collegecommunity.modeal.Test;
+import com.yzd.collegecommunity.retrofit.ProgressSubscriber;
+import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
+import com.yzd.collegecommunity.util.AppCenterUtil;
 import com.yzd.collegecommunity.util.PopupWindowSelectUtil;
+import com.yzd.collegecommunity.util.RetrofitUtil;
+import com.yzd.collegecommunity.util.SPUtil;
 import com.yzd.collegecommunity.util.SelectImageUtil;
+import com.yzd.collegecommunity.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,7 +45,7 @@ public class PublishGoodsActivity extends BaseActivity {
 
     PopupWindowSelectUtil popupWindowSelect;
     SelectImageUtil selectImageUtilResult;
-    SelectImageUtil selectImageUtil;
+    private SubscriberOnNextListener mListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,32 @@ public class PublishGoodsActivity extends BaseActivity {
 
         //侧滑效果
         SwipeBackHelper.onCreate(this);
+        popupWindowSelect = new PopupWindowSelectUtil(this, PublishGoodsActivity.this, R.layout.publish_activity_goods);
+        popupWindowSelect.setOnPopWindowOptionListener(new PopupWindowSelectUtil.OnPopWindowOptionListener() {
+            @Override
+            public void onTakePhoto() {
+                selectImageUtilResult.takePicture();
+            }
+
+            @Override
+            public void onChoosePhoto() {
+                selectImageUtilResult.choosePicture();
+            }
+        });
+
+        selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
+            @Override
+            public void uploadSingleImage(byte[] bitmapByte) {
+                mListener = new SubscriberOnNextListener() {
+                    @Override
+                    public void onNext(Object o) {
+                        ToastUtil.showShort(AppCenterUtil.getContextObject(), "Upload Success");
+                    }
+                };
+                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte, SPUtil.getToken(),
+                        new ProgressSubscriber<HttpWrapper<Test>>(mListener, AppCenterUtil.getContextObject()));
+            }
+        });
     }
 
     //侧滑效果
@@ -66,6 +100,7 @@ public class PublishGoodsActivity extends BaseActivity {
     /**
      * 重写上传照片拍照与选取照片功能时需要的onActivityResult，回调PopupWindowSelectUtil中的onActivityResult，
      * onActivityResult再回调选择照片的工具类SelectImageUtil
+     *
      * @param requestCode
      * @param resultCode
      * @param data
@@ -73,7 +108,7 @@ public class PublishGoodsActivity extends BaseActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        selectImageUtilResult=new SelectImageUtil(this, ibPhoto);
+        selectImageUtilResult = new SelectImageUtil(this, ibPhoto);
         selectImageUtilResult.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -83,18 +118,6 @@ public class PublishGoodsActivity extends BaseActivity {
             case R.id.ib_commit:
                 break;
             case R.id.ib_photo:
-                selectImageUtil=new SelectImageUtil(this, ibPhoto);
-                popupWindowSelect=new PopupWindowSelectUtil(this, PublishGoodsActivity.this, R.layout.publish_activity_goods, new PopupWindowSelectUtil.OnPopWindowOptionListener() {
-                    @Override
-                    public void onTakePhoto() {
-                        selectImageUtil.takePicture();
-                    }
-
-                    @Override
-                    public void onChoosePhoto() {
-                        selectImageUtil.choosePicture();
-                    }
-                });
                 popupWindowSelect.show();
                 break;
         }

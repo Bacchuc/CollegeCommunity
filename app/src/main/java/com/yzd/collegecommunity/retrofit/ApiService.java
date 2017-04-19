@@ -3,11 +3,9 @@ package com.yzd.collegecommunity.retrofit;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.modeal.Test;
 
-import java.io.File;
 import java.util.Map;
 
-import okhttp3.ResponseBody;
-import retrofit2.http.Body;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
@@ -64,12 +62,8 @@ public interface ApiService {
                                              @Field("email") String email,
                                              @Field("code") String code);
 
-    @FormUrlEncoded
-    @POST("uploadImg")
-    Observable<HttpWrapper<String>> uploadImg(@Field("token") String token, @Body File img);
-
     @POST("/file")
     @Multipart
-    Observable<HttpWrapper<Test>> uploadSingleFile(@PartMap Map<String, ResponseBody> params,
-                                             @Part("token") String token);
+    Observable<HttpWrapper<Test>> uploadSingleFile(@PartMap Map<String, RequestBody> params,
+                                                   @Part("token") String token);
 }
