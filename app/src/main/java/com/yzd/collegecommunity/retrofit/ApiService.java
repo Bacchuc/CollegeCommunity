@@ -1,8 +1,9 @@
 package com.yzd.collegecommunity.retrofit;
 
 import com.yzd.collegecommunity.modeal.HttpWrapper;
-import com.yzd.collegecommunity.modeal.Test;
+import com.yzd.collegecommunity.modeal.MainTaskListInfo;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -33,7 +34,7 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("textPost")
+    @POST("login")
     Observable<HttpWrapper<String>> login(@Field("username") String username, @Field("password") String password);
 
     /**
@@ -62,8 +63,80 @@ public interface ApiService {
                                              @Field("email") String email,
                                              @Field("code") String code);
 
-    @POST("/file")
+    @POST("textPost")
     @Multipart
-    Observable<HttpWrapper<Test>> uploadSingleFile(@PartMap Map<String, RequestBody> params,
-                                                   @Part("token") String token);
+    Observable<HttpWrapper<String>> uploadSingleFile(@PartMap Map<String, RequestBody> params,
+                                                     @Part("token") String token);
+
+    /**
+     * 提交商品发布的商品信息
+     *
+     * @param etNumber   商品数目
+     * @param etDescribe 商品描述
+     * @param etPrice    商品价格
+     * @param etTitle    商品标题
+     * @param token
+     * @return 上传成功则code为200
+     */
+    @FormUrlEncoded
+    @POST("textPost")
+    Observable<HttpWrapper<String>> commitPublishGoods(@Field("etNumber") String etNumber,
+                                                       @Field("etDescribe") String etDescribe,
+                                                       @Field("etPrice") String etPrice,
+                                                       @Field("etTitle") String etTitle,
+                                                       @Field("token") String token);
+
+    /**
+     * 提交任务发布的任务信息
+     *
+     * @param etTaskPrice 任务奖励
+     * @param etDescribe  任务描述
+     * @param etBeginTime 任务开始时间
+     * @param etEndTime   任务结束时间
+     * @param etTaskTitle 任务标题
+     * @param token
+     * @return 上传成功则code为200
+     */
+    @FormUrlEncoded
+    @POST("textPost")
+    Observable<HttpWrapper<String>> commitPublishTask(@Field("etTaskPrice") String etTaskPrice,
+                                                      @Field("etDescribe") String etDescribe,
+                                                      @Field("etBeginTime") String etBeginTime,
+                                                      @Field("etEndTime") String etEndTime,
+                                                      @Field("etTaskTitle") String etTaskTitle,
+                                                      @Field("token") String token);
+
+    /**
+     * 提交用户信息
+     *
+     * @param ivUsername 用户名
+     * @param ivEmail    邮箱
+     * @param ivSchool   用户学校
+     * @param ivPassword 用户密码
+     * @param token
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("textPost")
+    Observable<HttpWrapper<String>> commitUserInfo(@Field("ivUsername") String ivUsername,
+                                                   @Field("ivEmail") String ivEmail,
+                                                   @Field("ivSchool") String ivSchool,
+                                                   @Field("ivPassword") String ivPassword,
+                                                   @Field("token") String token);
+
+    /**
+     * 获取主页任务页面的列表信息
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("textPost")
+    Observable<HttpWrapper<List<MainTaskListInfo>>> getMainTaskInfo();
+
+    @FormUrlEncoded
+    @POST("textPost")
+    Observable<HttpWrapper<String>> getMainGoodsInfo();
+
+    @FormUrlEncoded
+    @POST("textPost")
+    Observable<HttpWrapper<String>> getMainRankingInfo();
 }

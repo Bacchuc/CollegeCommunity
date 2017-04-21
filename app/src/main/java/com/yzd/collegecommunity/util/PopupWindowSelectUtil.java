@@ -8,7 +8,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -22,7 +21,6 @@ public class PopupWindowSelectUtil extends PopupWindow {
 
     private TextView tvTake;
     private TextView tvSelect;
-    private ImageView mImage;
     private int viewLayout;
     private View view;
     private Context mContext;
@@ -32,14 +30,11 @@ public class PopupWindowSelectUtil extends PopupWindow {
 
     protected static final int CHOOSE_PICTURE = 0;
     protected static final int TAKE_PICTURE = 1;
-    SelectImageUtil selectImageUtil;
-    SelectImageUtil selectImageUtilResult;
 
     public PopupWindowSelectUtil(Context context, Activity activity, int viewLayout) {
         this.mContext = context;
         this.activity = activity;
         this.viewLayout = viewLayout;
-        //this.mImage=mImage;
         initPopupWindow();
     }
 
@@ -57,8 +52,6 @@ public class PopupWindowSelectUtil extends PopupWindow {
         params.alpha = 0.8f;
         activity.getWindow().setAttributes(params);//把该参数对象设置进当前界面中
 
-        selectImageUtil = new SelectImageUtil(activity, mImage);
-
         show();
 
         myDismiss();
@@ -67,7 +60,6 @@ public class PopupWindowSelectUtil extends PopupWindow {
         tvTake.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //selectImageUtil.takePicture();
                 if (mOnPopWindowOptionListener != null) {
                     mOnPopWindowOptionListener.onTakePhoto();
                 }
@@ -79,7 +71,6 @@ public class PopupWindowSelectUtil extends PopupWindow {
         tvSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //selectImageUtil.choosePicture();
                 if (mOnPopWindowOptionListener != null) {
                     mOnPopWindowOptionListener.onChoosePhoto();
                 }
@@ -87,11 +78,6 @@ public class PopupWindowSelectUtil extends PopupWindow {
             }
         });
     }
-
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        selectImageUtilResult=new SelectImageUtil(activity, mImage);
-//        selectImageUtilResult.onActivityResult(requestCode, resultCode, data);
-//    }
 
     /**
      * popupwindow弹出时设置原Activity背景透明

@@ -14,6 +14,8 @@ public class MainTaskListInfo {
 
     private Bitmap pic;     //描述图片
 
+    private Bitmap picHead;  //头像图片
+
     public Bitmap getPicHead() {
         return picHead;
     }
@@ -45,8 +47,6 @@ public class MainTaskListInfo {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    private Bitmap picHead;  //头像图片
 
 
 

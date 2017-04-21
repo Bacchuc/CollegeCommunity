@@ -33,7 +33,6 @@ public class Main_RankingFragment extends Fragment {
 
     private Activity mContext;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

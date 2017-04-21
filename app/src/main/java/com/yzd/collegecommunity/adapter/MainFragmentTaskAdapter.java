@@ -32,7 +32,6 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
     private TextView tv_describe;
     private TextView tv_username;
 
-
     public MainFragmentTaskAdapter(Activity context, List<Map<String, Object>> dates){
         this.mContext = context;
         this.dates = dates;
@@ -78,11 +77,9 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
         tv_username= (TextView) view.findViewById(R.id.tv_username);
 
         bt_like.setImageResource(R.drawable.heart_gray);
-
     }
 
     private void initListener() {
-
         bt_like.setOnClickListener(this);
         ib_contact.setOnClickListener(this);
         ib_head_picture.setOnClickListener(this);

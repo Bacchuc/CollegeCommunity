@@ -27,7 +27,6 @@ import butterknife.OnClick;
 
 import static com.yzd.collegecommunity.R.id.bt_login;
 
-
 /**
  * Created by Laiyin on 2017/3/4.
  */
@@ -80,7 +79,9 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
                         }
                     }
                 };
-                RetrofitUtil.getInstance().login(etUsername.getText().toString(), etPassword.getText().toString(), new ProgressSubscriber<HttpWrapper<String>>(mListener, getActivity()));
+                RetrofitUtil.getInstance().login(etUsername.getText().toString(),
+                        etPassword.getText().toString(),
+                        new ProgressSubscriber<HttpWrapper<String>>(mListener, getActivity()));
                 break;
             default:
                 break;

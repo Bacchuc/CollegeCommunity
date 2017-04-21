@@ -2,10 +2,11 @@ package com.yzd.collegecommunity.util;
 
 import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
-import com.yzd.collegecommunity.modeal.Test;
+import com.yzd.collegecommunity.modeal.MainTaskListInfo;
 import com.yzd.collegecommunity.retrofit.ApiService;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -16,8 +17,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * @author nanchen
@@ -102,11 +101,10 @@ public class RetrofitUtil {
      * @param code       验证码
      * @param subscriber
      */
-    public void register(String username, String password, String email, String code, Subscriber<HttpWrapper<String>> subscriber) {
+    public void register(String username, String password, String email, String code,
+                         Subscriber<HttpWrapper<String>> subscriber) {
         mApiService.register(username, email, password, code)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
 
@@ -117,12 +115,71 @@ public class RetrofitUtil {
      * @param token
      * @param subscriber
      */
-    public void uploadSingleFile(byte[] bytes, String token, Subscriber<HttpWrapper<Test>> subscriber) {
+    public void uploadSingleFile(byte[] bytes, String token, Subscriber<HttpWrapper<String>> subscriber) {
         Map<String, RequestBody> bodyMap = new HashMap<>();
 
         bodyMap.put("file" + "\";filename=\"" + Constants.SINGLE_IMAGE,
                 RequestBody.create(MediaType.parse("image/jpg"), bytes));
         mApiService.uploadSingleFile(bodyMap, token)
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 提交商品发布的商品信息
+     *
+     * @param etNumber   商品数目
+     * @param etDescribe 商品描述
+     * @param etPrice    商品价格
+     * @param etTitle    商品标题
+     * @param subscriber
+     */
+    public void commitPublishGoods(String etNumber, String etDescribe, String etPrice, String etTitle,
+                                   Subscriber<HttpWrapper<String>> subscriber) {
+        mApiService.commitPublishGoods(etNumber, etDescribe, etPrice, etTitle, SPUtil.getToken())
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 提交任务发布的任务信息
+     *
+     * @param etTaskPrice 任务奖励
+     * @param etDescribe  任务描述
+     * @param etBeginTime 任务开始时间
+     * @param etEndTime   任务结束时间
+     * @param etTaskTitle 任务标题
+     * @param subscriber
+     */
+    public void commitPublishTask(String etEndTime, String etBeginTime, String etDescribe, String etTaskPrice, String etTaskTitle,
+                                  Subscriber<HttpWrapper<String>> subscriber) {
+        mApiService.commitPublishTask(etTaskPrice, etDescribe, etBeginTime, etEndTime, etTaskTitle, SPUtil.getToken())
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 提交用户信息
+     *
+     * @param ivUsername 用户名
+     * @param ivEmail    邮箱
+     * @param ivSchool   用户学校
+     * @param ivPassword 用户密码
+     * @param subscriber
+     */
+    public void commitUserInfo(String ivUsername, String ivEmail, String ivSchool, String ivPassword,
+                               Subscriber<HttpWrapper<String>> subscriber) {
+        mApiService.commitUserInfo(ivUsername, ivEmail, ivSchool, ivPassword, SPUtil.getToken())
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取主页任务页面的列表信息
+     * @param subscriber
+     */
+    public void getMainTaskInfo(Subscriber<HttpWrapper<List<MainTaskListInfo>>> subscriber) {
+        mApiService.getMainTaskInfo()
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }

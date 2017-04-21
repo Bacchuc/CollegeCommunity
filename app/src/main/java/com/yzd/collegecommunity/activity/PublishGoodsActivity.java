@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
-import com.yzd.collegecommunity.modeal.Test;
 import com.yzd.collegecommunity.retrofit.ProgressSubscriber;
 import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
 import com.yzd.collegecommunity.util.AppCenterUtil;
@@ -55,6 +54,17 @@ public class PublishGoodsActivity extends BaseActivity {
 
         //侧滑效果
         SwipeBackHelper.onCreate(this);
+
+//        initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initView();
+    }
+
+    private void initView() {
         popupWindowSelect = new PopupWindowSelectUtil(this, PublishGoodsActivity.this, R.layout.publish_activity_goods);
         popupWindowSelect.setOnPopWindowOptionListener(new PopupWindowSelectUtil.OnPopWindowOptionListener() {
             @Override
@@ -78,7 +88,7 @@ public class PublishGoodsActivity extends BaseActivity {
                     }
                 };
                 RetrofitUtil.getInstance().uploadSingleFile(bitmapByte, SPUtil.getToken(),
-                        new ProgressSubscriber<HttpWrapper<Test>>(mListener, AppCenterUtil.getContextObject()));
+                        new ProgressSubscriber<HttpWrapper<String>>(mListener, AppCenterUtil.getContextObject()));
             }
         });
     }
@@ -116,6 +126,18 @@ public class PublishGoodsActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_commit:
+                mListener=new SubscriberOnNextListener() {
+                    @Override
+                    public void onNext(Object o) {
+                        ToastUtil.showShort(AppCenterUtil.getContextObject(),"Commit Success!");
+                    }
+                };
+                RetrofitUtil.getInstance().commitPublishGoods(etNumber.getText().toString(),
+                        etDescribe.getText().toString(),
+                        etPrice.getText().toString(),
+                        etTitle.getText().toString(),
+                        new ProgressSubscriber<HttpWrapper<String>>(
+                                mListener, AppCenterUtil.getContextObject()));
                 break;
             case R.id.ib_photo:
                 popupWindowSelect.show();

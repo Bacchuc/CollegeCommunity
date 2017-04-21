@@ -8,8 +8,8 @@ package com.yzd.collegecommunity.constants;
 
 public class Constants {
 
-    //    public final static String BASEURL="http://192.168.1.110:8888/collegecommunity/";           //访问的跟地址
-    public final static String BASEURL = "http://192.168.1.184:8080/CStu/";           //访问的跟地址
+        public final static String BASEURL="http://192.168.1.106:8888/collegecommunity/";           //访问的跟地址
+//    public final static String BASEURL = "http://192.168.1.184:8080/CStu/";           //访问的跟地址
     public static String TOKEN = "";  //用户登陆验证token
     public static String SP_NAME = "";
     public static String USER_ID = "";
