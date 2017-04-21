@@ -43,7 +43,6 @@
         android:textCursorDrawable="@null"
         android:textColor="@color/colorGray"
         android:paddingBottom="5dp"
-        android:inputType="textPassword"
         android:layout_below="@+id/v_username"
         android:layout_centerHorizontal="true"
         />

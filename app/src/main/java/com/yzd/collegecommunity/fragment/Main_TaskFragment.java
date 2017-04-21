@@ -51,13 +51,9 @@ public class Main_TaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment_task, container, false);
-
         initView(view);
-
         initListener();
-
-//        addList();
-
+        getData();
         ButterKnife.bind(this, view);
         return view;
     }
@@ -78,10 +74,6 @@ public class Main_TaskFragment extends Fragment {
 //                startActivity(intent);
             }
         });
-    }
-
-    private void addList() {
-
     }
 
     private void getData() {

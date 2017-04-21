@@ -103,7 +103,7 @@ public class RetrofitUtil {
      */
     public void register(String username, String password, String email, String code,
                          Subscriber<HttpWrapper<String>> subscriber) {
-        mApiService.register(username, email, password, code)
+        mApiService.register(username, password, email, code)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }

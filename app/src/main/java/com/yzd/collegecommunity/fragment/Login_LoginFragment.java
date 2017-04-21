@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.yzd.collegecommunity.R;
-import com.yzd.collegecommunity.activity.MainActivity;
+import com.yzd.collegecommunity.activity.MeActivity;
 import com.yzd.collegecommunity.activity.ThirdActivity;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.retrofit.ProgressSubscriber;
@@ -69,8 +69,8 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
                         if (httpWrapperResponse.getCode() == 200) {
                             //登陆成功后得到data中的token
                             SPUtil.refreshToken(httpWrapperResponse.getData());
-
-                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            System.out.println(httpWrapperResponse.getData()+"---------------------------------------");
+                            Intent intent = new Intent(getActivity(), MeActivity.class);
                             startActivity(intent);
                             getActivity().finish();
 

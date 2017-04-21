@@ -35,7 +35,7 @@ public interface ApiService {
      */
     @FormUrlEncoded
     @POST("login")
-    Observable<HttpWrapper<String>> login(@Field("username") String username, @Field("password") String password);
+    Observable<HttpWrapper<String>> login(@Field("userName") String username, @Field("password") String password);
 
     /**
      * 用户通过邮箱请求发送验证码请求
@@ -44,8 +44,8 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("textPost")
-    Observable<HttpWrapper<String>> sendCode(@Field("email") String email);
+    @POST("validate")
+    Observable<HttpWrapper<String>> sendCode(@Field("mail") String email);
 
     /**
      * 用户注册 先通过验证码验证 再输入4个参数信息判断邮箱与用户名是否已注册，验证码是否正确，条件满足则注册成功，反之注册失败
@@ -57,11 +57,11 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("textPost")
-    Observable<HttpWrapper<String>> register(@Field("username") String username,
+    @POST("register")
+    Observable<HttpWrapper<String>> register(@Field("userName") String username,
                                              @Field("password") String password,
-                                             @Field("email") String email,
-                                             @Field("code") String code);
+                                             @Field("mail") String email,
+                                             @Field("validate") String code);
 
     @POST("textPost")
     @Multipart

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yzd.collegecommunity.R;
-import com.yzd.collegecommunity.activity.MainActivity;
+import com.yzd.collegecommunity.activity.LoginActivity;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.retrofit.ProgressSubscriber;
 import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
@@ -76,7 +76,7 @@ public class Login_RegisterFragment extends Fragment implements View.OnClickList
                     @Override
                     public void onNext(HttpWrapper<String> httpWrapperResponse) {
                         if(httpWrapperResponse.getCode()==200){
-                            Intent intent=new Intent(getActivity(), MainActivity.class);
+                            Intent intent=new Intent(getActivity(), LoginActivity.class);
                             startActivity(intent);
                             getActivity().finish();
                         }else {

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">大学生社区</string>
+    <string name="year">Year</string>
+    <string name="location">Location</string>
 </resources>
