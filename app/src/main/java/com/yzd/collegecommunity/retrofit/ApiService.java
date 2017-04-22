@@ -1,9 +1,8 @@
 package com.yzd.collegecommunity.retrofit;
 
 import com.yzd.collegecommunity.modeal.HttpWrapper;
-import com.yzd.collegecommunity.modeal.MainTaskListInfo;
+import com.yzd.collegecommunity.modeal.TaskWrapper;
 
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -128,9 +127,8 @@ public interface ApiService {
      * 获取主页任务页面的列表信息
      * @return
      */
-    @FormUrlEncoded
-    @POST("textPost")
-    Observable<HttpWrapper<List<MainTaskListInfo>>> getMainTaskInfo();
+    @POST("task/all")
+    Observable<HttpWrapper<TaskWrapper>> getMainTaskInfo();
 
     @FormUrlEncoded
     @POST("textPost")

@@ -2,11 +2,10 @@ package com.yzd.collegecommunity.util;
 
 import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
-import com.yzd.collegecommunity.modeal.MainTaskListInfo;
+import com.yzd.collegecommunity.modeal.TaskWrapper;
 import com.yzd.collegecommunity.retrofit.ApiService;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -178,7 +177,7 @@ public class RetrofitUtil {
      * 获取主页任务页面的列表信息
      * @param subscriber
      */
-    public void getMainTaskInfo(Subscriber<HttpWrapper<List<MainTaskListInfo>>> subscriber) {
+    public void getMainTaskInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
         mApiService.getMainTaskInfo()
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);

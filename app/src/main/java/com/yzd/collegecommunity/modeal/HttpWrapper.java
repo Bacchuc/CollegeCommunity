@@ -18,6 +18,15 @@ public class HttpWrapper<T> implements Serializable {
     public int code;
 
 
+    @Override
+    public String toString() {
+        return "HttpWrapper{" +
+                "code=" + code +
+                ", data=" + data +
+                ", info='" + info + '\'' +
+                '}';
+    }
+
     /**
      * 返回的数据类型 不确定
      */

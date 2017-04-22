@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yzd.collegecommunity.R;
-import com.yzd.collegecommunity.modeal.MainTaskListInfo;
+import com.yzd.collegecommunity.constants.Constants;
+import com.yzd.collegecommunity.modeal.TaskWrapper;
 import com.yzd.collegecommunity.util.AppCenterUtil;
 
 import java.util.List;
@@ -27,10 +28,10 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
 
     private Context mContext;
     private LayoutInflater inflater;
-    private List<MainTaskListInfo> list;
+    private List<TaskWrapper.ListEntity> list;
     private int layoutId;
 
-    public MainFragmentTaskListAdapter(Context context, int layoutId, List<MainTaskListInfo> list) {
+    public MainFragmentTaskListAdapter(Context context, int layoutId, List<TaskWrapper.ListEntity> list) {
         this.mContext = context;
         this.inflater = LayoutInflater.from(mContext);
         this.list = list;
@@ -67,8 +68,12 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        viewHolder.ib_head_picture.setTag(i);
-        viewHolder.tv_describe.setText(list.get(i).getIntroduce());
+
+//        viewHolder.ib_head_picture.setTag(i);
+        viewHolder.tv_describe.setText(list.get(i).getDescription());
+        viewHolder.tv_username.setText(list.get(i).getPublish_user().getUsername());
+
+        System.out.println(list.get(i).getPic().toString());
 //        BmobFile file=new BmobFile(System.currentTimeMillis()+".png","",list.get(i).getPicUrl());
 //        if (list.get(i).getPicUrl()!=null){
 //            Bitmap bitmap=downloadFile(file,i);
@@ -79,13 +84,9 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
 //        if(TextUtils.isEmpty(list.get(i).getUsername())){
 //
 //        }
-
-        viewHolder.tv_username.setText(list.get(i).getUsername());
-        viewHolder.tv_username.setText(list.get(i).getUsername());
-        list.get(i).getPic();
         Glide.with(AppCenterUtil.getContextObject())
-                .load(list.get(i).getPic())
-                .into(viewHolder.ib_head_picture);
+                .load(Constants.BASEURL+list.get(i).getPic())
+                .into(viewHolder.iv_task_picture);
 
         return view;
     }
