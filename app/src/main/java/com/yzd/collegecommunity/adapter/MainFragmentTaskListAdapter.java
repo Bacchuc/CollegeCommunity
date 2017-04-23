@@ -12,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
-import com.yzd.collegecommunity.util.AppCenterUtil;
 
 import java.util.List;
 
@@ -73,7 +72,7 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
         viewHolder.tv_describe.setText(list.get(i).getDescription());
         viewHolder.tv_username.setText(list.get(i).getPublish_user().getUsername());
 
-        System.out.println(list.get(i).getPic().toString());
+        System.out.println(Constants.BASEURL+list.get(i).getPic());
 //        BmobFile file=new BmobFile(System.currentTimeMillis()+".png","",list.get(i).getPicUrl());
 //        if (list.get(i).getPicUrl()!=null){
 //            Bitmap bitmap=downloadFile(file,i);
@@ -84,9 +83,14 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
 //        if(TextUtils.isEmpty(list.get(i).getUsername())){
 //
 //        }
-        Glide.with(AppCenterUtil.getContextObject())
+
+        Glide.with(mContext)
                 .load(Constants.BASEURL+list.get(i).getPic())
                 .into(viewHolder.iv_task_picture);
+
+        Glide.with(mContext)
+                .load(Constants.BASEURL+list.get(i).getPublish_user().getPath())
+                .into(viewHolder.ib_head_picture);
 
         return view;
     }

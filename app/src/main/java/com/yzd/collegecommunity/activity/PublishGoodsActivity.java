@@ -15,7 +15,6 @@ import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
 import com.yzd.collegecommunity.util.AppCenterUtil;
 import com.yzd.collegecommunity.util.PopupWindowSelectUtil;
 import com.yzd.collegecommunity.util.RetrofitUtil;
-import com.yzd.collegecommunity.util.SPUtil;
 import com.yzd.collegecommunity.util.SelectImageUtil;
 import com.yzd.collegecommunity.util.ToastUtil;
 
@@ -51,18 +50,16 @@ public class PublishGoodsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.publish_activity_goods);
         ButterKnife.bind(this);
-
+        initView();
         //侧滑效果
         SwipeBackHelper.onCreate(this);
+    }
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
 //        initView();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initView();
-    }
+//    }
 
     private void initView() {
         popupWindowSelect = new PopupWindowSelectUtil(this, PublishGoodsActivity.this, R.layout.publish_activity_goods);
@@ -78,19 +75,7 @@ public class PublishGoodsActivity extends BaseActivity {
             }
         });
 
-        selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
-            @Override
-            public void uploadSingleImage(byte[] bitmapByte) {
-                mListener = new SubscriberOnNextListener() {
-                    @Override
-                    public void onNext(Object o) {
-                        ToastUtil.showShort(AppCenterUtil.getContextObject(), "Upload Success");
-                    }
-                };
-                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte, SPUtil.getToken(),
-                        new ProgressSubscriber<HttpWrapper<String>>(mListener, AppCenterUtil.getContextObject()));
-            }
-        });
+        selectImageUtilResult = new SelectImageUtil(this, ibPhoto);
     }
 
     //侧滑效果
@@ -120,6 +105,19 @@ public class PublishGoodsActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         selectImageUtilResult = new SelectImageUtil(this, ibPhoto);
         selectImageUtilResult.onActivityResult(requestCode, resultCode, data);
+        selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
+            @Override
+            public void uploadSingleImage(byte[] bitmapByte) {
+                mListener = new SubscriberOnNextListener() {
+                    @Override
+                    public void onNext(Object o) {
+                        ToastUtil.showShort(PublishGoodsActivity.this, "Upload Success");
+                    }
+                };
+                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte,
+                        new ProgressSubscriber<HttpWrapper<String>>(mListener, PublishGoodsActivity.this));
+            }
+        });
     }
 
     @OnClick({R.id.ib_commit, R.id.ib_photo})
@@ -137,7 +135,7 @@ public class PublishGoodsActivity extends BaseActivity {
                         etPrice.getText().toString(),
                         etTitle.getText().toString(),
                         new ProgressSubscriber<HttpWrapper<String>>(
-                                mListener, AppCenterUtil.getContextObject()));
+                                mListener, this));
                 break;
             case R.id.ib_photo:
                 popupWindowSelect.show();

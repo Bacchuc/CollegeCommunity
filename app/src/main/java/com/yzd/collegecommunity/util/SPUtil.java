@@ -43,7 +43,7 @@ public class SPUtil {
      */
     public static String getToken() {
         SharedPreferences sp = AppCenterUtil.getContextObject().getSharedPreferences(Constants.TOKEN, Context.MODE_PRIVATE);
-        return sp.getString(Constants.TOKEN, "");
+        return sp.getString(Constants.TOKEN, "nullToken");
     }
 
     public static String getUserId() {

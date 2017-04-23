@@ -52,7 +52,7 @@ public class PopupWindowSelectUtil extends PopupWindow {
         params.alpha = 0.8f;
         activity.getWindow().setAttributes(params);//把该参数对象设置进当前界面中
 
-        show();
+//        show();
 
         myDismiss();
 

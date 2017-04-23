@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.adapter.MainFragmentTaskListAdapter;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
-import com.yzd.collegecommunity.modeal.MainTaskListInfo;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
 import com.yzd.collegecommunity.retrofit.ProgressSubscriber;
 import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
@@ -32,7 +31,6 @@ public class Main_TaskFragment extends Fragment {
 
     @BindView(R.id.lv_task)
     ListView lvTask;
-    MainTaskListInfo mainTaskListInfo;
     private MainFragmentTaskListAdapter mainFragmentTaskListAdapter;
     private SubscriberOnNextListener mListener;
     private List<TaskWrapper.ListEntity> mainTaskListInfoList = new ArrayList<TaskWrapper.ListEntity>();

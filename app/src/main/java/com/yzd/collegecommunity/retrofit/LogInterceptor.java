@@ -72,12 +72,10 @@ public class LogInterceptor implements Interceptor {
                 String userId = jsonObject.getString("user_id");
                 String sessionId = jsonObject.getString("session_id");
 
-                System.out.println("safhkljdhaslhcosdiajsacjsdchos;ivfhi"+jsonObject.getString("data")+"-----+++++++++++++++++++++++++++++++++++++");
-
                 //SPUtil.refresh(userId, sessionId);
 
-                //code==300,既是token过期，发送广播重新登陆
-                if (code == 300) {
+                //code==401,既是token过期，发送广播重新登陆
+                if (code == 401) {
                     Intent intent =new Intent(AppCenterUtil.getContextObject(), LoginActivity.class);
                     AppCenterUtil.getContextObject().startActivity(intent);
                     ActivityCollectorUtil.finishAll();

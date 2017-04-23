@@ -46,6 +46,7 @@ dependencies {
     compile 'com.github.bluzwong:swipeback:0.2.0@aar'    //activity侧滑退出
     compile 'com.jude:swipebackhelper:3.1.2'//右边侧滑退出
     compile 'me.dm7.barcodescanner:zxing:1.8.4'   //二维码
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'   //打印Log拦截器
     compile 'io.reactivex:rxjava:1.1.0'           //rxjava
     compile 'io.reactivex:rxandroid:1.1.0'        //rxandroid
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'//retrofit2

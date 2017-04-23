@@ -5,13 +5,16 @@ import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
 import com.yzd.collegecommunity.retrofit.ApiService;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -39,8 +42,20 @@ public class RetrofitUtil {
     private RetrofitUtil() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+//        builder.addInterceptor(new LogInterceptor());
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        builder.addInterceptor(interceptor);
 
-
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
+                Request.Builder builder1 = request.newBuilder();
+                Request build = builder1.addHeader(Constants.TOKEN, SPUtil.getToken()).build();
+                return chain.proceed(build);
+            }
+        });
         mRetrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl(Constants.BASEURL)
@@ -111,15 +126,11 @@ public class RetrofitUtil {
      * 上传单张图片
      *
      * @param bytes      图片byte字节流
-     * @param token
      * @param subscriber
      */
-    public void uploadSingleFile(byte[] bytes, String token, Subscriber<HttpWrapper<String>> subscriber) {
-        Map<String, RequestBody> bodyMap = new HashMap<>();
-
-        bodyMap.put("file" + "\";filename=\"" + Constants.SINGLE_IMAGE,
-                RequestBody.create(MediaType.parse("image/jpg"), bytes));
-        mApiService.uploadSingleFile(bodyMap, token)
+    public void uploadSingleFile(byte[] bytes, Subscriber<HttpWrapper<String>> subscriber) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), bytes);
+        mApiService.uploadSingleFile(requestBody)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
@@ -135,7 +146,8 @@ public class RetrofitUtil {
      */
     public void commitPublishGoods(String etNumber, String etDescribe, String etPrice, String etTitle,
                                    Subscriber<HttpWrapper<String>> subscriber) {
-        mApiService.commitPublishGoods(etNumber, etDescribe, etPrice, etTitle, SPUtil.getToken())
+        System.out.println(SPUtil.getToken()+"----------------------------------------------------------");
+        mApiService.commitPublishGoods(etNumber, etDescribe, etPrice, etTitle)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
@@ -145,14 +157,12 @@ public class RetrofitUtil {
      *
      * @param etTaskPrice 任务奖励
      * @param etDescribe  任务描述
-     * @param etBeginTime 任务开始时间
      * @param etEndTime   任务结束时间
-     * @param etTaskTitle 任务标题
      * @param subscriber
      */
-    public void commitPublishTask(String etEndTime, String etBeginTime, String etDescribe, String etTaskPrice, String etTaskTitle,
+    public void commitPublishTask(String etEndTime, String etDescribe, Double etTaskPrice,
                                   Subscriber<HttpWrapper<String>> subscriber) {
-        mApiService.commitPublishTask(etTaskPrice, etDescribe, etBeginTime, etEndTime, etTaskTitle, SPUtil.getToken())
+        mApiService.commitPublishTask(etTaskPrice, etDescribe, etEndTime)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
@@ -168,7 +178,7 @@ public class RetrofitUtil {
      */
     public void commitUserInfo(String ivUsername, String ivEmail, String ivSchool, String ivPassword,
                                Subscriber<HttpWrapper<String>> subscriber) {
-        mApiService.commitUserInfo(ivUsername, ivEmail, ivSchool, ivPassword, SPUtil.getToken())
+        mApiService.commitUserInfo(ivUsername, ivEmail, ivSchool, ivPassword)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }

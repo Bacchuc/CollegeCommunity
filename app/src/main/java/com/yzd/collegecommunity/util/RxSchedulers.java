@@ -27,4 +27,17 @@ public class RxSchedulers {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    /**
+     * RxJava切换线程
+     *
+     * @param <T>
+     * @return
+     */
+    public static <T> Observable.Transformer<T, T> switchHeaderThread() {
+        return tObservable -> tObservable
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

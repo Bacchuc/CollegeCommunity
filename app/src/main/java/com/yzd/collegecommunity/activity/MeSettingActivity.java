@@ -14,7 +14,6 @@ import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
 import com.yzd.collegecommunity.util.AppCenterUtil;
 import com.yzd.collegecommunity.util.PopupWindowSelectUtil;
 import com.yzd.collegecommunity.util.RetrofitUtil;
-import com.yzd.collegecommunity.util.SPUtil;
 import com.yzd.collegecommunity.util.SelectImageUtil;
 import com.yzd.collegecommunity.util.ToastUtil;
 
@@ -71,6 +70,7 @@ public class MeSettingActivity extends BaseActivity {
             }
         });
 
+        selectImageUtilResult = new SelectImageUtil(this, ibHeadPicture);
         selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
             @Override
             public void uploadSingleImage(byte[] bitmapByte) {
@@ -80,7 +80,7 @@ public class MeSettingActivity extends BaseActivity {
                         ToastUtil.showShort(AppCenterUtil.getContextObject(), "Upload Success");
                     }
                 };
-                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte, SPUtil.getToken(),
+                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte,
                         new ProgressSubscriber<HttpWrapper<String>>(mListener, AppCenterUtil.getContextObject()));
             }
         });

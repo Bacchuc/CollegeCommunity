@@ -3,15 +3,12 @@ package com.yzd.collegecommunity.retrofit;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
 
-import java.util.Map;
-
 import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.PartMap;
 import rx.Observable;
 
 /**
@@ -62,10 +59,13 @@ public interface ApiService {
                                              @Field("mail") String email,
                                              @Field("validate") String code);
 
-    @POST("textPost")
+//    @POST("uploadTaskPic")
+//    @Multipart
+//    Observable<HttpWrapper<String>> uploadSingleFile(@PartMap Map<String, RequestBody> picStream);
+
+    @POST("uploadTaskPic")
     @Multipart
-    Observable<HttpWrapper<String>> uploadSingleFile(@PartMap Map<String, RequestBody> params,
-                                                     @Part("token") String token);
+    Observable<HttpWrapper<String>> uploadSingleFile(@Part("picStream") RequestBody picStream);
 
     /**
      * 提交商品发布的商品信息
@@ -74,36 +74,28 @@ public interface ApiService {
      * @param etDescribe 商品描述
      * @param etPrice    商品价格
      * @param etTitle    商品标题
-     * @param token
      * @return 上传成功则code为200
      */
     @FormUrlEncoded
-    @POST("textPost")
+    @POST("goods/private/toPublish")
     Observable<HttpWrapper<String>> commitPublishGoods(@Field("etNumber") String etNumber,
                                                        @Field("etDescribe") String etDescribe,
                                                        @Field("etPrice") String etPrice,
-                                                       @Field("etTitle") String etTitle,
-                                                       @Field("token") String token);
+                                                       @Field("etTitle") String etTitle);
 
     /**
      * 提交任务发布的任务信息
      *
      * @param etTaskPrice 任务奖励
      * @param etDescribe  任务描述
-     * @param etBeginTime 任务开始时间
      * @param etEndTime   任务结束时间
-     * @param etTaskTitle 任务标题
-     * @param token
      * @return 上传成功则code为200
      */
     @FormUrlEncoded
-    @POST("textPost")
-    Observable<HttpWrapper<String>> commitPublishTask(@Field("etTaskPrice") String etTaskPrice,
-                                                      @Field("etDescribe") String etDescribe,
-                                                      @Field("etBeginTime") String etBeginTime,
-                                                      @Field("etEndTime") String etEndTime,
-                                                      @Field("etTaskTitle") String etTaskTitle,
-                                                      @Field("token") String token);
+    @POST("private/toPublishTask")
+    Observable<HttpWrapper<String>> commitPublishTask(@Field("pay") Double etTaskPrice,
+                                                      @Field("description") String etDescribe,
+                                                      @Field("endTime") String etEndTime);
 
     /**
      * 提交用户信息
@@ -112,7 +104,6 @@ public interface ApiService {
      * @param ivEmail    邮箱
      * @param ivSchool   用户学校
      * @param ivPassword 用户密码
-     * @param token
      * @return
      */
     @FormUrlEncoded
@@ -120,14 +111,13 @@ public interface ApiService {
     Observable<HttpWrapper<String>> commitUserInfo(@Field("ivUsername") String ivUsername,
                                                    @Field("ivEmail") String ivEmail,
                                                    @Field("ivSchool") String ivSchool,
-                                                   @Field("ivPassword") String ivPassword,
-                                                   @Field("token") String token);
+                                                   @Field("ivPassword") String ivPassword);
 
     /**
      * 获取主页任务页面的列表信息
      * @return
      */
-    @POST("task/all")
+    @POST("all")
     Observable<HttpWrapper<TaskWrapper>> getMainTaskInfo();
 
     @FormUrlEncoded

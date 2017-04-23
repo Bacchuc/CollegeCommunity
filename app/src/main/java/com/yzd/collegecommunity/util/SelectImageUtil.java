@@ -10,8 +10,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
@@ -29,7 +27,7 @@ public class SelectImageUtil {
     private static final int CROP_SMALL_PICTURE = 2;
     private Activity activity;
 
-    private SubscriberOnNextListener mListener;
+//    private SubscriberOnNextListener mListener;
 
     public SelectImageUtil(Activity activity, ImageView mImage) {
         this.activity = activity;
@@ -83,7 +81,6 @@ public class SelectImageUtil {
         intent.putExtra("return-data", true);
         activity.startActivityForResult(intent, CROP_SMALL_PICTURE);
     }
-
 
     /**
      * 保存裁剪之后的图片数据

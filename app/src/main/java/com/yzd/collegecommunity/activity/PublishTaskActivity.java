@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.jude.swipbackhelper.SwipeBackHelper;
 import com.yzd.collegecommunity.R;
@@ -14,7 +15,6 @@ import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
 import com.yzd.collegecommunity.util.AppCenterUtil;
 import com.yzd.collegecommunity.util.PopupWindowSelectUtil;
 import com.yzd.collegecommunity.util.RetrofitUtil;
-import com.yzd.collegecommunity.util.SPUtil;
 import com.yzd.collegecommunity.util.SelectImageUtil;
 import com.yzd.collegecommunity.util.ToastUtil;
 
@@ -37,7 +37,7 @@ public class PublishTaskActivity extends BaseActivity {
     @BindView(R.id.et_describe)
     EditText etDescribe;
     @BindView(R.id.ib_task_photo)
-    ImageButton ibTaskPhoto;
+    ImageView ibTaskPhoto;
     @BindView(R.id.et_begin_time)
     EditText etBeginTime;
     @BindView(R.id.et_end_time)
@@ -52,7 +52,7 @@ public class PublishTaskActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.publish_activity_task);
         ButterKnife.bind(this);
-
+        initView();
         //侧滑效果
         SwipeBackHelper.onCreate(this);
     }
@@ -84,19 +84,8 @@ public class PublishTaskActivity extends BaseActivity {
             }
         });
 
-        selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
-            @Override
-            public void uploadSingleImage(byte[] bitmapByte) {
-                mListener = new SubscriberOnNextListener() {
-                    @Override
-                    public void onNext(Object o) {
-                        ToastUtil.showShort(AppCenterUtil.getContextObject(), "Upload Success");
-                    }
-                };
-                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte, SPUtil.getToken(),
-                        new ProgressSubscriber<HttpWrapper<String>>(mListener, AppCenterUtil.getContextObject()));
-            }
-        });
+        selectImageUtilResult = new SelectImageUtil(this, ibTaskPhoto);
+
     }
 
     /**
@@ -111,6 +100,19 @@ public class PublishTaskActivity extends BaseActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         selectImageUtilResult = new SelectImageUtil(this, ibTaskPhoto);
+        selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
+            @Override
+            public void uploadSingleImage(byte[] bitmapByte) {
+                mListener = new SubscriberOnNextListener() {
+                    @Override
+                    public void onNext(Object o) {
+                        ToastUtil.showShort(PublishTaskActivity.this, "Upload Success");
+                    }
+                };
+                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte,
+                        new ProgressSubscriber<HttpWrapper<String>>(mListener, PublishTaskActivity.this));
+            }
+        });
         selectImageUtilResult.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -118,19 +120,18 @@ public class PublishTaskActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_commit:
-                mListener=new SubscriberOnNextListener() {
+                mListener = new SubscriberOnNextListener() {
                     @Override
                     public void onNext(Object o) {
-                        ToastUtil.showShort(AppCenterUtil.getContextObject(),"Commit Success!");
+                        ToastUtil.showShort(AppCenterUtil.getContextObject(), "Commit Success!");
                     }
                 };
+
                 RetrofitUtil.getInstance().commitPublishTask(etEndTime.getText().toString(),
-                        etBeginTime.getText().toString(),
                         etDescribe.getText().toString(),
-                        etTaskPrice.getText().toString(),
-                        etTaskTitle.getText().toString(),
+                        Double.valueOf(etTaskPrice.getText().toString()),
                         new ProgressSubscriber<HttpWrapper<String>>(
-                                mListener, AppCenterUtil.getContextObject()));
+                                mListener, this));
                 break;
             case R.id.ib_task_photo:
                 popupWindowSelect.show();
