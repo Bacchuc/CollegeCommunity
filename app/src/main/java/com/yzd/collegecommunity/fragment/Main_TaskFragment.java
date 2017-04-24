@@ -35,8 +35,6 @@ public class Main_TaskFragment extends Fragment {
     private SubscriberOnNextListener mListener;
     private List<TaskWrapper.ListEntity> mainTaskListInfoList = new ArrayList<TaskWrapper.ListEntity>();
 
-//    private Thread thread;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,12 +72,6 @@ public class Main_TaskFragment extends Fragment {
             @Override
             public void onNext(HttpWrapper<TaskWrapper> httpWrapperResponse) {
                 if (httpWrapperResponse.getCode() == 200) {
-                    //登陆成功后得到data中的token
-//                    SPUtil.refreshToken(httpWrapperResponse.getInfo());
-
-                    System.out.println(httpWrapperResponse.getData().toString()+"----------------------------------------------------");
-                    System.out.println(httpWrapperResponse.getData()+"----------------------------------------------------");
-
                     mainTaskListInfoList.clear();
                     mainTaskListInfoList.addAll(httpWrapperResponse.getData().getList());
                     mainFragmentTaskListAdapter.notifyDataSetChanged();  //更新数据
