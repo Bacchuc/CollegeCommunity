@@ -12,11 +12,13 @@ import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.retrofit.ProgressSubscriber;
 import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
-import com.yzd.collegecommunity.util.AppCenterUtil;
 import com.yzd.collegecommunity.util.PopupWindowSelectUtil;
 import com.yzd.collegecommunity.util.RetrofitUtil;
+import com.yzd.collegecommunity.util.SPUtil;
 import com.yzd.collegecommunity.util.SelectImageUtil;
 import com.yzd.collegecommunity.util.ToastUtil;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -55,12 +57,6 @@ public class PublishGoodsActivity extends BaseActivity {
         SwipeBackHelper.onCreate(this);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        initView();
-//    }
-
     private void initView() {
         popupWindowSelect = new PopupWindowSelectUtil(this, PublishGoodsActivity.this, R.layout.publish_activity_goods);
         popupWindowSelect.setOnPopWindowOptionListener(new PopupWindowSelectUtil.OnPopWindowOptionListener() {
@@ -74,7 +70,6 @@ public class PublishGoodsActivity extends BaseActivity {
                 selectImageUtilResult.choosePicture();
             }
         });
-
         selectImageUtilResult = new SelectImageUtil(this, ibPhoto);
     }
 
@@ -107,14 +102,20 @@ public class PublishGoodsActivity extends BaseActivity {
         selectImageUtilResult.onActivityResult(requestCode, resultCode, data);
         selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
             @Override
-            public void uploadSingleImage(byte[] bitmapByte) {
-                mListener = new SubscriberOnNextListener() {
+            public void uploadSingleImage(File file) {
+                mListener = new SubscriberOnNextListener<HttpWrapper<String>>() {
                     @Override
-                    public void onNext(Object o) {
-                        ToastUtil.showShort(PublishGoodsActivity.this, "Upload Success");
+                    public void onNext(HttpWrapper<String> httpWrapperResponse) {
+                        if (httpWrapperResponse.getCode() == 200) {
+                            //登陆成功后得到data中的token
+                            SPUtil.refreshToken(httpWrapperResponse.getData());
+                            ToastUtil.showShort(PublishGoodsActivity.this, "Upload Success");
+                        } else {
+                            ToastUtil.showLong(PublishGoodsActivity.this,httpWrapperResponse.getInfo());
+                        }
                     }
                 };
-                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte,
+                RetrofitUtil.getInstance().uploadSingleFile(file,
                         new ProgressSubscriber<HttpWrapper<String>>(mListener, PublishGoodsActivity.this));
             }
         });
@@ -124,10 +125,16 @@ public class PublishGoodsActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ib_commit:
-                mListener=new SubscriberOnNextListener() {
+                mListener=new SubscriberOnNextListener<HttpWrapper<String>>() {
                     @Override
-                    public void onNext(Object o) {
-                        ToastUtil.showShort(AppCenterUtil.getContextObject(),"Commit Success!");
+                    public void onNext(HttpWrapper<String> httpWrapperResponse) {
+                        if (httpWrapperResponse.getCode() == 200) {
+                            //登陆成功后得到data中的token
+                            SPUtil.refreshToken(httpWrapperResponse.getData());
+                            ToastUtil.showShort(PublishGoodsActivity.this, "Commit Success!");
+                        } else {
+                            ToastUtil.showLong(PublishGoodsActivity.this, httpWrapperResponse.getInfo());
+                        }
                     }
                 };
                 RetrofitUtil.getInstance().commitPublishGoods(etNumber.getText().toString(),

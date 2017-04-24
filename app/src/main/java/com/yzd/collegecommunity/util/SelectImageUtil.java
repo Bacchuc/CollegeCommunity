@@ -10,8 +10,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Laiyin on 2017/4/4.
@@ -92,10 +95,9 @@ public class SelectImageUtil {
             //显示图片,这里图片是方形的，可以用一个工具类处理成圆形
             mImage.setImageBitmap(mBitmap);
             //在这个地方可以写上上传该图片到服务器的代码
-            byte[] bytes = Bitmap2Bytes(mBitmap);
-
+//            byte[] bytes = bitmap2Bytes(mBitmap);
             if(mOnSelectImageOptionListener != null){
-                mOnSelectImageOptionListener.uploadSingleImage(bytes);
+                mOnSelectImageOptionListener.uploadSingleImage(saveBitmapFile(mBitmap));
             }
         }
     }
@@ -107,7 +109,7 @@ public class SelectImageUtil {
     }
 
     public interface OnSelectImageOptionListener{
-        void uploadSingleImage(byte[] bitmapByte);
+        void uploadSingleImage(File file);
     }
 
     /**
@@ -115,10 +117,28 @@ public class SelectImageUtil {
      * @param bitmap
      * @return
      */
-    public static byte[] Bitmap2Bytes(Bitmap bitmap){
+    public static byte[] bitmap2Bytes(Bitmap bitmap){
         ByteArrayOutputStream baos=new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos);
         return baos.toByteArray();
+    }
+
+    /**
+     * 把Bitmap转File
+     * @param bitmap
+     */
+    public File saveBitmapFile(Bitmap bitmap){
+        File file=new File(Environment
+                .getExternalStorageDirectory(), "temp_image2.jpg");//将要保存图片的路径 
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
     /**

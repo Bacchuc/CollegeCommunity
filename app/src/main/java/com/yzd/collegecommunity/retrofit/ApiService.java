@@ -3,12 +3,14 @@ package com.yzd.collegecommunity.retrofit;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
 
+import java.util.Map;
+
 import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import rx.Observable;
 
 /**
@@ -59,13 +61,14 @@ public interface ApiService {
                                              @Field("mail") String email,
                                              @Field("validate") String code);
 
-//    @POST("uploadTaskPic")
-//    @Multipart
-//    Observable<HttpWrapper<String>> uploadSingleFile(@PartMap Map<String, RequestBody> picStream);
-
-    @POST("uploadTaskPic")
+    /**
+     * 发布任务上传单张图片
+     * @param file
+     * @return
+     */
     @Multipart
-    Observable<HttpWrapper<String>> uploadSingleFile(@Part("picStream") RequestBody picStream);
+    @POST("uploadTaskPic")
+    Observable<HttpWrapper<String>> uploadSingleFile(@PartMap Map<String,RequestBody> file);
 
     /**
      * 提交商品发布的商品信息
@@ -127,4 +130,17 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("textPost")
     Observable<HttpWrapper<String>> getMainRankingInfo();
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

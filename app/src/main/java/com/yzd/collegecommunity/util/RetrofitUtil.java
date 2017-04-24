@@ -5,7 +5,10 @@ import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
 import com.yzd.collegecommunity.retrofit.ApiService;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -125,12 +128,17 @@ public class RetrofitUtil {
     /**
      * 上传单张图片
      *
-     * @param bytes      图片byte字节流
+     * @param file      图片byte字节流
      * @param subscriber
      */
-    public void uploadSingleFile(byte[] bytes, Subscriber<HttpWrapper<String>> subscriber) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/jpg"), bytes);
-        mApiService.uploadSingleFile(requestBody)
+    public void uploadSingleFile(File file, Subscriber<HttpWrapper<String>> subscriber) {
+
+        Map<String,RequestBody> bodyMap = new HashMap<>();
+
+        bodyMap.put("file"+"\"; filename=\""+file.getName(),
+                RequestBody.create(MediaType.parse("image/png"),file));
+
+        mApiService.uploadSingleFile(bodyMap)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
@@ -192,4 +200,31 @@ public class RetrofitUtil {
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

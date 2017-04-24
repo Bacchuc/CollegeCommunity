@@ -11,11 +11,13 @@ import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.retrofit.ProgressSubscriber;
 import com.yzd.collegecommunity.retrofit.SubscriberOnNextListener;
-import com.yzd.collegecommunity.util.AppCenterUtil;
 import com.yzd.collegecommunity.util.PopupWindowSelectUtil;
 import com.yzd.collegecommunity.util.RetrofitUtil;
+import com.yzd.collegecommunity.util.SPUtil;
 import com.yzd.collegecommunity.util.SelectImageUtil;
 import com.yzd.collegecommunity.util.ToastUtil;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,19 +73,6 @@ public class MeSettingActivity extends BaseActivity {
         });
 
         selectImageUtilResult = new SelectImageUtil(this, ibHeadPicture);
-        selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
-            @Override
-            public void uploadSingleImage(byte[] bitmapByte) {
-                mListener = new SubscriberOnNextListener() {
-                    @Override
-                    public void onNext(Object o) {
-                        ToastUtil.showShort(AppCenterUtil.getContextObject(), "Upload Success");
-                    }
-                };
-                RetrofitUtil.getInstance().uploadSingleFile(bitmapByte,
-                        new ProgressSubscriber<HttpWrapper<String>>(mListener, AppCenterUtil.getContextObject()));
-            }
-        });
     }
 
     //侧滑效果
@@ -111,6 +100,25 @@ public class MeSettingActivity extends BaseActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         selectImageUtilResult = new SelectImageUtil(this, ibHeadPicture);
+        selectImageUtilResult.setOnSelectImageOptionListener(new SelectImageUtil.OnSelectImageOptionListener() {
+            @Override
+            public void uploadSingleImage(File file) {
+                mListener = new SubscriberOnNextListener<HttpWrapper<String>>() {
+                    @Override
+                    public void onNext(HttpWrapper<String> httpWrapperResponse) {
+                        if (httpWrapperResponse.getCode() == 200) {
+                            //登陆成功后得到data中的token
+                            SPUtil.refreshToken(httpWrapperResponse.getData());
+                            ToastUtil.showShort(MeSettingActivity.this, "Commit Success!");
+                        } else {
+                            ToastUtil.showLong(MeSettingActivity.this, httpWrapperResponse.getInfo());
+                        }
+                    }
+                };
+                RetrofitUtil.getInstance().uploadSingleFile(file,
+                        new ProgressSubscriber<HttpWrapper<String>>(mListener, MeSettingActivity.this));
+            }
+        });
         selectImageUtilResult.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -121,10 +129,16 @@ public class MeSettingActivity extends BaseActivity {
                 popupWindowSelect.show();
                 break;
             case R.id.bt_commit:
-                mListener=new SubscriberOnNextListener() {
+                mListener=new SubscriberOnNextListener<HttpWrapper<String>>() {
                     @Override
-                    public void onNext(Object o) {
-                        ToastUtil.showShort(AppCenterUtil.getContextObject(),"Commit Success!");
+                    public void onNext(HttpWrapper<String> httpWrapperResponse) {
+                        if (httpWrapperResponse.getCode() == 200) {
+                            //登陆成功后得到data中的token
+                            SPUtil.refreshToken(httpWrapperResponse.getData());
+                            ToastUtil.showShort(MeSettingActivity.this, "Commit Success!");
+                        } else {
+                            ToastUtil.showLong(MeSettingActivity.this, httpWrapperResponse.getInfo());
+                        }
                     }
                 };
                 RetrofitUtil.getInstance().commitUserInfo(ivUsername.getText().toString(),
@@ -132,7 +146,7 @@ public class MeSettingActivity extends BaseActivity {
                         ivSchool.getText().toString(),
                         ivPassword.getText().toString(),
                         new ProgressSubscriber<HttpWrapper<String>>(
-                                mListener, AppCenterUtil.getContextObject()));
+                                mListener, MeSettingActivity.this));
                 break;
         }
     }

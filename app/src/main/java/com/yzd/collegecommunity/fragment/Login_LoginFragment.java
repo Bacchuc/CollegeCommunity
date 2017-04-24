@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.yzd.collegecommunity.R;
 import com.yzd.collegecommunity.activity.MainActivity;
@@ -20,6 +19,7 @@ import com.yzd.collegecommunity.util.BlurBehind;
 import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 import com.yzd.collegecommunity.util.RetrofitUtil;
 import com.yzd.collegecommunity.util.SPUtil;
+import com.yzd.collegecommunity.util.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,9 +72,8 @@ public class Login_LoginFragment extends Fragment implements View.OnClickListene
                             Intent intent = new Intent(getActivity(), MainActivity.class);
                             startActivity(intent);
                             getActivity().finish();
-
                         } else {
-                            Toast.makeText(getActivity(), httpWrapperResponse.getInfo(), Toast.LENGTH_SHORT).show();
+                            ToastUtil.showShort(getActivity(), httpWrapperResponse.getInfo());
                         }
                     }
                 };
