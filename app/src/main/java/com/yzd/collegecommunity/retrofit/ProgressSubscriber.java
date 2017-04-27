@@ -84,7 +84,6 @@ public class ProgressSubscriber<T> extends Subscriber<T> implements ProgressCanc
             ToastUtil.showLong(AppCenterUtil.getContextObject(), "Network outage,please check your network status");
         } else {
             ToastUtil.showLong(AppCenterUtil.getContextObject(), "error:" + e.getMessage());
-
         }
         dismissProgressDialog();
     }

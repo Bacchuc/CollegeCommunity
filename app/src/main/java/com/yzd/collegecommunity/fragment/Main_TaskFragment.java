@@ -55,6 +55,7 @@ public class Main_TaskFragment extends Fragment {
                 R.layout.main_fragment_task_item, mainTaskListInfoList);
         lvTask.setAdapter(mainFragmentTaskListAdapter);
     }
+
     private void initListener() {
         lvTask.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

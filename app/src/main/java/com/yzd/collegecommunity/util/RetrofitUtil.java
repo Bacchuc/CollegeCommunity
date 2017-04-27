@@ -2,6 +2,7 @@ package com.yzd.collegecommunity.util;
 
 import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
+import com.yzd.collegecommunity.modeal.RankingWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
 import com.yzd.collegecommunity.retrofit.ApiService;
 
@@ -197,6 +198,26 @@ public class RetrofitUtil {
      */
     public void getMainTaskInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
         mApiService.getMainTaskInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取主页商品页面的列表信息
+     * @param subscriber
+     */
+    public void getMainGoodsInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+        mApiService.getMainGoodsInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取主页排行榜页面的列表信息
+     * @param subscriber
+     */
+    public void getMainRankingInfo(Subscriber<HttpWrapper<RankingWrapper>> subscriber) {
+        mApiService.getMainRankingInfo()
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }

@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ib_head_picture"
         android:layout_width="40dip"
@@ -25,22 +24,9 @@
         android:textSize="20dp"
         android:textColor="@color/black"
         android:layout_toRightOf="@+id/ib_head_picture"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
     />
-
-    <TextView
-        android:id="@+id/tv_school"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Harvard University "
-        android:textSize="15dp"
-        android:textColor="@color/colorGray"
-        android:layout_toRightOf="@+id/ib_head_picture"
-        android:layout_marginLeft="10dp"
-        android:layout_alignBottom="@+id/ib_head_picture"
-        android:layout_below="@+id/tv_username"
-        />
 
     <Button
         android:id="@+id/bt_contact"

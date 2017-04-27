@@ -1,6 +1,7 @@
 package com.yzd.collegecommunity.retrofit;
 
 import com.yzd.collegecommunity.modeal.HttpWrapper;
+import com.yzd.collegecommunity.modeal.RankingWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
 
 import java.util.Map;
@@ -123,13 +124,11 @@ public interface ApiService {
     @POST("all")
     Observable<HttpWrapper<TaskWrapper>> getMainTaskInfo();
 
-    @FormUrlEncoded
     @POST("textPost")
-    Observable<HttpWrapper<String>> getMainGoodsInfo();
+    Observable<HttpWrapper<TaskWrapper>> getMainGoodsInfo();
 
-    @FormUrlEncoded
-    @POST("textPost")
-    Observable<HttpWrapper<String>> getMainRankingInfo();
+    @POST("rank/all")
+    Observable<HttpWrapper<RankingWrapper>> getMainRankingInfo();
 
 
 

@@ -68,21 +68,8 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-//        viewHolder.ib_head_picture.setTag(i);
         viewHolder.tv_describe.setText(list.get(i).getDescription());
         viewHolder.tv_username.setText(list.get(i).getPublish_user().getUsername());
-
-        System.out.println(Constants.BASEURL+list.get(i).getPic());
-//        BmobFile file=new BmobFile(System.currentTimeMillis()+".png","",list.get(i).getPicUrl());
-//        if (list.get(i).getPicUrl()!=null){
-//            Bitmap bitmap=downloadFile(file,i);
-//        }else {
-//            viewHolder.mm_v1_Image.setImageResource(R.drawable.my_listview);
-//        }
-
-//        if(TextUtils.isEmpty(list.get(i).getUsername())){
-//
-//        }
 
         Glide.with(mContext)
                 .load(Constants.BASEURL+list.get(i).getPic())

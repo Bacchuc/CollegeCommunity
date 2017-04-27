@@ -1,15 +1,24 @@
 package com.yzd.collegecommunity.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.yzd.collegecommunity.R;
+import com.yzd.collegecommunity.activity.MeContactActivity;
+import com.yzd.collegecommunity.constants.Constants;
+import com.yzd.collegecommunity.modeal.RankingWrapper;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Laiyin on 2017/3/16.
@@ -17,58 +26,75 @@ import java.util.ArrayList;
 
 public class MainFragmentRankingListAdapter extends RecyclerView.Adapter<MainFragmentRankingListAdapter.MyViewHolder> {
 
-    private ArrayList list;
+    private List<RankingWrapper.ListEntity> list;
+    private List<String> listImage;
     private Context context;
     private LinearLayoutManager linearLayoutManager;
-    private ArrayList list_image;
 
-    public MainFragmentRankingListAdapter(Context context,ArrayList list) {
-        this.list=list;
+    public MainFragmentRankingListAdapter(Context context, List<RankingWrapper.ListEntity> list) {
+        this.list = list;
         this.context = context;
-        linearLayoutManager =new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-        list_image=new ArrayList();
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/7aec54e736d12f2ec564664446c2d562853568b5.jpg");
-        list_image.add("http://c.hiphotos.baidu.com/movie/pic/item/e4dde71190ef76c6e52d8fe29516fdfaae51677f.jpg");
-        list_image.add("http://c.hiphotos.baidu.com/movie/pic/item/fd039245d688d43f5d3648ec741ed21b0ef43b15.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-        list_image.add("http://e.hiphotos.baidu.com/movie/pic/item/1ad5ad6eddc451da65ded2f5bffd5266d0163280.jpg");
-
+        linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.main_fragment_ranking_item, null);
-        MyViewHolder holder = new MyViewHolder(view);
-        return holder;
+//        if(viewType==0) {
+//            View view = LayoutInflater.from(context).inflate(R.layout.main_fragment_ranking_item, parent, null);
+//            MyViewHolder holder = new MyViewHolder(view);
+            MyViewHolder holder = new MyViewHolder(LayoutInflater
+                    .from(parent.getContext())
+                    .inflate(R.layout.main_fragment_ranking_item, parent, false));
+            holder.bt_contact.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, MeContactActivity.class);
+                    context.startActivity(intent);
+                }
+            });
+            return holder;
+//        }
+//        else{
+//            MyUserViewHolder holderUser=new MyUserViewHolder(
+//                    LayoutInflater.from(context).inflate(R.layout.main_fragment_ranking_item,parent,false));
+//            holderUser.bt_contact.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent=new Intent(context, MeContactActivity.class);
+//                    context.startActivity(intent);
+//                }
+//            });
+//            return holderUser;
+//        }}
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        if(list_image.size()>0) {
-            holder.recyclerImage.setLayoutManager(linearLayoutManager);
-            MainFragmentRankingListImageAdapter adapter = new MainFragmentRankingListImageAdapter(context, list_image);
-            holder.recyclerImage.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
-            holder.recyclerImage.setAdapter(adapter);
 
-        }else{
+//        if(holder instanceof MyViewHolder){
+        listImage = list.get(position).getImages();
+        if (listImage.size() > 0) {
+            holder.recyclerImage.setLayoutManager(linearLayoutManager);
+            MainFragmentRankingListImageAdapter adapter = new MainFragmentRankingListImageAdapter(context, listImage);
+            holder.recyclerImage.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+            holder.recyclerImage.setAdapter(adapter);
+        } else {
+            holder.recyclerImage.setLayoutManager(linearLayoutManager);
+            holder.recyclerImage.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+
             holder.recyclerImage.setVisibility(View.INVISIBLE);
         }
+        holder.tv_username.setText(list.get(position).getUsername());
+        Glide.with(context)
+                .load(Constants.BASEURL + list.get(position).getPath())
+                .into(holder.ib_head_picture);
+//        }
+//        else if (holder instanceof MyUserViewHolder){
+//            ((MyUserViewHolder)holder).tv_username.setText(list.get(position).getUsername());
+//            Glide.with(context)
+//                    .load(Constants.BASEURL+list.get(position).getPath())
+//                    .into(((MyUserViewHolder)holder).ib_head_picture);
+//        }
     }
 
     @Override
@@ -76,12 +102,33 @@ public class MainFragmentRankingListAdapter extends RecyclerView.Adapter<MainFra
         return list.size();
     }
 
+    //图片加载
     class MyViewHolder extends RecyclerView.ViewHolder {
         RecyclerView recyclerImage;
+        CircleImageView ib_head_picture;
+        Button bt_contact;
+        TextView tv_username;
+
         public MyViewHolder(View itemView) {
             super(itemView);
-            recyclerImage= (RecyclerView) itemView.findViewById(R.id.rv_image);
+            recyclerImage = (RecyclerView) itemView.findViewById(R.id.rv_image);
+            ib_head_picture = (CircleImageView) itemView.findViewById(R.id.ib_head_picture);
+            bt_contact = (Button) itemView.findViewById(R.id.bt_contact);
+            tv_username = (TextView) itemView.findViewById(R.id.tv_username);
         }
     }
+
+//    //用户信息加载
+//    class MyUserViewHolder extends RecyclerView.ViewHolder{
+//        CircleImageView ib_head_picture;
+//        Button bt_contact;
+//        TextView tv_username;
+//        public MyUserViewHolder(View itemView) {
+//            super(itemView);
+//            ib_head_picture= (CircleImageView) itemView.findViewById(R.id.ib_head_picture);
+//            bt_contact= (Button) itemView.findViewById(R.id.bt_contact);
+//            tv_username= (TextView) itemView.findViewById(R.id.tv_username);
+//        }
+//    }
 
 }

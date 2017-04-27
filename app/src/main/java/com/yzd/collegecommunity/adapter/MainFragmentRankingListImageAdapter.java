@@ -11,8 +11,9 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.yzd.collegecommunity.R;
+import com.yzd.collegecommunity.constants.Constants;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Laiyin on 2017/3/16.
@@ -20,10 +21,10 @@ import java.util.ArrayList;
 
 public class MainFragmentRankingListImageAdapter extends RecyclerView.Adapter<MainFragmentRankingListImageAdapter.MyImageHolder> {
     private Context context;
-    private ArrayList list;
+    private List<String> list;
     private DisplayMetrics dm;
 
-    public MainFragmentRankingListImageAdapter(Context context, ArrayList list){
+    public MainFragmentRankingListImageAdapter(Context context, List<String> list){
         this.context=context;
         this.list=list;
         dm = new DisplayMetrics();
@@ -40,7 +41,7 @@ public class MainFragmentRankingListImageAdapter extends RecyclerView.Adapter<Ma
 
     public void onBindViewHolder(MyImageHolder holder, int position) {
         Glide.with(context)
-                .load(list.get(position))
+                .load(Constants.BASEURL+list.get(position))
                 .centerCrop()
                 .crossFade()
                 .into(holder.imageView);
