@@ -1,5 +1,6 @@
 package com.yzd.collegecommunity.retrofit;
 
+import com.yzd.collegecommunity.modeal.GoodsWrapper;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.modeal.RankingWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
@@ -69,7 +70,25 @@ public interface ApiService {
      */
     @Multipart
     @POST("uploadTaskPic")
-    Observable<HttpWrapper<String>> uploadSingleFile(@PartMap Map<String,RequestBody> file);
+    Observable<HttpWrapper<String>> uploadTaskSingleFile(@PartMap Map<String,RequestBody> file);
+
+    /**
+     * 发布商品上传单张图片
+     * @param file
+     * @return
+     */
+    @Multipart
+    @POST("uploadGoodsPic")
+    Observable<HttpWrapper<String>> uploadGoodsSingleFile(@PartMap Map<String,RequestBody> file);
+
+    /**
+     * 上传用户单张图片
+     * @param file
+     * @return
+     */
+    @Multipart
+    @POST("private/upload")
+    Observable<HttpWrapper<String>> uploadUserSingleFile(@PartMap Map<String,RequestBody> file);
 
     /**
      * 提交商品发布的商品信息
@@ -81,11 +100,11 @@ public interface ApiService {
      * @return 上传成功则code为200
      */
     @FormUrlEncoded
-    @POST("goods/private/toPublish")
-    Observable<HttpWrapper<String>> commitPublishGoods(@Field("etNumber") String etNumber,
-                                                       @Field("etDescribe") String etDescribe,
-                                                       @Field("etPrice") String etPrice,
-                                                       @Field("etTitle") String etTitle);
+    @POST("private/toPublishGoods")
+    Observable<HttpWrapper<String>> commitPublishGoods(@Field("goodsNum") String etNumber,
+                                                       @Field("description") String etDescribe,
+                                                       @Field("price") String etPrice,
+                                                       @Field("title") String etTitle);
 
     /**
      * 提交任务发布的任务信息
@@ -111,24 +130,116 @@ public interface ApiService {
      * @return
      */
     @FormUrlEncoded
-    @POST("textPost")
-    Observable<HttpWrapper<String>> commitUserInfo(@Field("ivUsername") String ivUsername,
-                                                   @Field("ivEmail") String ivEmail,
-                                                   @Field("ivSchool") String ivSchool,
-                                                   @Field("ivPassword") String ivPassword);
+    @POST("private/modify")
+    Observable<HttpWrapper<String>> commitUserInfo(@Field("userName") String ivUsername,
+                                                   @Field("mail") String ivEmail,
+                                                   @Field("school") String ivSchool,
+                                                   @Field("password") String ivPassword);
 
     /**
      * 获取主页任务页面的列表信息
      * @return
      */
-    @POST("all")
+    @POST("allTasks")
     Observable<HttpWrapper<TaskWrapper>> getMainTaskInfo();
 
-    @POST("textPost")
-    Observable<HttpWrapper<TaskWrapper>> getMainGoodsInfo();
+    /**
+     * 获取商品任务页面的列表信息
+     * @return
+     */
+    @POST("allGoods")
+    Observable<HttpWrapper<GoodsWrapper>> getMainGoodsInfo();
 
-    @POST("rank/all")
+    /**
+     * 获取主页排行榜页面的列表信息
+     * @return
+     */
+    @POST("allRanking")
     Observable<HttpWrapper<RankingWrapper>> getMainRankingInfo();
+
+    /**
+     * 获取个人商品已经发布的页面的列表信息
+     * @return
+     */
+    @POST("private/sellGoods/selling")
+    Observable<HttpWrapper<GoodsWrapper>> getMeGoodsMyPublicSellInfo();
+
+    /**
+     * 获取个人商品正在销售的页面的列表信息
+     * @return
+     */
+    @POST("private/sellGoods/translate")
+    Observable<HttpWrapper<GoodsWrapper>> getMeGoodsMyPublicSellingInfo();
+
+    /**
+     * 获取个人商品已经销售完的页面的列表信息
+     * @return
+     */
+    @POST("private/sellGoods/confirm")
+    Observable<HttpWrapper<GoodsWrapper>> getMeGoodsMyPublicSoldInfo();
+
+    /**
+     * 获取个人商品已经完成购买的页面的列表信息
+     * @return
+     */
+    @POST("private/buyGoods/selling")
+    Observable<HttpWrapper<GoodsWrapper>> getMeGoodsOtherPublicFinishInfo();
+
+    /**
+     * 获取个人商品已经购买的页面的列表信息
+     * @return
+     */
+    @POST("private/buyGoods/selling")
+    Observable<HttpWrapper<GoodsWrapper>> getMeGoodsMyPublicPurchaseInfo();
+
+    /**
+     * 获取个人商品正在路上的页面的列表信息
+     * @return
+     */
+    @POST("private/buyGoods/selling")
+    Observable<HttpWrapper<GoodsWrapper>> getMeGoodsMyPublicUnderWayInfo();
+
+    /**
+     * 获取个人任务已经完成的页面的列表信息
+     * @return
+     */
+    @POST("private/publishedTask/finished")
+    Observable<HttpWrapper<TaskWrapper>> getMeTaskMyPublicFinishInfo();
+
+    /**
+     * 获取个人任务正在发布的页面的列表信息
+     * @return
+     */
+    @POST("private/publishedTask/unaccept")
+    Observable<HttpWrapper<TaskWrapper>> getMeTaskMyPublicReleasedInfo();
+
+    /**
+     * 获取个人任务正在完成的页面的列表信息
+     * @return
+     */
+    @POST("private/publishedTask/doing")
+    Observable<HttpWrapper<TaskWrapper>> getMeTaskMyPublicUnderWayInfo();
+
+    /**
+     * 获取个人接受过的任务的页面的列表信息
+     * @return
+     */
+    @POST("private/publishedTask/unaccept")
+    Observable<HttpWrapper<TaskWrapper>> getMeTaskOtherPublicAcceptInfo();
+
+    /**
+     * 获取个人正在完成的任务页面的列表信息
+     * @return
+     */
+    @POST("private/publishedTask/doing")
+    Observable<HttpWrapper<TaskWrapper>> getMeTaskOtherPublicUnderWayInfo();
+
+    /**
+     * 获取个人已经完成的任务页面的列表信息
+     * @return
+     */
+    @POST("private/acceptedTask/finished")
+    Observable<HttpWrapper<TaskWrapper>> getMeTaskOtherPublicFinishInfo();
 
 
 

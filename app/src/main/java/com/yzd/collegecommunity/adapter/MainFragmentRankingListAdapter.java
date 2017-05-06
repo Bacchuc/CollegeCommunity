@@ -1,6 +1,6 @@
 package com.yzd.collegecommunity.adapter;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yzd.collegecommunity.R;
-import com.yzd.collegecommunity.activity.MeContactActivity;
+import com.yzd.collegecommunity.activity.chat_room;
 import com.yzd.collegecommunity.constants.Constants;
 import com.yzd.collegecommunity.modeal.RankingWrapper;
 
@@ -28,10 +28,10 @@ public class MainFragmentRankingListAdapter extends RecyclerView.Adapter<MainFra
 
     private List<RankingWrapper.ListEntity> list;
     private List<String> listImage;
-    private Context context;
+    private Activity context;
     private LinearLayoutManager linearLayoutManager;
 
-    public MainFragmentRankingListAdapter(Context context, List<RankingWrapper.ListEntity> list) {
+    public MainFragmentRankingListAdapter(Activity context, List<RankingWrapper.ListEntity> list) {
         this.list = list;
         this.context = context;
         linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -48,7 +48,7 @@ public class MainFragmentRankingListAdapter extends RecyclerView.Adapter<MainFra
             holder.bt_contact.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, MeContactActivity.class);
+                    Intent intent = new Intent(context, chat_room.class);
                     context.startActivity(intent);
                 }
             });

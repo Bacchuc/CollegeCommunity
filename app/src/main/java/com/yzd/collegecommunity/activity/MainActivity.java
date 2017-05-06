@@ -26,7 +26,6 @@ import com.yzd.collegecommunity.util.OnBlurCompleteListener;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -41,19 +40,19 @@ import static com.yzd.collegecommunity.R.id.tv_left;
 
 public class MainActivity extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
-    @BindView(R.id.tv_left)
-    AnimatedGradientTextView tvLeft;
-    @BindView(R.id.bt_task)
-    Button btTask;
-    @BindView(R.id.bt_goods)
-    Button btGoods;
-    @BindView(R.id.bt_ranking_list)
-    Button btRankingList;
-    @BindView(R.id.iv_tab)
-    ImageView ivTab;
-    @BindView(R.id.vp_main)
-    ViewPager vpMain;
-    @BindView(R.id.fab)
+    //    @BindView(R.id.tv_left)
+    private AnimatedGradientTextView tvLeft;
+    //    @BindView(R.id.bt_task)
+    private Button btTask;
+    //    @BindView(R.id.bt_goods)
+    private Button btGoods;
+    //    @BindView(R.id.bt_ranking_list)
+    private Button btRankingList;
+    //    @BindView(R.id.iv_tab)
+    private ImageView ivTab;
+    //    @BindView(R.id.vp_main)
+    private ViewPager vpMain;
+    //    @BindView(R.id.fab)
     FloatingActionButton fab;
 
     public String TAG = "MainActivity";
@@ -79,6 +78,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     }
 
     private void initView() {
+        vpMain = (ViewPager) findViewById(R.id.vp_main);
+        ivTab = (ImageView) findViewById(R.id.iv_tab);
+        btRankingList = (Button) findViewById(R.id.bt_ranking_list);
+        btGoods = (Button) findViewById(R.id.bt_goods);
+        btTask = (Button) findViewById(R.id.bt_task);
+        tvLeft= (AnimatedGradientTextView) findViewById(R.id.tv_left);
+        fab= (FloatingActionButton) findViewById(R.id.fab);
 
         fragments = new ArrayList<Fragment>();
         fragments.add(new Main_TaskFragment());
@@ -108,6 +114,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         ivTab.setAnimation(an);
 
         vpMain.addOnPageChangeListener(this);
+        vpMain.setOffscreenPageLimit(3);
 
     }
 
@@ -174,4 +181,5 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 break;
         }
     }
+
 }

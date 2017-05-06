@@ -1,6 +1,7 @@
 package com.yzd.collegecommunity.util;
 
 import com.yzd.collegecommunity.constants.Constants;
+import com.yzd.collegecommunity.modeal.GoodsWrapper;
 import com.yzd.collegecommunity.modeal.HttpWrapper;
 import com.yzd.collegecommunity.modeal.RankingWrapper;
 import com.yzd.collegecommunity.modeal.TaskWrapper;
@@ -127,19 +128,55 @@ public class RetrofitUtil {
     }
 
     /**
-     * 上传单张图片
+     * 上传任务的单张图片
      *
      * @param file      图片byte字节流
      * @param subscriber
      */
-    public void uploadSingleFile(File file, Subscriber<HttpWrapper<String>> subscriber) {
+    public void uploadTaskSingleFile(File file, Subscriber<HttpWrapper<String>> subscriber) {
 
         Map<String,RequestBody> bodyMap = new HashMap<>();
 
         bodyMap.put("file"+"\"; filename=\""+file.getName(),
                 RequestBody.create(MediaType.parse("image/png"),file));
 
-        mApiService.uploadSingleFile(bodyMap)
+        mApiService.uploadTaskSingleFile(bodyMap)
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 上传商品的单张图片
+     *
+     * @param file      图片byte字节流
+     * @param subscriber
+     */
+    public void uploadGoodsSingleFile(File file, Subscriber<HttpWrapper<String>> subscriber) {
+
+        Map<String,RequestBody> bodyMap = new HashMap<>();
+
+        bodyMap.put("file"+"\"; filename=\""+file.getName(),
+                RequestBody.create(MediaType.parse("image/png"),file));
+
+        mApiService.uploadGoodsSingleFile(bodyMap)
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 上传用户头像的单张图片
+     *
+     * @param file      图片byte字节流
+     * @param subscriber
+     */
+    public void uploadUserSingleFile(File file, Subscriber<HttpWrapper<String>> subscriber) {
+
+        Map<String,RequestBody> bodyMap = new HashMap<>();
+
+        bodyMap.put("file"+"\"; filename=\""+file.getName(),
+                RequestBody.create(MediaType.parse("image/png"),file));
+
+        mApiService.uploadUserSingleFile(bodyMap)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }
@@ -155,7 +192,6 @@ public class RetrofitUtil {
      */
     public void commitPublishGoods(String etNumber, String etDescribe, String etPrice, String etTitle,
                                    Subscriber<HttpWrapper<String>> subscriber) {
-        System.out.println(SPUtil.getToken()+"----------------------------------------------------------");
         mApiService.commitPublishGoods(etNumber, etDescribe, etPrice, etTitle)
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
@@ -206,7 +242,7 @@ public class RetrofitUtil {
      * 获取主页商品页面的列表信息
      * @param subscriber
      */
-    public void getMainGoodsInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+    public void getMainGoodsInfo(Subscriber<HttpWrapper<GoodsWrapper>> subscriber) {
         mApiService.getMainGoodsInfo()
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
@@ -218,6 +254,126 @@ public class RetrofitUtil {
      */
     public void getMainRankingInfo(Subscriber<HttpWrapper<RankingWrapper>> subscriber) {
         mApiService.getMainRankingInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人商品已经发布的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeGoodsMyPublicSellInfo(Subscriber<HttpWrapper<GoodsWrapper>> subscriber) {
+        mApiService.getMeGoodsMyPublicSellInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人商品正在销售的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeGoodsMyPublicSellingInfo(Subscriber<HttpWrapper<GoodsWrapper>> subscriber) {
+        mApiService.getMeGoodsMyPublicSellingInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人商品已经销售完的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeGoodsMyPublicSoldInfo(Subscriber<HttpWrapper<GoodsWrapper>> subscriber) {
+        mApiService.getMeGoodsMyPublicSoldInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人商品已经完成购买的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeGoodsOtherPublicFinishInfo(Subscriber<HttpWrapper<GoodsWrapper>> subscriber) {
+        mApiService.getMeGoodsOtherPublicFinishInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人商品已经购买的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeGoodsMyPublicPurchaseInfo(Subscriber<HttpWrapper<GoodsWrapper>> subscriber) {
+        mApiService.getMeGoodsMyPublicPurchaseInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人商品正在路上的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeGoodsMyPublicUnderWayInfo(Subscriber<HttpWrapper<GoodsWrapper>> subscriber) {
+        mApiService.getMeGoodsMyPublicUnderWayInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人任务已经完成的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeTaskMyPublicFinishInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+        mApiService.getMeTaskMyPublicFinishInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人任务正在发布的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeTaskMyPublicReleasedInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+        mApiService.getMeTaskMyPublicReleasedInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人任务正在完成的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeTaskMyPublicUnderWayInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+        mApiService.getMeTaskMyPublicUnderWayInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人接受过的任务的页面的列表信息
+     * @param subscriber
+     */
+    public void getMeTaskOtherPublicAcceptInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+        mApiService.getMeTaskOtherPublicAcceptInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人正在完成的任务页面的列表信息
+     * @param subscriber
+     */
+    public void getMeTaskOtherPublicUnderWayInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+        mApiService.getMeTaskOtherPublicUnderWayInfo()
+                .compose(RxSchedulers.switchThread())
+                .subscribe(subscriber);
+    }
+
+    /**
+     * 获取个人已经完成的任务页面的列表信息
+     * @param subscriber
+     */
+    public void getMeTaskOtherPublicFinishInfo(Subscriber<HttpWrapper<TaskWrapper>> subscriber) {
+        mApiService.getMeTaskOtherPublicFinishInfo()
                 .compose(RxSchedulers.switchThread())
                 .subscribe(subscriber);
     }

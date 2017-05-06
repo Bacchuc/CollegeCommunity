@@ -141,7 +141,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/rl_goods">
+        android:layout_below="@+id/rl_goods"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_collect_picture"
@@ -176,7 +177,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:gravity="center_vertical"
-        android:layout_below="@+id/rl_collect">
+        android:layout_below="@+id/rl_collect"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_contact_picture"

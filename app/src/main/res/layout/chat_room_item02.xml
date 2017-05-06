@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <com.example.administrator.myapplication.chat_room_imagview
+        android:id="@+id/myImageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/chat_room_headphoto1"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="小兽星日单铺"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="12dp"
+        android:textColor="#000"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/myImageView"
+        android:layout_toRightOf="@+id/myImageView"
+        android:layout_toEndOf="@+id/myImageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="社区优店:小兽星单铺"
+        android:layout_marginLeft="12dp"
+        android:textSize="12sp"
+        android:id="@+id/textView4"
+        android:layout_below="@+id/textView3"
+        android:layout_toRightOf="@+id/myImageView"
+        android:layout_toEndOf="@+id/myImageView" />
+</RelativeLayout>

@@ -69,9 +69,9 @@ public class MeGoodsMyPublishFragment extends Fragment implements ViewPager.OnPa
     private void initView() {
 
         fragments = new ArrayList<android.support.v4.app.Fragment>();
-        fragments.add(new Main_TaskFragment());
-        fragments.add(new Main_GoodsFragment());
-        fragments.add(new Main_RankingFragment());
+        fragments.add(new MeGoodsMyPublishFragmentSellFragment());
+        fragments.add(new MeGoodsMyPublishFragmentSellingFragment());
+        fragments.add(new MeGoodsMyPublishFragmentSoldFragment());
 
         btArgs = new Button[]{btSell, btSelling, btSold};     //将滑动的buttonTab放进一个集合
 

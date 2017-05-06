@@ -36,7 +36,7 @@
         <activity android:name=".activity.MeContactActivity"></activity>
         <activity android:name=".activity.MeGoodsActivity"></activity>
 
-
+        <activity android:name=".activity.chat_room"></activity>
     </application>
 
 </manifest>

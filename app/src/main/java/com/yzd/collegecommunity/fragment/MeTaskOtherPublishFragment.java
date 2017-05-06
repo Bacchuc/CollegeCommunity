@@ -69,9 +69,9 @@ public class MeTaskOtherPublishFragment extends Fragment implements ViewPager.On
     private void initView() {
 
         fragments = new ArrayList<android.support.v4.app.Fragment>();
-        fragments.add(new Main_TaskFragment());
-        fragments.add(new Main_GoodsFragment());
-        fragments.add(new Main_RankingFragment());
+        fragments.add(new MeTaskOtherPublishFragmentAcceptFragment());
+        fragments.add(new MeTaskOtherPublishFragmentFinishedFragment());
+        fragments.add(new MeTaskOtherPublishFragmentUnderWayFragment());
 
         btArgs = new Button[]{btAccept, btUnderWay, btFinished};     //将滑动的buttonTab放进一个集合
 

@@ -115,7 +115,7 @@ public class PublishGoodsActivity extends BaseActivity {
                         }
                     }
                 };
-                RetrofitUtil.getInstance().uploadSingleFile(file,
+                RetrofitUtil.getInstance().uploadGoodsSingleFile(file,
                         new ProgressSubscriber<HttpWrapper<String>>(mListener, PublishGoodsActivity.this));
             }
         });

@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda' //lambda正则表达式
+//apply plugin: 'me.tatarka.retrolambda' //lambda正则表达式
 
 android {
     compileSdkVersion 25
@@ -11,6 +11,10 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {

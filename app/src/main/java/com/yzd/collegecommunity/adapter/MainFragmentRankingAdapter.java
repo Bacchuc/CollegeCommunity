@@ -30,6 +30,7 @@ public class MainFragmentRankingAdapter extends BaseAdapter implements View.OnCl
 
     private Activity mContext;
     private List<Map<String, Object>> dates;
+    private Button btContact;
 
     public MainFragmentRankingAdapter(Activity context, List<Map<String, Object>> dates) {
         this.mContext = context;
@@ -93,4 +94,5 @@ public class MainFragmentRankingAdapter extends BaseAdapter implements View.OnCl
             ButterKnife.bind(this, view);
         }
     }
+
 }

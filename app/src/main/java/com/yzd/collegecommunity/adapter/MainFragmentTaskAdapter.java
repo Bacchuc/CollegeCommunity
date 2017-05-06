@@ -5,15 +5,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.content.Intent;
 import com.yzd.collegecommunity.R;
+import com.yzd.collegecommunity.activity.ChatActivity;
 
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -26,13 +29,13 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
     private List<Map<String, Object>> dates;
 
     private CircleImageView ib_head_picture;
-    private ImageButton bt_like;
-    private ImageButton ib_contact;
+    //    private ImageButton bt_like;
+    private Button ib_contact;
     private ImageView iv_task_picture;
     private TextView tv_describe;
     private TextView tv_username;
 
-    public MainFragmentTaskAdapter(Activity context, List<Map<String, Object>> dates){
+    public MainFragmentTaskAdapter(Activity context, List<Map<String, Object>> dates) {
         this.mContext = context;
         this.dates = dates;
     }
@@ -55,7 +58,7 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
 
-        final View view1 = LayoutInflater.from(mContext).inflate(R.layout.main_fragment_task_item,null,false);
+        final View view1 = LayoutInflater.from(mContext).inflate(R.layout.main_fragment_task_item, null, false);
 
         view1.setTag(false);        //默认取消true，收藏为true
 
@@ -69,39 +72,55 @@ public class MainFragmentTaskAdapter extends BaseAdapter implements View.OnClick
 
     private void initView(View view) {
 
-        ib_head_picture= (CircleImageView) view.findViewById(R.id.ib_head_picture);
-        bt_like= (ImageButton) view.findViewById(R.id.bt_like);
-        ib_contact= (ImageButton) view.findViewById(R.id.ib_contact);
-        iv_task_picture= (ImageView) view.findViewById(R.id.iv_task_picture);
-        tv_describe= (TextView) view.findViewById(R.id.tv_describe);
-        tv_username= (TextView) view.findViewById(R.id.tv_username);
+//        ib_head_picture= (CircleImageView) view.findViewById(R.id.ib_head_picture);
+////        bt_like= (ImageButton) view.findViewById(R.id.bt_like);
+//        ib_contact= (Button) view.findViewById(R.id.ib_contact);
+//        iv_task_picture= (ImageView) view.findViewById(R.id.iv_task_picture);
+//        tv_describe= (TextView) view.findViewById(R.id.tv_describe);
+//        tv_username= (TextView) view.findViewById(R.id.tv_username);
 
-        bt_like.setImageResource(R.drawable.heart_gray);
+//        bt_like.setImageResource(R.drawable.heart_gray);
     }
 
     private void initListener() {
-        bt_like.setOnClickListener(this);
-        ib_contact.setOnClickListener(this);
-        ib_head_picture.setOnClickListener(this);
+//        bt_like.setOnClickListener(this);
+//        ib_contact.setOnClickListener(this);
+//        ib_head_picture.setOnClickListener(this);
+    }
+
+    static class ViewHolder {
+        @BindView(R.id.ib_head_picture)
+        CircleImageView ibHeadPicture;
+        @BindView(R.id.tv_username)
+        TextView tvUsername;
+        @BindView(R.id.ib_contact)
+        Button ibContact;
+        @BindView(R.id.tv_describe)
+        TextView tvDescribe;
+        @BindView(R.id.iv_task_picture)
+        ImageView ivTaskPicture;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.bt_like:
-                if ((boolean)(view.getTag())) {
-                    bt_like.setImageResource(R.drawable.heart_gray);
-                    view.setTag(false);
-                }
-                else {
-                    bt_like.setImageResource(R.drawable.heart_orange);
-                    view.setTag(true);
-                }
-                break;
+//            case R.id.bt_like:
+//                if ((boolean)(view.getTag())) {
+//                    bt_like.setImageResource(R.drawable.heart_gray);
+//                    view.setTag(false);
+//                }
+//                else {
+//                    bt_like.setImageResource(R.drawable.heart_orange);
+//                    view.setTag(true);
+//                }
+//                break;
             case R.id.ib_contact:
-//                Intent intent;
-//                intent = new Intent(mContext, secondhand_market.class);
-//                mContext.startActivity(intent);
+                Intent intent = new Intent(mContext, ChatActivity.class);
+                mContext.startActivity(intent);
                 break;
             case R.id.ib_head_picture:
 //                Intent intent1;

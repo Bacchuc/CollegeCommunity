@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +29,9 @@
             android:text="Bacchus"
             android:textSize="@dimen/activity_list_username"
             android:textColor="@color/colorOrange1"
+            android:layout_toRightOf="@id/ib_head_picture"
             android:layout_marginLeft="10dp"
+            android:layout_alignBaseline="@id/ib_head_picture"
             />
         <!--sandybrown-->
         <!--<ImageView-->
@@ -45,7 +47,19 @@
             <!--android:layout_height="wrap_content"-->
             <!--android:text="2days"-->
             <!--android:layout_marginRight="10dp"/>-->
-    </LinearLayout>
+
+        <Button
+            android:id="@+id/ib_contact"
+            android:layout_width="110dp"
+            android:layout_height="38dp"
+            android:text="contact"
+            android:textSize="15dp"
+            android:textColor="@color/colorOrange"
+            android:background="@drawable/semi_round_hollow_background"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_describe"
@@ -54,9 +68,10 @@
         android:layout_below="@+id/ll_top"
         android:layout_marginLeft="65dp"
         android:layout_marginRight="12dp"
+        android:layout_marginTop="3dp"
         android:text="I always knew looking back on the tears would make me laugh, but I never knew looking back on the laughs would make me cry."
         android:textSize="14dp"
-        android:textColor="@color/colorDarkGray"/>
+        android:textColor="@color/colorGray"/>
 
     <LinearLayout
         android:id="@+id/ll_image"
@@ -64,6 +79,7 @@
         android:layout_height="180dp"
         android:layout_marginLeft="65dp"
         android:layout_marginRight="12dp"
+        android:layout_marginTop="2dp"
         android:layout_below="@+id/tv_describe"
         android:orientation="horizontal">
 
@@ -75,22 +91,23 @@
             />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/bt_like"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_below="@+id/ll_image"
-        android:layout_marginLeft="65dp"
-        android:background="@drawable/heart_orange"/>
+    <!--<ImageButton-->
+        <!--android:id="@+id/bt_like"-->
+        <!--android:layout_width="18dp"-->
+        <!--android:layout_height="18dp"-->
+        <!--android:layout_below="@+id/ll_image"-->
+        <!--android:layout_marginLeft="65dp"-->
+        <!--android:background="@drawable/heart_orange"/>-->
 
-    <ImageButton
-        android:id="@+id/ib_contact"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_below="@+id/ll_image"
-        android:background="@drawable/contact_main"
-        />
+    <!--<ImageButton-->
+        <!--android:id="@+id/ib_contact"-->
+        <!--android:layout_width="25dp"-->
+        <!--android:layout_height="25dp"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_below="@+id/ll_image"-->
+        <!--android:background="@drawable/contact_main"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--/>-->
 
 </RelativeLayout>

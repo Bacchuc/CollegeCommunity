@@ -22,12 +22,15 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Created by Laiyin on 2017/3/5.
  */
 
 public class Main_TaskFragment extends Fragment {
+
+    private Unbinder unbinder;
 
     @BindView(R.id.lv_task)
     ListView lvTask;
@@ -43,7 +46,7 @@ public class Main_TaskFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.main_fragment_task, container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         getData();
         initListener();
         initView();
@@ -84,5 +87,11 @@ public class Main_TaskFragment extends Fragment {
         RetrofitUtil.getInstance().getMainTaskInfo(
                 new ProgressSubscriber<HttpWrapper<TaskWrapper>>(mListener, getActivity()));
 
+    }
+
+    @Override
+    public void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
     }
 }

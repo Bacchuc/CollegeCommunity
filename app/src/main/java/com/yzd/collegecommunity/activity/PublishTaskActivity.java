@@ -117,7 +117,7 @@ public class PublishTaskActivity extends BaseActivity {
                         }
                     }
                 };
-                RetrofitUtil.getInstance().uploadSingleFile(file,
+                RetrofitUtil.getInstance().uploadTaskSingleFile(file,
                         new ProgressSubscriber<HttpWrapper<String>>(mListener, PublishTaskActivity.this));
             }
         });

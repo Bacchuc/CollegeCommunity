@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="200dp"
+    android:background="#fff"
+    android:padding="4dp">
 
-    <ListView
-        android:id="@+id/list_view"
+    <ImageView
+        android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#dde"
+        android:scaleType="centerCrop"
+        android:src="@drawable/head1"/>
 
     <View
-        android:id="@+id/touch_interceptor_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="40sp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/image_text_shadow" />
 
-    <FrameLayout
-        android:id="@+id/details_layout"
+    <TextView
+        android:id="@+id/list_item_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </FrameLayout>
-
-    <com.alexvasilkov.foldablelayout.UnfoldableView
-        android:id="@+id/unfoldable_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:text="Clothes"/>
 
 </FrameLayout>

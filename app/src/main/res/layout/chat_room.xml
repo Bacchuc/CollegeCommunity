@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="9"
+            android:background="#B4EEB4"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/relativeLayout3"
+            android:visibility="gone"
+            >
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageButton2"
+                android:src="@drawable/back"
+                android:background="#B4EEB4"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="消息"
+                android:textColor="#000000"
+                android:textSize="26sp"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/textView28"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/imageButton2"
+                android:layout_toEndOf="@+id/imageButton2" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <com.mursaat.extendedtextview.AnimatedGradientTextView
+                android:id="@+id/tv_center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="News"
+                app:colors="@array/center_title_colors"
+                app:simultaneousColors="2"
+                app:angle="45"
+                app:speed="1000"
+                android:textSize="@dimen/activity_title_center_size"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorDarkGray"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/view_up">
+            </View>
+
+        </RelativeLayout>
+
+
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:text="+"
+            android:textSize="26dp"
+            android:layout_weight="2"
+            android:background="#90ee90"
+            android:id="@+id/button"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+             />
+        <!--android:layout_gravity="right"-->
+    </LinearLayout>
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:listSelector="@android:color/transparent"
+        android:layout_weight="1"
+        android:id="@+id/listView" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp">
+
+        <EditText
+            android:id="@+id/input_text"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:hint="打个招呼"
+            android:background="@android:drawable/editbox_background_normal"
+            android:maxLines="2" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:textSize="18dp"
+            android:textColor="#FFF"
+            android:background="@drawable/semi_round_grean_backgroud"
+            android:layout_marginRight="10dp" />
+    </LinearLayout>
+</LinearLayout>

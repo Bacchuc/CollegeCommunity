@@ -54,7 +54,6 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
         ViewHolder viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
@@ -67,18 +66,14 @@ public class MainFragmentTaskListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-
         viewHolder.tv_describe.setText(list.get(i).getDescription());
         viewHolder.tv_username.setText(list.get(i).getPublish_user().getUsername());
-
         Glide.with(mContext)
                 .load(Constants.BASEURL+list.get(i).getPic())
                 .into(viewHolder.iv_task_picture);
-
         Glide.with(mContext)
                 .load(Constants.BASEURL+list.get(i).getPublish_user().getPath())
                 .into(viewHolder.ib_head_picture);
-
         return view;
     }
 

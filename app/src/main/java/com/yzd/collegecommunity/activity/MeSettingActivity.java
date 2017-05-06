@@ -115,7 +115,7 @@ public class MeSettingActivity extends BaseActivity {
                         }
                     }
                 };
-                RetrofitUtil.getInstance().uploadSingleFile(file,
+                RetrofitUtil.getInstance().uploadUserSingleFile(file,
                         new ProgressSubscriber<HttpWrapper<String>>(mListener, MeSettingActivity.this));
             }
         });
